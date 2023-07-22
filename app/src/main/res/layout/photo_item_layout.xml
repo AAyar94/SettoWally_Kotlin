@@ -25,10 +25,12 @@
         app:layout_constraintEnd_toEndOf="@id/imageViewPerPhoto"
         app:layout_constraintStart_toStartOf="@id/imageViewPerPhoto" />
 
-    <ImageView
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_margin="24dp"
+    <ImageButton
+        android:id="@+id/isLikedButton"
+        android:layout_width="@dimen/image_button_size"
+        android:layout_height="@dimen/image_button_size"
+        android:layout_margin="12dp"
+        android:background="@android:color/transparent"
         android:src="@drawable/ic_favorite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.settowally.settowally.R
 import com.settowally.settowally.databinding.PhotoItemLayoutBinding
 import com.settowally.settowally.repository.model.Photo
 import com.settowally.settowally.repository.model.PhotosDataModel
@@ -19,6 +20,13 @@ class HomeFragmentAdapter(
         fun bind(position: Int) {
             Glide.with(binding.root).load(photosList[position].src.medium)
                 .into(binding.imageViewPerPhoto)
+            binding.isLikedButton.setOnClickListener {
+                /**     LIKE FUNCTION       */
+            }
+            if (photosList[position].liked) {
+                Glide.with(binding.root).load(R.drawable.ic_favorite_filled)
+                    .into(binding.isLikedButton)
+            }
             binding.root.setOnClickListener {
                 onItemClick(photosList[position])
             }
