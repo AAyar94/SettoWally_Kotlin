@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.settowally.settowally.databinding.FragmentWallpaperDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +23,12 @@ class WallpaperDetailsFragment : Fragment() {
     ): View {
         mBinding = FragmentWallpaperDetailsBinding.inflate(layoutInflater, container, false)
 
-        Glide.with(binding.root).load(photoArgs.photo.src.original).into(binding.bigImageView)
+        val circularProgressDrawable = CircularProgressDrawable(requireContext())
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.start()
+
+        Glide.with(binding.root).load(photoArgs.photo.src.original).placeholder(circularProgressDrawable).into(binding.bigImageView)
 
 
         return binding.root

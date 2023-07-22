@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.settowally.settowally.common.NetworkResponseHandler
 import com.settowally.settowally.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,8 +37,20 @@ class HomeFragment : Fragment() {
 
         binding.imagesRecyclerView.adapter = homeAdapter
 
-        homeViewModel.photoDataObject.observe(viewLifecycleOwner) {
-            homeAdapter.setData(it)
+        homeViewModel.photoDataObject.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is NetworkResponseHandler.Success -> {
+                    response.data?.let { homeAdapter.setData(it) }
+                }
+
+                is NetworkResponseHandler.Error -> {
+
+                }
+
+                is NetworkResponseHandler.Loading -> {
+
+                }
+            }
         }
 
 
