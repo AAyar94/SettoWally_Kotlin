@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.settowally.settowally.common.Constant.Companion.PER_PAGE_PHOTO_COUNTER
 import com.settowally.settowally.common.NetworkResponseHandler
 import com.settowally.settowally.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +27,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeViewModel.getPhotos(page = 1, perPage = 21)
+        homeViewModel.getPhotos(page = 1, perPage = PER_PAGE_PHOTO_COUNTER)
     }
 
     override fun onCreateView(

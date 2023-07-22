@@ -8,6 +8,7 @@ class Constant {
         /**     REMOTE      */
         const val API_KEY = SETTOWALLY_API_KEY
         const val BASE_URL = "https://api.pexels.com/v1/"
+        const val PER_PAGE_PHOTO_COUNTER = 20
 
     }
 }
