@@ -24,12 +24,12 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.settowally.settowally.FavoritesFragment"
+        android:name="com.settowally.settowally.ui.fragment.favorites_fragment.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.settowally.settowally.SettingsFragment"
+        android:name="com.settowally.settowally.ui.fragment.settings_fragment.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>

@@ -62,34 +62,37 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    // Retrofit
+    /*      Retrofit        */
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
-    // Dagger - Hilt
+    /*      Dagger - Hilt       */
     implementation "com.google.dagger:hilt-android:2.44.2"
     kapt "com.google.dagger:hilt-compiler:2.44.2"
     kapt "androidx.hilt:hilt-compiler:1.0.0"
 
-    // Coroutines
+    /*      Coroutines      */
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
-    // Lifecycle
+    /*      Lifecycle       */
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
 
-    //Glide Image loading library
+    /*      Glide Image loading library     */
     implementation 'com.github.bumptech.glide:glide:4.15.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
 
-    // Gson
+    /*      Gson        */
     implementation 'com.google.code.gson:gson:2.10'
 
-    //okHttpClient Logging Interceptor
+    /*      okHttpClient Logging Interceptor        */
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
+
+    /*      BlurView        */
+    implementation 'com.github.Dimezis:BlurView:version-2.0.3'
 
 
 }

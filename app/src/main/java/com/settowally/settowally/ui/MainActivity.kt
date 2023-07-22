@@ -1,6 +1,7 @@
 package com.settowally.settowally.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -25,6 +26,14 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         binding.bottomNavBar.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.wallpaperDetailsFragment -> binding.bottomNavBar.visibility= View.GONE
+                else -> binding.bottomNavBar.visibility = View.VISIBLE
+            }
+        }
+
 
     }
 

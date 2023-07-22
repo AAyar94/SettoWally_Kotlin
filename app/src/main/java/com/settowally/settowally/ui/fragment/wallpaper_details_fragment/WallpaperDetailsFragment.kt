@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewOutlineProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.settowally.settowally.databinding.FragmentWallpaperDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import eightbitlab.com.blurview.RenderScriptBlur
 
 @AndroidEntryPoint
 class WallpaperDetailsFragment : Fragment() {
@@ -22,6 +24,12 @@ class WallpaperDetailsFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         mBinding = FragmentWallpaperDetailsBinding.inflate(layoutInflater, container, false)
+
+        binding.blurViewOverlay.setupWith(binding.root,  RenderScriptBlur(requireContext()))
+            .setFrameClearDrawable(binding.bigImageView.background)
+            .setBlurRadius(5f)
+        binding.blurViewOverlay.outlineProvider = ViewOutlineProvider.BACKGROUND;
+        binding.blurViewOverlay.clipToOutline = true;
 
         val circularProgressDrawable = CircularProgressDrawable(requireContext())
         circularProgressDrawable.strokeWidth = 5f
