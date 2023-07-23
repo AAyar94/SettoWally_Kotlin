@@ -94,5 +94,7 @@ dependencies {
     /*      BlurView        */
     implementation 'com.github.Dimezis:BlurView:version-2.0.3'
 
+    /*      Splash API      */
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
 
 }

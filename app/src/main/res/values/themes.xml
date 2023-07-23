@@ -1,5 +1,5 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-<resources>
     <style name="Base.Theme.SettoWally" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/md_theme_light_primary</item>
         <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
@@ -27,5 +27,13 @@
         <item name="colorOnSurfaceInverse">@color/md_theme_light_inverseOnSurface</item>
         <item name="colorSurfaceInverse">@color/md_theme_light_inverseSurface</item>
         <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.SplashScreen">
+        <item name="android:animatedImageDrawable" tools:targetApi="r">
+            @drawable/splash_logo_animated
+        </item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">?attr/backgroundColor</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.SettoWally</item>
     </style>
 </resources>
