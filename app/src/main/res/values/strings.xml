@@ -53,4 +53,14 @@
     <string name="details">Details</string>
     <string name="download">Download</string>
     <string name="set_wallpaper">Set Wallpaper</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="quality">Quality</string>
+    <string name="tiny">Tiny</string>
+    <string name="small">Small</string>
+    <string name="portrait">Portrait</string>
+    <string name="original">Original</string>
+    <string name="medium">Medium</string>
+    <string name="large2x">Large2x</string>
+    <string name="large">Large</string>
+    <string name="landscape">Landscape</string>
 </resources>
