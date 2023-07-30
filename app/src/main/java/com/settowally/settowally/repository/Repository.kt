@@ -1,7 +1,7 @@
 package com.settowally.settowally.repository
 
 import com.settowally.settowally.common.NetworkResponseHandler
-import com.settowally.settowally.repository.model.PhotosDataModel
+import com.settowally.settowally.repository.remote.model.PhotosDataModel
 import com.settowally.settowally.repository.remote.RemoteDataSource
 import javax.inject.Inject
 
