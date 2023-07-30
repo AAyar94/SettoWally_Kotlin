@@ -47,8 +47,8 @@ class WallpaperDetailsFragment : Fragment() {
         binding.blurViewOverlay.clipToOutline = true;
 
         val circularProgressDrawable = CircularProgressDrawable(requireContext())
-        circularProgressDrawable.strokeWidth = 5f
-        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.strokeWidth = 10f
+        circularProgressDrawable.centerRadius = 50f
         circularProgressDrawable.start()
 
         Glide.with(binding.root).load(photoArgs.photo.src.original).placeholder(circularProgressDrawable).into(binding.bigImageView)
