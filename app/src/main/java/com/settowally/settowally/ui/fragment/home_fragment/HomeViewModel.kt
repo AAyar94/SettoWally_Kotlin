@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.settowally.settowally.common.NetworkResponseHandler
 import com.settowally.settowally.repository.Repository
-import com.settowally.settowally.repository.model.PhotosDataModel
+import com.settowally.settowally.repository.remote.model.PhotosDataModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
