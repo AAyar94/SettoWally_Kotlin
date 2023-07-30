@@ -1,22 +1,32 @@
 package com.settowally.settowally.ui.fragment.settings_fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.settowally.settowally.R
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.settowally.settowally.databinding.FragmentSettingsBinding
 
 
 class SettingsFragment : Fragment() {
 
+    private var mBinding: FragmentSettingsBinding? = null
+    private val binding get() = mBinding!!
+    private val viewModel: SettingsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+    ): View {
+        mBinding = FragmentSettingsBinding.inflate(inflater, container, false)
+
+
+
+
+
+        return binding.root
     }
+
 
 }

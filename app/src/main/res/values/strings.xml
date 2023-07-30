@@ -63,4 +63,12 @@
     <string name="large2x">Large2x</string>
     <string name="large">Large</string>
     <string name="landscape">Landscape</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+    <string name="system">System</string>
+    <string name="share">Share</string>
+    <string name="about">About</string>
+    <string name="developer">Developer :</string>
+    <string name="adem_ayar">Adem Ayar</string>
+    <string name="see_more_apps_on_play_store">See more apps on Play Store</string>
 </resources>
