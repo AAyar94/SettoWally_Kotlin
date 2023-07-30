@@ -1,4 +1,4 @@
-package com.settowally.settowally.repository.model
+package com.settowally.settowally.repository.remote.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
