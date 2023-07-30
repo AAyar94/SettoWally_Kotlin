@@ -37,24 +37,23 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.wallpaperDetailsFragment -> {
                     binding.bottomNavBar.visibility = View.GONE
-                  //  window.statusBarColor=Color.TRANSPARENT
-                    //window.navigationBarColor=Color.TRANSPARENT
+                    window.statusBarColor = Color.TRANSPARENT
+                    window.navigationBarColor = Color.TRANSPARENT
                 }
 
                 else -> {
                     binding.bottomNavBar.visibility = View.VISIBLE
-                    /*windowBarsColorChanger(
-                        MaterialColors.getColor(
-                            binding.root,
-                            com.google.android.material.R.attr.colorSecondaryContainer
-                        )
-                    )*/
+                    window.statusBarColor=MaterialColors.getColor(binding.root,
+                        com.google.android.material.R.attr.colorSecondaryContainer)
+                    window.navigationBarColor=MaterialColors.getColor(binding.root,
+                        com.google.android.material.R.attr.colorSecondaryContainer)
                 }
             }
         }
     }
 
-    private fun windowBarsColorChanger(color: Int) {
+    /**     Status & Nav bar color changer        */
+    /*private fun windowBarsColorChanger(color: Int) {
         window.statusBarColor = MaterialColors.getColor(
             binding.root,
             color
@@ -64,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             color
         )
 
-    }
+    }*/
 
 
     override fun onSupportNavigateUp(): Boolean {
