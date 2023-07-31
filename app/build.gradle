@@ -18,8 +18,8 @@ android {
         applicationId "com.settowally.settowally"
         minSdk 28
         targetSdk 33
-        versionCode 10
-        versionName "1.0.5 -ALPHA"
+        versionCode 1
+        versionName "1.0.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -96,4 +96,8 @@ dependencies {
 
     /*      Splash API      */
     implementation "androidx.core:core-splashscreen:1.0.0"
+
+    /*      DataStore       */
+    implementation "androidx.datastore:datastore-preferences:1.1.0-alpha04"
+
 }

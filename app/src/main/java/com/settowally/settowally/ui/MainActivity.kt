@@ -1,10 +1,12 @@
 package com.settowally.settowally.ui
 
 import android.annotation.SuppressLint
+import android.app.UiModeManager
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -12,10 +14,14 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.color.MaterialColors
 import com.settowally.settowally.R
 import com.settowally.settowally.databinding.ActivityMainBinding
+import com.settowally.settowally.repository.data_store.DataStoreRepository
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity @Inject constructor(
+    private val dataStoreRepository: DataStoreRepository,
+) : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -43,13 +49,29 @@ class MainActivity : AppCompatActivity() {
 
                 else -> {
                     binding.bottomNavBar.visibility = View.VISIBLE
-                    window.statusBarColor=MaterialColors.getColor(binding.root,
-                        com.google.android.material.R.attr.colorSecondaryContainer)
-                    window.navigationBarColor=MaterialColors.getColor(binding.root,
-                        com.google.android.material.R.attr.colorSecondaryContainer)
+                    window.statusBarColor = MaterialColors.getColor(
+                        binding.root,
+                        com.google.android.material.R.attr.colorSecondaryContainer
+                    )
+                    window.navigationBarColor = MaterialColors.getColor(
+                        binding.root,
+                        com.google.android.material.R.attr.colorSecondaryContainer
+                    )
                 }
             }
         }
+
+      /*  val savedThemeStr = dataStoreRepository.darkModeSavedOption
+        val savedTheme =return when(savedThemeStr){
+            is "Dark" -> 1
+            is "Light"->0
+        }
+        if (android.os.Build.VERSION.SDK_INT < 30) {
+            AppCompatDelegate.setDefaultNightMode(savedTheme)
+        } else {
+            UiModeManager.MODE_NIGHT_YES
+        }*/
+
     }
 
     /**     Status & Nav bar color changer        */
