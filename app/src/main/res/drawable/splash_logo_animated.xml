@@ -1,14 +1,44 @@
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="192dp"
-    android:height="192dp"
-    android:viewportWidth="192"
-    android:viewportHeight="192">
-  <group>
-    <clip-path
-        android:pathData="M0,0h192v0v192v0h-192v0v-192z"/>
-    <path
-        android:pathData="M68.02,119.37c-3.8,0 -7.34,-0.62 -10.62,-1.86c-4.35,-1.62 -6.53,-3.93 -6.53,-6.91c0,-1.66 0.53,-3.09 1.6,-4.29c1.11,-1.24 2.54,-1.86 4.29,-1.86c1.24,0 3.01,0.43 5.31,1.28c2.35,0.81 4.16,1.22 5.44,1.22c3.29,0 4.93,-1.3 4.93,-3.9c0,-1.28 -1.86,-2.45 -5.57,-3.52c-4.99,-1.41 -8.41,-2.71 -10.24,-3.9c-3.71,-2.39 -5.57,-5.87 -5.57,-10.43c0,-4.86 1.77,-8.81 5.31,-11.84c3.33,-2.86 7.38,-4.29 12.16,-4.29c2.86,0 5.74,0.6 8.64,1.79c3.67,1.58 5.5,3.65 5.5,6.21c0,1.66 -0.53,3.14 -1.6,4.42c-1.07,1.28 -2.5,1.92 -4.29,1.92c-0.98,0 -2.39,-0.32 -4.22,-0.96c-1.83,-0.64 -3.26,-0.96 -4.29,-0.96c-2.43,0 -3.65,0.85 -3.65,2.56c0,0.9 1.86,1.88 5.57,2.94c4.69,1.32 8.11,2.77 10.24,4.35c3.71,2.73 5.57,6.59 5.57,11.58c0,4.95 -1.81,8.98 -5.44,12.1c-3.41,2.9 -7.59,4.35 -12.54,4.35zM122.97,99.91c1.45,-4.27 4.16,-11.24 8.13,-20.93c1.19,-3.11 3.22,-4.67 6.08,-4.67c0.51,0 1.04,0.06 1.6,0.19c1.54,0.3 2.75,1 3.65,2.11c0.9,1.11 1.34,2.35 1.34,3.71c0,0.34 -0.02,0.68 -0.06,1.02c-0.17,0.85 -0.43,1.66 -0.77,2.43l-14.65,32.77c-1.45,3.2 -3.84,4.8 -7.17,4.8c-0.6,0 -1.2,-0.06 -1.79,-0.19c-1.84,-0.34 -3.35,-1.19 -4.54,-2.56c-1.2,-1.37 -1.88,-2.9 -2.05,-4.61l-2.18,-21.44c-1.62,3.71 -4.8,10.09 -9.54,19.14c-1.45,2.9 -3.84,4.35 -7.17,4.35c-0.55,0 -1.11,-0.04 -1.66,-0.13c-2.05,-0.43 -3.67,-1.39 -4.86,-2.88c-1.07,-1.37 -1.62,-2.94 -1.66,-4.74l-1.34,-35.9c-0.04,-0.85 0.02,-1.69 0.19,-2.5c0.26,-1.32 0.92,-2.43 1.98,-3.33c1.11,-0.9 2.41,-1.34 3.9,-1.34c0.43,0 0.85,0.04 1.28,0.13c3.58,0.68 5.4,3.03 5.44,7.04l0.13,22.46c1.96,-4.35 5.5,-11.48 10.62,-21.38c1.24,-2.47 3.22,-3.71 5.95,-3.71c1.83,0 3.39,0.6 4.67,1.79c1.28,1.15 2.01,2.62 2.18,4.42z"
-        android:fillColor="#2A9FC2"
-        android:fillType="nonZero"/>
-  </group>
-</vector>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt" >
+    <aapt:attr name="android:drawable">
+        <vector
+            android:height="64dp"
+            android:width="64dp"
+            android:viewportHeight="600"
+            android:viewportWidth="600" >
+            <group
+                android:name="rotationGroup"
+                android:pivotX="300.0"
+                android:pivotY="300.0"
+                android:rotation="45.0" >
+                <path
+                    android:name="v"
+                    android:fillColor="#000000"
+                    android:pathData="M300,70 l 0,-70 70,70 0,0 -70,70z" />
+            </group>
+        </vector>
+    </aapt:attr>
+
+    <target android:name="rotationGroup">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:duration="6000"
+                android:propertyName="rotation"
+                android:valueFrom="0"
+                android:valueTo="360" />
+        </aapt:attr>
+    </target>
+
+    <target android:name="v" >
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:duration="3000"
+                    android:propertyName="pathData"
+                    android:valueFrom="M300,70 l 0,-70 70,70 0,0 -70,70z"
+                    android:valueTo="M300,70 l 0,-70 70,0  0,140 -70,0 z"
+                    android:valueType="pathType"/>
+            </set>
+        </aapt:attr>
+    </target>
+</animated-vector>
