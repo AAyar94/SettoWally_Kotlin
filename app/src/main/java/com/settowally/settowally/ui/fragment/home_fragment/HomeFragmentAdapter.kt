@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.settowally.settowally.R
 import com.settowally.settowally.databinding.PhotoItemLayoutBinding
-import com.settowally.settowally.repository.remote.model.Photo
-import com.settowally.settowally.repository.remote.model.PhotosDataModel
+import com.settowally.settowally.data.remote.model.Photo
+import com.settowally.settowally.data.remote.model.PhotosDataModel
 
 class HomeFragmentAdapter(
     val onItemClick: (photo: Photo) -> Unit,

@@ -1,7 +1,7 @@
 package com.settowally.settowally.di
 
 import com.settowally.settowally.common.Constant.Companion.BASE_URL
-import com.settowally.settowally.repository.remote.PhotosAPI
+import com.settowally.settowally.data.remote.PhotosAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

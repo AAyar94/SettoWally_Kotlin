@@ -20,7 +20,7 @@
         tools:layout="@layout/fragment_wallpaper_details" >
         <argument
             android:name="photo"
-            app:argType="com.settowally.settowally.repository.remote.model.Photo" />
+            app:argType="com.settowally.settowally.data.remote.model.Photo" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
