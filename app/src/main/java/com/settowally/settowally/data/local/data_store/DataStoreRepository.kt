@@ -1,4 +1,4 @@
-package com.settowally.settowally.repository.data_store
+package com.settowally.settowally.data.local.data_store
 
 import android.content.Context
 import androidx.datastore.core.DataStore

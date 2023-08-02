@@ -1,4 +1,4 @@
-package com.settowally.settowally.data.remote.model
+package com.settowally.settowally.data.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
