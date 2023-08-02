@@ -30,8 +30,9 @@
         android:layout_width="@dimen/image_button_size"
         android:layout_height="@dimen/image_button_size"
         android:layout_margin="12dp"
+        android:scaleType="fitCenter"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_favorite"
+        android:src="@drawable/ic_favorite_filled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@color/white" />

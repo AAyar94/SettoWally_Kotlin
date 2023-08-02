@@ -14,13 +14,13 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.color.MaterialColors
 import com.settowally.settowally.R
 import com.settowally.settowally.databinding.ActivityMainBinding
-import com.settowally.settowally.repository.data_store.DataStoreRepository
+import com.settowally.settowally.data.local.data_store.DataStoreRepository
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity @Inject constructor(
-    private val dataStoreRepository: DataStoreRepository,
+    //private val dataStoreRepository: DataStoreRepository,
 ) : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding

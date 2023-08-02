@@ -5,12 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.settowally.settowally.R
+import com.settowally.settowally.data.model.Photo
+import com.settowally.settowally.data.model.PhotosDataModel
 import com.settowally.settowally.databinding.PhotoItemLayoutBinding
-import com.settowally.settowally.data.remote.model.Photo
-import com.settowally.settowally.data.remote.model.PhotosDataModel
 
 class HomeFragmentAdapter(
     val onItemClick: (photo: Photo) -> Unit,
+    val favoriteButtonClick: (photo: Photo) -> Unit,
 ) : RecyclerView.Adapter<HomeFragmentAdapter.HomeViewHolder>() {
 
     private val photosList = mutableListOf<Photo>()
@@ -21,7 +22,7 @@ class HomeFragmentAdapter(
             Glide.with(binding.root).load(photosList[position].src.medium)
                 .into(binding.imageViewPerPhoto)
             binding.isLikedButton.setOnClickListener {
-                /**     LIKE FUNCTION       */
+                favoriteButtonClick(photosList[position])
             }
             if (photosList[position].liked) {
                 Glide.with(binding.root).load(R.drawable.ic_favorite_filled)

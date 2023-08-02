@@ -20,13 +20,17 @@
         tools:layout="@layout/fragment_wallpaper_details" >
         <argument
             android:name="photo"
-            app:argType="com.settowally.settowally.data.remote.model.Photo" />
+            app:argType="com.settowally.settowally.data.model.Photo" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.settowally.settowally.ui.fragment.favorites_fragment.FavoritesFragment"
         android:label="fragment_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_wallpaperDetailsFragment"
+            app:destination="@id/wallpaperDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.settowally.settowally.ui.fragment.settings_fragment.SettingsFragment"

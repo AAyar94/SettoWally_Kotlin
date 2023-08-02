@@ -4,9 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.settowally.settowally.common.NetworkResponseHandler
-import com.settowally.settowally.repository.Repository
-import com.settowally.settowally.data.remote.model.PhotosDataModel
+import com.settowally.settowally.data.model.Photo
+import com.settowally.settowally.data.repository.Repository
+import com.settowally.settowally.data.model.PhotosDataModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,6 +23,12 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             val photosResponse = repository.getPhotosFromRemote(page, perPage)
             photoDataObject.postValue(photosResponse)
+        }
+    }
+
+    fun savePhotoToDb(photo: Photo){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.savePhotoToDb(photo)
         }
     }
 

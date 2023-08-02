@@ -18,11 +18,16 @@ class HomeFragment : Fragment() {
     private val binding get() = mBinding!!
     private val homeViewModel: HomeViewModel by viewModels()
     private val homeAdapter: HomeFragmentAdapter by lazy {
-        HomeFragmentAdapter { photo ->
-            val action = HomeFragmentDirections.actionHomeFragmentToWallpaperDetailsFragment(photo)
-            findNavController().navigate(action)
-
-        }
+        HomeFragmentAdapter(
+            onItemClick = { photo ->
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToWallpaperDetailsFragment(photo)
+                findNavController().navigate(action)
+            },
+            favoriteButtonClick = { photo ->
+                homeViewModel.savePhotoToDb(photo)
+            }
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
