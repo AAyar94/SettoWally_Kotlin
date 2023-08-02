@@ -3,7 +3,7 @@ package com.settowally.settowally.data.local.coverters
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.settowally.settowally.data.remote.model.Src
+import com.settowally.settowally.data.model.Src
 
 class SrcTypeConverter {
     @TypeConverter
