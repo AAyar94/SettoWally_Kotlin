@@ -71,4 +71,9 @@
     <string name="developer">Developer :</string>
     <string name="adem_ayar">Adem Ayar</string>
     <string name="see_more_apps_on_play_store">See more apps on Play Store</string>
+    <string name="photo_details">Photo Details</string>
+    <string name="height">Height:</string>
+    <string name="photographer">Photographer:</string>
+    <string name="width">Width</string>
+    <string name="close">Close</string>
 </resources>
