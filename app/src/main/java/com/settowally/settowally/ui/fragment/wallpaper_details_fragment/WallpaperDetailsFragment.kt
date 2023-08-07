@@ -1,6 +1,7 @@
 package com.settowally.settowally.ui.fragment.wallpaper_details_fragment
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.settowally.settowally.R
 import com.settowally.settowally.data.model.WallpaperType
@@ -19,6 +24,12 @@ import com.settowally.settowally.databinding.AlertDialogSetWallpaperBinding
 import com.settowally.settowally.databinding.FragmentWallpaperDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class WallpaperDetailsFragment : Fragment() {
@@ -27,16 +38,52 @@ class WallpaperDetailsFragment : Fragment() {
     private val viewModel: WallpaperDetailsViewModel by viewModels()
     private val photoArgs: WallpaperDetailsFragmentArgs by navArgs()
 
+    private var job: Job? = null
+
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         mBinding = FragmentWallpaperDetailsBinding.inflate(layoutInflater, container, false)
 
-        Glide.with(binding.root.context)
-            .load(photoArgs.photo.src.medium)
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(binding.bigImageView)
+        job = GlobalScope.launch(Dispatchers.Main) {
+
+            delay(400) // :)
+
+            Glide.with(binding.root.context)
+                .load(photoArgs.photo.src.medium)
+                .listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        binding.progressCircular.visibility = View.GONE
+                        binding.errorImage.visibility = View.VISIBLE
+                        binding.blurViewOverlay.visibility = View.GONE
+                        return false
+                    }
+
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        binding.progressCircular.visibility = View.GONE
+                        binding.errorImage.visibility = View.GONE
+                        binding.blurViewOverlay.visibility = View.VISIBLE
+                        return false
+                    }
+
+                })
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(binding.bigImageView)
+        }
+
 
         setBlurLayer()
         setupButtons()
@@ -47,8 +94,8 @@ class WallpaperDetailsFragment : Fragment() {
         binding.blurViewOverlay.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(binding.bigImageView.background)
             .setBlurRadius(5f)
-        binding.blurViewOverlay.outlineProvider = ViewOutlineProvider.BACKGROUND;
-        binding.blurViewOverlay.clipToOutline = true;
+        binding.blurViewOverlay.outlineProvider = ViewOutlineProvider.BACKGROUND
+        binding.blurViewOverlay.clipToOutline = true
     }
 
     @SuppressLint("SetTextI18n")
@@ -110,5 +157,6 @@ class WallpaperDetailsFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         mBinding = null
+        job?.cancel()
     }
 }
