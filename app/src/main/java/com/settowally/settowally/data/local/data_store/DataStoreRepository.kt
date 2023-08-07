@@ -1,6 +1,7 @@
 package com.settowally.settowally.data.local.data_store
 
 import android.content.Context
+import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.IOException
 import androidx.datastore.preferences.core.Preferences
@@ -11,52 +12,51 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.settowally.settowally.common.Constant.Companion.PREFERENCES_NAME
 import com.settowally.settowally.common.Constant.Companion.PREFERENCE_DARK_MODE_SETTING
 import com.settowally.settowally.common.Constant.Companion.PREFERENCE_QUALITY_SETTING
+import com.settowally.settowally.data.model.Theme
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 
 
 private val Context.datastore: DataStore<Preferences> by preferencesDataStore(name = PREFERENCES_NAME)
 
-
-@ViewModelScoped
+// @ActivityScope yerine @Singleton yaptım. Hem Activity hem ViewModel'da çağırabiliyorum.
+@Singleton
 class DataStoreRepository @Inject constructor(@ApplicationContext private val context: Context) {
 
     private object PreferenceKeys {
-        val darkModeSetting = stringPreferencesKey(PREFERENCE_DARK_MODE_SETTING)
+        val selectedTheme = stringPreferencesKey(PREFERENCE_DARK_MODE_SETTING)
         val qualitySetting = stringPreferencesKey(PREFERENCE_QUALITY_SETTING)
     }
 
     private val dataStore: DataStore<Preferences> = context.datastore
 
+    suspend fun saveDarkModeOption(theme: Theme) {
+        dataStore.edit { preferences ->
+            preferences[PreferenceKeys.selectedTheme] = theme.name
+        }
+    }
 
-    suspend fun saveDarkModeOption(str: String) {
-        context.datastore.edit { preferences ->
-            preferences[PreferenceKeys.darkModeSetting] = str
+    val selectedThemeFlow: Flow<Theme> = dataStore.data.map { preferences ->
+        val themeName = preferences[PreferenceKeys.selectedTheme] ?: Theme.SYSTEM.name
+        try {
+            Theme.valueOf(themeName)
+        } catch (ex: IllegalArgumentException) {
+            Log.e("Failed - -  -   -    -", "$ex")
+            Theme.SYSTEM
         }
     }
 
     suspend fun saveQualityOption(str: String) {
-        context.datastore.edit { preferences ->
+        dataStore.edit { preferences ->
             preferences[PreferenceKeys.qualitySetting] = str
         }
     }
 
-    val darkModeSavedOption: Flow<String> = context.datastore.data.catch { exception ->
-        if (exception is IOException) {
-            emit(emptyPreferences())
-        } else {
-            throw exception
-        }
-    }.map { preferences ->
-        val selectedDarkModeOption = preferences[PreferenceKeys.darkModeSetting] ?: "OS"
-        selectedDarkModeOption
-    }
-
-    val savedQualitySetting: Flow<String> = context.datastore.data.catch { exception ->
+    val savedQualitySetting: Flow<String> = dataStore.data.catch { exception ->
         if (exception is IOException) {
             emit(emptyPreferences())
         } else {
@@ -66,6 +66,4 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         val selectedQualitySetting = preferences[PreferenceKeys.qualitySetting] ?: "Medium"
         selectedQualitySetting
     }
-
-
 }
