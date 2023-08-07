@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.settowally.settowally.R
+import com.settowally.settowally.data.model.WallpaperType
 import com.settowally.settowally.databinding.AlartDialogPhotoDetailBinding
+import com.settowally.settowally.databinding.AlertDialogSetWallpaperBinding
 import com.settowally.settowally.databinding.FragmentWallpaperDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
@@ -21,6 +24,7 @@ import eightbitlab.com.blurview.RenderScriptBlur
 class WallpaperDetailsFragment : Fragment() {
     private var mBinding: FragmentWallpaperDetailsBinding? = null
     private val binding get() = mBinding!!
+    private val viewModel: WallpaperDetailsViewModel by viewModels()
     private val photoArgs: WallpaperDetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -29,22 +33,22 @@ class WallpaperDetailsFragment : Fragment() {
     ): View {
         mBinding = FragmentWallpaperDetailsBinding.inflate(layoutInflater, container, false)
 
+        Glide.with(binding.root.context)
+            .load(photoArgs.photo.src.medium)
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(binding.bigImageView)
+
+        setBlurLayer()
+        setupButtons()
+        return binding.root
+    }
+
+    private fun setBlurLayer() {
         binding.blurViewOverlay.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(binding.bigImageView.background)
             .setBlurRadius(5f)
         binding.blurViewOverlay.outlineProvider = ViewOutlineProvider.BACKGROUND;
         binding.blurViewOverlay.clipToOutline = true;
-
-        val circularProgressDrawable = CircularProgressDrawable(requireContext())
-        circularProgressDrawable.strokeWidth = 10f
-        circularProgressDrawable.centerRadius = 50f
-        circularProgressDrawable.start()
-
-        Glide.with(binding.root).load(photoArgs.photo.src.original)
-            .placeholder(circularProgressDrawable).into(binding.bigImageView)
-
-        setupButtons()
-        return binding.root
     }
 
     @SuppressLint("SetTextI18n")
@@ -73,7 +77,32 @@ class WallpaperDetailsFragment : Fragment() {
             dialog.show()
         }
         binding.setWallpaperButton.setOnClickListener {
-
+            val builder = MaterialAlertDialogBuilder(requireContext())
+            val dialogView = AlertDialogSetWallpaperBinding.inflate(layoutInflater)
+            builder.setView(dialogView.root)
+            dialogView.wallpaperSetHomeButton.setOnClickListener {
+                viewModel.setWallpaper(
+                    photoArgs.photo.src.medium,
+                    WallpaperType.HOME_SCREEN,
+                    requireContext()
+                )
+            }
+            dialogView.wallpaperSetLockButton.setOnClickListener {
+                viewModel.setWallpaper(
+                    photoArgs.photo.src.medium,
+                    WallpaperType.LOCK_SCREEN,
+                    requireContext()
+                )
+            }
+            dialogView.wallpaperSetBothButton.setOnClickListener {
+                viewModel.setWallpaper(
+                    photoArgs.photo.src.medium,
+                    WallpaperType.HOME_AND_LOCK_SCREEN,
+                    requireContext()
+                )
+            }
+            val dialog = builder.create()
+            dialog.show()
         }
     }
 

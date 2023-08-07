@@ -10,7 +10,7 @@ import com.settowally.settowally.data.model.PhotosDataModel
 import com.settowally.settowally.databinding.PhotoItemLayoutBinding
 
 class HomeFragmentAdapter(
-    val onItemClick: (photo: Photo) -> Unit,
+    val onItemClick: (photo : Photo) -> Unit,
     val favoriteButtonClick: (photo: Photo) -> Unit,
 ) : RecyclerView.Adapter<HomeFragmentAdapter.HomeViewHolder>() {
 
