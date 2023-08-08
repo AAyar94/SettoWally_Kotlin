@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.settowally.settowally.data.model.PhotoQuality
 import com.settowally.settowally.data.model.Theme
 import com.settowally.settowally.databinding.FragmentSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +33,7 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
+            /**     Theme Picker OnClick Listeners      */
             darkModeChip.setOnClickListener {
                 viewModel.saveTheme(Theme.DARK)
             }
@@ -42,6 +44,32 @@ class SettingsFragment : Fragment() {
 
             systemModeChip.setOnClickListener {
                 viewModel.saveTheme(Theme.SYSTEM)
+            }
+
+            /**      Quality Picker OnClick Listeners        */
+            originalQualityChip.setOnClickListener {
+                viewModel.setPhotosQuality(PhotoQuality.Original)
+            }
+            large2xQualityChip.setOnClickListener {
+                viewModel.setPhotosQuality(PhotoQuality.Large2x)
+            }
+            largeQualityChip.setOnClickListener {
+                viewModel.setPhotosQuality(PhotoQuality.Large)
+            }
+            landspaceQualityChip.setOnClickListener {
+                viewModel.setPhotosQuality(PhotoQuality.Landscape)
+            }
+            portraitQualityChip.setOnClickListener {
+                viewModel.setPhotosQuality(PhotoQuality.Portrait)
+            }
+            mediumQualityChip.setOnClickListener {
+                viewModel.setPhotosQuality(PhotoQuality.Medium)
+            }
+            tinyQualityChip.setOnClickListener {
+                viewModel.setPhotosQuality(PhotoQuality.Tiny)
+            }
+            smallQualityChip.setOnClickListener {
+                viewModel.setPhotosQuality(PhotoQuality.Small)
             }
         }
 
@@ -57,6 +85,16 @@ class SettingsFragment : Fragment() {
                 binding.darkModeChip.isChecked = savedTheme == Theme.DARK
                 binding.lightModeChip.isChecked = savedTheme == Theme.LIGHT
                 binding.systemModeChip.isChecked = savedTheme == Theme.SYSTEM
+            }
+            viewModel.selectedQuality.collect { savedQuality ->
+                binding.originalQualityChip.isChecked = savedQuality == PhotoQuality.Original
+                binding.large2xQualityChip.isChecked = savedQuality == PhotoQuality.Large2x
+                binding.largeQualityChip.isChecked = savedQuality == PhotoQuality.Large
+                binding.landspaceQualityChip.isChecked = savedQuality == PhotoQuality.Landscape
+                binding.portraitQualityChip.isChecked = savedQuality == PhotoQuality.Portrait
+                binding.mediumQualityChip.isChecked = savedQuality == PhotoQuality.Medium
+                binding.tinyQualityChip.isChecked = savedQuality == PhotoQuality.Tiny
+                binding.smallQualityChip.isChecked = savedQuality == PhotoQuality.Small
             }
         }
     }

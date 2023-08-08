@@ -4,20 +4,25 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.settowally.settowally.common.NetworkResponseHandler
+import com.settowally.settowally.data.local.data_store.DataStoreRepository
 import com.settowally.settowally.data.model.Photo
+import com.settowally.settowally.data.model.PhotoQuality
 import com.settowally.settowally.data.repository.Repository
 import com.settowally.settowally.data.model.PhotosDataModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val repository: Repository,
+    dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
 
     val photoDataObject = MutableLiveData<NetworkResponseHandler<PhotosDataModel>>()
+    val selectedQuality : Flow<PhotoQuality> = dataStoreRepository.savedQualitySetting
 
     fun getPhotos(page: Int, perPage: Int) {
         viewModelScope.launch {
@@ -31,5 +36,7 @@ class HomeViewModel @Inject constructor(
             repository.savePhotoToDb(photo)
         }
     }
+
+
 
 }

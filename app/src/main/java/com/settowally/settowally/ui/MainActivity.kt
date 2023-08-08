@@ -23,7 +23,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    // Bu şekilde Inject edersek sıkıntı olmuyor açılışta.
     @Inject
     lateinit var dataStoreRepository: DataStoreRepository
 
@@ -66,33 +65,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        /*  val savedThemeStr = dataStoreRepository.darkModeSavedOption
-          val savedTheme =return when(savedThemeStr){
-              is "Dark" -> 1
-              is "Light"->0
-          }
-          if (android.os.Build.VERSION.SDK_INT < 30) {
-              AppCompatDelegate.setDefaultNightMode(savedTheme)
-          } else {
-              UiModeManager.MODE_NIGHT_YES
-          }*/
-
     }
-
-    /**     Status & Nav bar color changer        */
-    /*private fun windowBarsColorChanger(color: Int) {
-        window.statusBarColor = MaterialColors.getColor(
-            binding.root,
-            color
-        )
-        window.navigationBarColor = MaterialColors.getColor(
-            binding.root,
-            color
-        )
-
-    }*/
-
     private fun setTheme() {
         lifecycleScope.launch {
             dataStoreRepository.selectedThemeFlow.collect { savedTheme ->

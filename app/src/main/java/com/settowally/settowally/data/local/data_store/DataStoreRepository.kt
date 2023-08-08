@@ -3,19 +3,17 @@ package com.settowally.settowally.data.local.data_store
 import android.content.Context
 import android.util.Log
 import androidx.datastore.core.DataStore
-import androidx.datastore.core.IOException
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.settowally.settowally.common.Constant.Companion.PREFERENCES_NAME
 import com.settowally.settowally.common.Constant.Companion.PREFERENCE_DARK_MODE_SETTING
 import com.settowally.settowally.common.Constant.Companion.PREFERENCE_QUALITY_SETTING
+import com.settowally.settowally.data.model.PhotoQuality
 import com.settowally.settowally.data.model.Theme
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -50,20 +48,19 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         }
     }
 
-    suspend fun saveQualityOption(str: String) {
+    suspend fun saveQualityOption(quality: PhotoQuality) {
         dataStore.edit { preferences ->
-            preferences[PreferenceKeys.qualitySetting] = str
+            preferences[PreferenceKeys.qualitySetting] = quality.name
         }
     }
 
-    val savedQualitySetting: Flow<String> = dataStore.data.catch { exception ->
-        if (exception is IOException) {
-            emit(emptyPreferences())
-        } else {
-            throw exception
+    val savedQualitySetting: Flow<PhotoQuality> = dataStore.data.map { preferences ->
+        val qualityName = preferences[PreferenceKeys.qualitySetting] ?: PhotoQuality.Medium.name
+        try {
+            PhotoQuality.valueOf(qualityName)
+        } catch (e: java.lang.IllegalArgumentException) {
+            Log.e("Failed - -  -   -    -", "$e")
+            PhotoQuality.Medium
         }
-    }.map { preferences ->
-        val selectedQualitySetting = preferences[PreferenceKeys.qualitySetting] ?: "Medium"
-        selectedQualitySetting
     }
 }

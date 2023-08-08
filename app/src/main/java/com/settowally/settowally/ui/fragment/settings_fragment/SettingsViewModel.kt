@@ -3,6 +3,7 @@ package com.settowally.settowally.ui.fragment.settings_fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.settowally.settowally.data.local.data_store.DataStoreRepository
+import com.settowally.settowally.data.model.PhotoQuality
 import com.settowally.settowally.data.model.Theme
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,6 +17,7 @@ class SettingsViewModel @Inject constructor(
 ) : ViewModel() {
 
     val selectedTheme: Flow<Theme> = dataStoreRepository.selectedThemeFlow
+    val selectedQuality : Flow<PhotoQuality> = dataStoreRepository.savedQualitySetting
 
     fun saveTheme(theme: Theme) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -23,9 +25,10 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun setPhotosQuality(text: String) {
+    fun setPhotosQuality(quality: PhotoQuality) {
         viewModelScope.launch(Dispatchers.IO) {
-            dataStoreRepository.saveQualityOption(text)
+            dataStoreRepository.saveQualityOption(quality)
         }
     }
+
 }
