@@ -11,7 +11,6 @@ import com.settowally.settowally.data.model.PhotosDataModel
 import com.settowally.settowally.databinding.PhotoItemLayoutBinding
 
 class HomeFragmentAdapter(
-    val quality: String?,
     val onItemClick: (photo: Photo) -> Unit,
     val favoriteButtonClick: (photo: Photo) -> Unit,
 ) : RecyclerView.Adapter<HomeFragmentAdapter.HomeViewHolder>() {
@@ -20,22 +19,8 @@ class HomeFragmentAdapter(
 
     inner class HomeViewHolder(private val binding: PhotoItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
-
-
         fun bind(position: Int) {
-            val requestQuality = when (quality) {
-                "Tiny" -> photosList[layoutPosition].src.tiny
-                "Small" -> photosList[layoutPosition].src.small
-                "Medium" -> photosList[layoutPosition].src.medium
-                "Portrait" -> photosList[layoutPosition].src.portrait
-                "Landscape" -> photosList[layoutPosition].src.landscape
-                "Large" -> photosList[layoutPosition].src.large
-                "Large2x" -> photosList[layoutPosition].src.large2x
-                "Original" -> photosList[layoutPosition].src.original
-                else -> photosList[layoutPosition].src.medium
-            }
-            Glide.with(binding.root).load(requestQuality)
+            Glide.with(binding.root).load(photosList[position].src.medium)
                 .into(binding.imageViewPerPhoto)
             binding.isLikedButton.setOnClickListener {
                 favoriteButtonClick(photosList[position])

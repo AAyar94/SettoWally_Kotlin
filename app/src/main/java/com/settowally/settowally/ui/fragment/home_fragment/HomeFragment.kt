@@ -20,7 +20,6 @@ class HomeFragment : Fragment() {
     private var mBinding: FragmentHomeBinding? = null
     private val binding get() = mBinding!!
     private val homeViewModel: HomeViewModel by viewModels()
-    private var photoQuality: PhotoQuality? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,11 +27,11 @@ class HomeFragment : Fragment() {
     ): View {
         mBinding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
-        viewLifecycleOwner.lifecycleScope.launch {
+        /**viewLifecycleOwner.lifecycleScope.launch {
             homeViewModel.selectedQuality.collect { savedQuality ->
                 photoQuality = savedQuality
             }
-        }
+        }*/
         homeViewModel.getPhotos(page = 1, perPage = PER_PAGE_PHOTO_COUNTER)
 
         return binding.root
@@ -42,7 +41,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val homeAdapter: HomeFragmentAdapter by lazy {
             HomeFragmentAdapter(
-                photoQuality.toString(),
                 onItemClick = { photo ->
                     val action =
                         HomeFragmentDirections.actionHomeFragmentToWallpaperDetailsFragment(photo)

@@ -22,7 +22,6 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     val photoDataObject = MutableLiveData<NetworkResponseHandler<PhotosDataModel>>()
-    val selectedQuality : Flow<PhotoQuality> = dataStoreRepository.savedQualitySetting
 
     fun getPhotos(page: Int, perPage: Int) {
         viewModelScope.launch {
