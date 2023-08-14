@@ -16,6 +16,7 @@ class Constant {
         const val FAVORITE_PHOTOS_TABLE_NAME = "favorite_photos"
         const val PHOTOS_SRC_TABLE_NAME = "photos_src"
         const val DATABASE_NAME = "Saved_photos"
+        const val BACK_ONLINE= "back_online"
 
     }
 }

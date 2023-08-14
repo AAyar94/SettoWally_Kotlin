@@ -4,9 +4,11 @@ import android.content.Context
 import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.settowally.settowally.common.Constant.Companion.BACK_ONLINE
 import com.settowally.settowally.common.Constant.Companion.PREFERENCES_NAME
 import com.settowally.settowally.common.Constant.Companion.PREFERENCE_DARK_MODE_SETTING
 import com.settowally.settowally.common.Constant.Companion.PREFERENCE_QUALITY_SETTING
@@ -28,10 +30,12 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
     private object PreferenceKeys {
         val selectedTheme = stringPreferencesKey(PREFERENCE_DARK_MODE_SETTING)
         val qualitySetting = stringPreferencesKey(PREFERENCE_QUALITY_SETTING)
+        val backOnline = booleanPreferencesKey(BACK_ONLINE)
     }
 
     private val dataStore: DataStore<Preferences> = context.datastore
 
+    /**     DARK MODE       */
     suspend fun saveDarkModeOption(theme: Theme) {
         dataStore.edit { preferences ->
             preferences[PreferenceKeys.selectedTheme] = theme.name
@@ -47,7 +51,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             Theme.SYSTEM
         }
     }
-
+    /**      SAVED QUALİTY       */
     suspend fun saveQualityOption(quality: PhotoQuality) {
         dataStore.edit { preferences ->
             preferences[PreferenceKeys.qualitySetting] = quality.name
@@ -61,6 +65,21 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         } catch (e: java.lang.IllegalArgumentException) {
             Log.e("Failed - -  -   -    -", "$e")
             PhotoQuality.Medium
+        }
+    }
+    /**      BACK ONLINE     */
+    val backOnlineFlow: Flow<Boolean> = dataStore.data.map { preferences ->
+        val onlineStatus = preferences[PreferenceKeys.backOnline] ?: false
+        try {
+            onlineStatus
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    suspend fun saveOnlineStatus(status: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[PreferenceKeys.backOnline] = status
         }
     }
 }

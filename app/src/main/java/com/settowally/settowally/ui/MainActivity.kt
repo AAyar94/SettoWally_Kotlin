@@ -52,6 +52,16 @@ class MainActivity : AppCompatActivity() {
                     window.navigationBarColor = Color.TRANSPARENT
                 }
 
+                R.id.setWallpaperBottomSheetFragment -> {
+                    binding.bottomNavBar.visibility = View.GONE
+                    window.navigationBarColor = Color.TRANSPARENT
+                }
+
+                R.id.downloadBottomSheetFragment -> {
+                    binding.bottomNavBar.visibility = View.GONE
+                    window.navigationBarColor = Color.TRANSPARENT
+                }
+
                 else -> {
                     binding.bottomNavBar.visibility = View.VISIBLE
                     window.statusBarColor = MaterialColors.getColor(
@@ -66,6 +76,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun setTheme() {
         lifecycleScope.launch {
             dataStoreRepository.selectedThemeFlow.collect { savedTheme ->

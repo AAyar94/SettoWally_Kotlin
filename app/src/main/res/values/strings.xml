@@ -76,8 +76,21 @@
     <string name="photographer">Photographer:</string>
     <string name="width">Width</string>
     <string name="close">Close</string>
-    <string name="set_wallpaper_to">Set wallpaper to:</string>
+    <string name="setting_wallpaper_to">Setting wallpaper to:</string>
     <string name="set_wallpaper_to_lock_screen">Set wallpaper to lock screen</string>
     <string name="set_wallpaper_to_home_screen">Set wallpaper to home screen</string>
     <string name="set_wallpaper_to_home_and_lock_screen">Set wallpaper to home and lock screen</string>
+    <string name="wallpaper_set_to_home_screen">Wallpaper set to home screen</string>
+    <string name="wallpaper_set_to_lock_screen">Wallpaper set to lock screen</string>
+    <string name="wallpaper_set_to_system">Wallpaper set to system</string>
+    <string name="download_wallpaper">Download Wallpaper</string>
+    <string name="select_the_quality_you_want_to_download">Select the quality you want to download</string>
+    <string name="wallpaper_downloaded_quality_portrait">Wallpaper Downloaded Quality : Portrait</string>
+    <string name="wallpaper_downloaded_quality_landscape">Wallpaper Downloaded Quality : Landscape</string>
+    <string name="wallpaper_downloaded_quality_tiny">Wallpaper Downloaded Quality : Tiny</string>
+    <string name="wallpaper_downloaded_quality_small">Wallpaper Downloaded Quality : Small</string>
+    <string name="wallpaper_downloaded_quality_medium">Wallpaper Downloaded Quality : Medium</string>
+    <string name="wallpaper_downloaded_quality_large">Wallpaper Downloaded Quality : Large</string>
+    <string name="wallpaper_downloaded_quality_large2x">Wallpaper Downloaded Quality : Large2x</string>
+    <string name="wallpaper_downloaded_quality_original">Wallpaper Downloaded Quality : Original</string>
 </resources>

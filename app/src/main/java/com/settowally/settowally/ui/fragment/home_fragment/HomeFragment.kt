@@ -6,20 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.settowally.settowally.common.Constant.Companion.PER_PAGE_PHOTO_COUNTER
 import com.settowally.settowally.common.NetworkResponseHandler
-import com.settowally.settowally.data.model.PhotoQuality
+import com.settowally.settowally.data.model.Photo
 import com.settowally.settowally.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var mBinding: FragmentHomeBinding? = null
     private val binding get() = mBinding!!
     private val homeViewModel: HomeViewModel by viewModels()
+    var savedPhotosList: List<Photo>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,12 +26,9 @@ class HomeFragment : Fragment() {
     ): View {
         mBinding = FragmentHomeBinding.inflate(layoutInflater, container, false)
 
-        /**viewLifecycleOwner.lifecycleScope.launch {
-            homeViewModel.selectedQuality.collect { savedQuality ->
-                photoQuality = savedQuality
-            }
-        }*/
         homeViewModel.getPhotos(page = 1, perPage = PER_PAGE_PHOTO_COUNTER)
+        savedPhotosList = homeViewModel.localDbResponse.value
+
 
         return binding.root
     }
@@ -41,15 +37,15 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val homeAdapter: HomeFragmentAdapter by lazy {
             HomeFragmentAdapter(
+                savedPhotosList,
                 onItemClick = { photo ->
                     val action =
                         HomeFragmentDirections.actionHomeFragmentToWallpaperDetailsFragment(photo)
                     findNavController().navigate(action)
-                },
-                favoriteButtonClick = { photo ->
-                    homeViewModel.savePhotoToDb(photo)
                 }
-            )
+            ) { photo ->
+                homeViewModel.savePhotoToDb(photo)
+            }
         }
         binding.imagesRecyclerView.adapter = homeAdapter
 

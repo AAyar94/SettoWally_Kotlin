@@ -1,16 +1,16 @@
 package com.settowally.settowally.ui.fragment.home_fragment
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.settowally.settowally.R
 import com.settowally.settowally.data.model.Photo
-import com.settowally.settowally.data.model.PhotoQuality
 import com.settowally.settowally.data.model.PhotosDataModel
 import com.settowally.settowally.databinding.PhotoItemLayoutBinding
 
 class HomeFragmentAdapter(
+    val savedPhotosList: List<Photo>?,
     val onItemClick: (photo: Photo) -> Unit,
     val favoriteButtonClick: (photo: Photo) -> Unit,
 ) : RecyclerView.Adapter<HomeFragmentAdapter.HomeViewHolder>() {
@@ -25,11 +25,15 @@ class HomeFragmentAdapter(
             binding.isLikedButton.setOnClickListener {
                 favoriteButtonClick(photosList[position])
             }
-            if (photosList[position].liked) {
-                Glide.with(binding.root).load(R.drawable.ic_favorite_filled)
-                    .into(binding.isLikedButton)
+            binding.isLikedButton.setOnClickListener {
+                favoriteButtonClick(photosList[position])
+                if (savedPhotosList?.contains(photosList[position]) == true){
+                    binding.isLikedButton.setColorFilter(Color.RED)
+                }else{
+                    binding.isLikedButton.setColorFilter(Color.WHITE)
+                }
             }
-            binding.root.setOnClickListener {
+            binding.imageViewPerPhoto.setOnClickListener {
                 onItemClick(photosList[position])
             }
         }

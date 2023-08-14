@@ -21,6 +21,12 @@
         <argument
             android:name="photo"
             app:argType="com.settowally.settowally.data.model.Photo" />
+        <action
+            android:id="@+id/action_wallpaperDetailsFragment_to_downloadBottomSheetFragment"
+            app:destination="@id/downloadBottomSheetFragment" />
+        <action
+            android:id="@+id/action_wallpaperDetailsFragment_to_setWallpaperBottomSheetFragment"
+            app:destination="@id/setWallpaperBottomSheetFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
@@ -36,4 +42,22 @@
         android:name="com.settowally.settowally.ui.fragment.settings_fragment.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <dialog
+        android:id="@+id/downloadBottomSheetFragment"
+        android:name="com.settowally.settowally.ui.fragment.download_bottom_sheet.DownloadBottomSheetFragment"
+        android:label="fragment_download_bottom_sheet"
+        tools:layout="@layout/fragment_download_bottom_sheet" >
+        <argument
+            android:name="src"
+            app:argType="com.settowally.settowally.data.model.Src" />
+    </dialog>
+    <dialog
+        android:id="@+id/setWallpaperBottomSheetFragment"
+        android:name="com.settowally.settowally.ui.fragment.set_wallpaper_bottom_sheet.SetWallpaperBottomSheetFragment"
+        android:label="fragment_set_wallpaper_bottom_sheet"
+        tools:layout="@layout/fragment_set_wallpaper_bottom_sheet" >
+        <argument
+            android:name="photo"
+            app:argType="com.settowally.settowally.data.model.Photo" />
+    </dialog>
 </navigation>
