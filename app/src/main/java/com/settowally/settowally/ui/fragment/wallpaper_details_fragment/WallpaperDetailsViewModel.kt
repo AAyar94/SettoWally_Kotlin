@@ -22,5 +22,4 @@ class WallpaperDetailsViewModel @Inject constructor(
 
     val selectedQuality : Flow<PhotoQuality> = dataStoreRepository.savedQualitySetting
 
-
 }

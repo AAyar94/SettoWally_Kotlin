@@ -11,6 +11,7 @@ import com.settowally.settowally.data.model.PhotoQuality
 import com.settowally.settowally.data.model.Theme
 import com.settowally.settowally.databinding.FragmentSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
@@ -73,15 +74,12 @@ class SettingsFragment : Fragment() {
             }
         }
 
-
-
         observeLiveData()
     }
 
     private fun observeLiveData() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.selectedTheme.collect { savedTheme ->
-                // Kontrolke
                 binding.darkModeChip.isChecked = savedTheme == Theme.DARK
                 binding.lightModeChip.isChecked = savedTheme == Theme.LIGHT
                 binding.systemModeChip.isChecked = savedTheme == Theme.SYSTEM
