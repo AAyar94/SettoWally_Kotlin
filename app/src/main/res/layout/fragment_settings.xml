@@ -126,7 +126,6 @@
             android:layout_marginHorizontal="16dp"
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"
-            app:checkedChip="@id/mediumQualityChip"
             app:chipSpacing="24dp"
             app:selectionRequired="true"
             app:singleSelection="true">

@@ -93,4 +93,9 @@
     <string name="wallpaper_downloaded_quality_large">Wallpaper Downloaded Quality : Large</string>
     <string name="wallpaper_downloaded_quality_large2x">Wallpaper Downloaded Quality : Large2x</string>
     <string name="wallpaper_downloaded_quality_original">Wallpaper Downloaded Quality : Original</string>
+    <string name="photo">Photo</string>
+    <string name="about_this_photo">About this photo</string>
+    <string name="average_color">Average Color</string>
+    <string name="description">Description</string>
+    <string name="you_are_at_first_page">You are at first page</string>
 </resources>

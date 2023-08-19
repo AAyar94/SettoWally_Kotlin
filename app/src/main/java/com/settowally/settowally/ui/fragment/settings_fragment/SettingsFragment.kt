@@ -11,7 +11,6 @@ import com.settowally.settowally.data.model.PhotoQuality
 import com.settowally.settowally.data.model.Theme
 import com.settowally.settowally.databinding.FragmentSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
@@ -22,13 +21,20 @@ class SettingsFragment : Fragment() {
     private val binding get() = mBinding!!
     private val viewModel: SettingsViewModel by viewModels()
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         mBinding = FragmentSettingsBinding.inflate(inflater, container, false)
+
+        qualityOptionSetter()
+        observeLiveData()
+
+
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,33 +55,32 @@ class SettingsFragment : Fragment() {
 
             /**      Quality Picker OnClick Listeners        */
             originalQualityChip.setOnClickListener {
-                viewModel.setPhotosQuality(PhotoQuality.Original)
+                viewModel.setPhotosQuality(PhotoQuality.ORIGINAL)
             }
             large2xQualityChip.setOnClickListener {
-                viewModel.setPhotosQuality(PhotoQuality.Large2x)
+                viewModel.setPhotosQuality(PhotoQuality.LARGE2X)
             }
             largeQualityChip.setOnClickListener {
-                viewModel.setPhotosQuality(PhotoQuality.Large)
+                viewModel.setPhotosQuality(PhotoQuality.LARGE)
             }
             landspaceQualityChip.setOnClickListener {
-                viewModel.setPhotosQuality(PhotoQuality.Landscape)
+                viewModel.setPhotosQuality(PhotoQuality.LANDSCAPE)
             }
             portraitQualityChip.setOnClickListener {
-                viewModel.setPhotosQuality(PhotoQuality.Portrait)
+                viewModel.setPhotosQuality(PhotoQuality.PORTRAIT)
             }
             mediumQualityChip.setOnClickListener {
-                viewModel.setPhotosQuality(PhotoQuality.Medium)
+                viewModel.setPhotosQuality(PhotoQuality.MEDIUM)
             }
             tinyQualityChip.setOnClickListener {
-                viewModel.setPhotosQuality(PhotoQuality.Tiny)
+                viewModel.setPhotosQuality(PhotoQuality.TINY)
             }
             smallQualityChip.setOnClickListener {
-                viewModel.setPhotosQuality(PhotoQuality.Small)
+                viewModel.setPhotosQuality(PhotoQuality.SMALL)
             }
         }
-
-        observeLiveData()
     }
+
 
     private fun observeLiveData() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -84,15 +89,31 @@ class SettingsFragment : Fragment() {
                 binding.lightModeChip.isChecked = savedTheme == Theme.LIGHT
                 binding.systemModeChip.isChecked = savedTheme == Theme.SYSTEM
             }
+        }
+    }
+
+    private fun qualityOptionSetter() {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.selectedQuality.collect { savedQuality ->
-                binding.originalQualityChip.isChecked = savedQuality == PhotoQuality.Original
-                binding.large2xQualityChip.isChecked = savedQuality == PhotoQuality.Large2x
-                binding.largeQualityChip.isChecked = savedQuality == PhotoQuality.Large
-                binding.landspaceQualityChip.isChecked = savedQuality == PhotoQuality.Landscape
-                binding.portraitQualityChip.isChecked = savedQuality == PhotoQuality.Portrait
-                binding.mediumQualityChip.isChecked = savedQuality == PhotoQuality.Medium
-                binding.tinyQualityChip.isChecked = savedQuality == PhotoQuality.Tiny
-                binding.smallQualityChip.isChecked = savedQuality == PhotoQuality.Small
+                when (savedQuality) {
+
+                    PhotoQuality.ORIGINAL -> binding.originalQualityChip.isChecked = true
+
+                    PhotoQuality.LARGE2X -> binding.large2xQualityChip.isChecked = true
+
+                    PhotoQuality.LARGE -> binding.largeQualityChip.isChecked = true
+
+                    PhotoQuality.LANDSCAPE -> binding.landspaceQualityChip.isChecked = true
+
+                    PhotoQuality.PORTRAIT -> binding.portraitQualityChip.isChecked = true
+
+                    PhotoQuality.MEDIUM -> binding.mediumQualityChip.isChecked = true
+
+                    PhotoQuality.TINY -> binding.tinyQualityChip.isChecked = true
+
+                    PhotoQuality.SMALL -> binding.smallQualityChip.isChecked = true
+
+                }
             }
         }
     }

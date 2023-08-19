@@ -22,8 +22,6 @@ import javax.inject.Singleton
 
 
 private val Context.datastore: DataStore<Preferences> by preferencesDataStore(name = PREFERENCES_NAME)
-
-// @ActivityScope yerine @Singleton yaptım. Hem Activity hem ViewModel'da çağırabiliyorum.
 @Singleton
 class DataStoreRepository @Inject constructor(@ApplicationContext private val context: Context) {
 
@@ -51,6 +49,8 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             Theme.SYSTEM
         }
     }
+
+
     /**      SAVED QUALİTY       */
     suspend fun saveQualityOption(quality: PhotoQuality) {
         dataStore.edit { preferences ->
@@ -59,14 +59,18 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
     }
 
     val savedQualitySetting: Flow<PhotoQuality> = dataStore.data.map { preferences ->
-        val qualityName = preferences[PreferenceKeys.qualitySetting] ?: PhotoQuality.Medium.name
+        val qualityName = preferences[PreferenceKeys.qualitySetting] ?: PhotoQuality.MEDIUM.name
         try {
             PhotoQuality.valueOf(qualityName)
         } catch (e: java.lang.IllegalArgumentException) {
             Log.e("Failed - -  -   -    -", "$e")
-            PhotoQuality.Medium
+            PhotoQuality.MEDIUM
         }
     }
+
+
+
+
     /**      BACK ONLINE     */
     val backOnlineFlow: Flow<Boolean> = dataStore.data.map { preferences ->
         val onlineStatus = preferences[PreferenceKeys.backOnline] ?: false
