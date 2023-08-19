@@ -62,6 +62,11 @@ class MainActivity : AppCompatActivity() {
                     window.navigationBarColor = Color.TRANSPARENT
                 }
 
+                R.id.detailsBottomSheetFragment -> {
+                    binding.bottomNavBar.visibility = View.GONE
+                    window.navigationBarColor = Color.TRANSPARENT
+                }
+
                 else -> {
                     binding.bottomNavBar.visibility = View.VISIBLE
                     window.statusBarColor = MaterialColors.getColor(

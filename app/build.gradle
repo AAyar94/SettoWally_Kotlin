@@ -12,12 +12,12 @@ localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
     namespace 'com.settowally.settowally'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.settowally.settowally"
         minSdk 28
-        targetSdk 33
+        targetSdk 34
         versionCode 11
         versionName "1.0.7"
 
