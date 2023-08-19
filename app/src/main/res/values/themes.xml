@@ -1,5 +1,5 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
 
+<resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Base.Theme.SettoWally" parent="Theme.Material3.Light.NoActionBar">
         <item name="colorPrimary">@color/md_theme_light_primary</item>
         <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
@@ -29,13 +29,10 @@
         <item name="colorPrimaryInverse">@color/md_theme_light_inversePrimary</item>
     </style>
 
-    <style name="SplashTheme" parent="Theme.SplashScreen">
-        <item name="android:animatedImageDrawable" tools:targetApi="r">
-            @drawable/splash_logo_animated
-        </item>
+    <style name="Splash.Theme" parent="Theme.SplashScreen">
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">?attr/colorSurface</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/splash_logo_animated</item>
         <item name="android:windowSplashScreenAnimationDuration" tools:targetApi="s">1000</item>
-        <item name="android:windowSplashScreenBackground" tools:targetApi="s">?attr/backgroundColor</item>
         <item name="postSplashScreenTheme">@style/Base.Theme.SettoWally</item>
-        <item name="android:windowSplashScreenBehavior" tools:targetApi="tiramisu">icon_preferred</item>
     </style>
 </resources>

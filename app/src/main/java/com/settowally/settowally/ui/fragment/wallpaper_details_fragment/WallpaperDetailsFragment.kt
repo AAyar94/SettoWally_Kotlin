@@ -20,6 +20,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.settowally.settowally.data.model.PhotoQuality
 import com.settowally.settowally.databinding.FragmentWallpaperDetailsBinding
@@ -59,11 +60,16 @@ class WallpaperDetailsFragment : Fragment() {
     }
 
     private fun getQualityOption() {
+        val circularProgressDrawable = CircularProgressDrawable(requireContext())
+        circularProgressDrawable.strokeWidth = 6f
+        circularProgressDrawable.centerRadius = 50f
+        circularProgressDrawable.start()
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.selectedQuality.collect { quality ->
                 urlParser(quality).let {
                     Glide.with(binding.root)
                         .load(it)
+                        .placeholder(circularProgressDrawable)
                         .into(binding.bigImageView)
                 }
             }
