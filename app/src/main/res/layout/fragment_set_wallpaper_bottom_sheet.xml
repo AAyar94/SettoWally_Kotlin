@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.fragment.download_bottom_sheet.DownloadBottomSheetFragment">
+    tools:context=".ui.fragment.wallpaper_details_fragment.download_bottom_sheet.DownloadBottomSheetFragment">
 
     <TextView
         android:id="@+id/wallpaperAlertTitle"

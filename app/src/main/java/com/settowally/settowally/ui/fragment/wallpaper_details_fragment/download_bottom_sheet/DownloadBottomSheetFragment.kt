@@ -1,4 +1,4 @@
-package com.settowally.settowally.ui.fragment.download_bottom_sheet
+package com.settowally.settowally.ui.fragment.wallpaper_details_fragment.download_bottom_sheet
 
 import android.app.DownloadManager
 import android.content.Context

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/colorSurface">
+
+    <TextView
+        android:id="@+id/photoHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:fontFamily="@font/porkys"
+        android:gravity="center"
+        android:text="@string/about_this_photo"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="36sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/infoHeightText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/photoHeader"
+        app:layout_constraintTop_toBottomOf="@id/photoHeader"
+        tools:text="Height : 1920" />
+
+    <TextView
+        android:id="@+id/infoWidthText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/photoHeader"
+        app:layout_constraintTop_toBottomOf="@id/infoHeightText"
+        tools:text="Width : 1080" />
+
+    <TextView
+        android:id="@+id/infoAvgColorText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/photoHeader"
+        app:layout_constraintTop_toBottomOf="@id/infoWidthText"
+        tools:text="Average Color : Blue" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardColorInc"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="@id/infoAvgColorText"
+        app:layout_constraintEnd_toEndOf="@id/infoAvgColorText"
+        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintStart_toStartOf="@id/infoAvgColorText"
+        app:layout_constraintTop_toTopOf="@id/infoAvgColorText" />
+
+    <TextView
+        android:id="@+id/infoPhotographerText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/photoHeader"
+        app:layout_constraintTop_toBottomOf="@id/infoAvgColorText"
+        tools:text="@tools:sample/lorem" />
+
+    <TextView
+        android:id="@+id/infoAltText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/photoHeader"
+        app:layout_constraintTop_toBottomOf="@id/infoPhotographerText"
+        tools:text="@tools:sample/lorem" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/dialogCloseButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/close"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/infoAltText"
+        app:layout_constraintStart_toStartOf="@id/infoAltText"
+        app:layout_constraintTop_toBottomOf="@id/infoAltText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

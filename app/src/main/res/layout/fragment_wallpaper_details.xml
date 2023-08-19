@@ -6,106 +6,92 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragment.wallpaper_details_fragment.WallpaperDetailsFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/rootContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/bigImageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+    <ImageView
+        android:id="@+id/bigImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom">
 
         <eightbitlab.com.blurview.BlurView
             android:id="@+id/blurViewOverlay"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
+            android:layout_height="0dp"
             app:blurOverlayColor="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="12dp"
-                android:orientation="vertical">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/downloadButton"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="12dp"
+            android:text="@string/download"
+            app:icon="@drawable/ic_download"
+            app:iconGravity="textStart"
+            app:layout_constraintEnd_toStartOf="@id/shareButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/shareButton"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="12dp"
+            android:text="@string/share"
+            app:icon="@drawable/ic_share"
+            app:iconGravity="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/downloadButton"
+            app:layout_constraintTop_toTopOf="@id/downloadButton"/>
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/downloadButton"
-                        style="@style/Widget.Material3.Button.TonalButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/blured_button_bg"
-                        android:text="@string/download"
-                        app:icon="@drawable/ic_download"
-                        app:iconGravity="textStart" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/detailsButton"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="12dp"
+            android:text="@string/details"
+            app:icon="@drawable/ic_info"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:iconGravity="textStart"
+            app:layout_constraintEnd_toEndOf="@id/downloadButton"
+            app:layout_constraintStart_toStartOf="@id/downloadButton"
+            app:layout_constraintTop_toBottomOf="@id/downloadButton" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/shareButton"
-                        style="@style/Widget.Material3.Button.TonalButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="4dp"
-                        android:layout_weight="2"
-                        android:background="@drawable/blured_button_bg"
-                        android:text="@string/share"
-                        app:icon="@drawable/ic_share"
-                        app:iconGravity="textStart" />
-                </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/setWallpaperButton"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="12dp"
+            android:text="@string/set_wallpaper"
+            app:icon="@drawable/ic_wallpaper"
+            app:iconGravity="textStart"
+            app:layout_constraintEnd_toEndOf="@id/shareButton"
+            app:layout_constraintStart_toStartOf="@id/shareButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/shareButton" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/detailsButton"
-                        style="@style/Widget.Material3.Button.TonalButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/blured_button_bg"
-                        android:text="@string/details"
-                        app:icon="@drawable/ic_info"
-                        app:iconGravity="textStart" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/setWallpaperButton"
-                        style="@style/Widget.Material3.Button.TonalButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/blured_button_bg"
-                        android:text="@string/set_wallpaper"
-                        app:icon="@drawable/ic_wallpaper"
-                        app:iconGravity="textStart" />
-                </LinearLayout>
-            </LinearLayout>
-        </eightbitlab.com.blurview.BlurView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

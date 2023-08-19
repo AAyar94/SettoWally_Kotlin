@@ -1,4 +1,4 @@
-package com.settowally.settowally.ui.fragment.set_wallpaper_bottom_sheet
+package com.settowally.settowally.ui.fragment.wallpaper_details_fragment.set_wallpaper_bottom_sheet
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -85,35 +85,35 @@ class SetWallpaperBottomSheetFragment : BottomSheetDialogFragment() {
 
     private fun photoSetQuality(selectedPhotoQuality: PhotoQuality?): String {
         return when (selectedPhotoQuality) {
-            PhotoQuality.Medium -> {
+            PhotoQuality.MEDIUM -> {
                 args.photo.src.medium
             }
 
-            PhotoQuality.Large -> {
+            PhotoQuality.LARGE -> {
                 args.photo.src.large
             }
 
-            PhotoQuality.Large2x -> {
+            PhotoQuality.LARGE2X -> {
                 args.photo.src.large2x
             }
 
-            PhotoQuality.Original -> {
+            PhotoQuality.ORIGINAL -> {
                 args.photo.src.original
             }
 
-            PhotoQuality.Tiny -> {
+            PhotoQuality.TINY -> {
                 args.photo.src.tiny
             }
 
-            PhotoQuality.Landscape -> {
+            PhotoQuality.LANDSCAPE -> {
                 args.photo.src.landscape
             }
 
-            PhotoQuality.Small -> {
+            PhotoQuality.SMALL -> {
                 args.photo.src.small
             }
 
-            PhotoQuality.Portrait -> {
+            PhotoQuality.PORTRAIT -> {
                 args.photo.src.portrait
             }
 
