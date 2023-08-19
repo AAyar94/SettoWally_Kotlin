@@ -1,71 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.fragment.wallpaper_details_fragment.download_bottom_sheet.DownloadBottomSheetFragment">
+    app:cardBackgroundColor="?attr/colorSurface"
+    app:cardCornerRadius="40dp">
 
-    <TextView
-        android:id="@+id/wallpaperAlertTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/porkys"
-        android:gravity="center"
-        android:text="@string/set_wallpaper"
-        android:textColor="?attr/colorOnSecondaryContainer"
-        android:textSize="36sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/wallpaperAlertMessage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/setting_wallpaper_to"
-        android:textColor="?attr/colorOnSecondaryContainer"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/wallpaperAlertTitle" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/wallpaperSetHomeButton"
-        style="@style/Widget.Material3.Button.TonalButton"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="12dp"
-        android:text="@string/set_wallpaper_to_home_screen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/wallpaperAlertMessage" />
+        tools:context=".ui.fragment.wallpaper_details_fragment.download_bottom_sheet.DownloadBottomSheetFragment">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/wallpaperSetLockButton"
-        style="@style/Widget.Material3.Button.TonalButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/set_wallpaper_to_lock_screen"
-        app:layout_constraintEnd_toEndOf="@id/wallpaperSetHomeButton"
-        app:layout_constraintStart_toStartOf="@id/wallpaperSetHomeButton"
-        app:layout_constraintTop_toBottomOf="@id/wallpaperSetHomeButton" />
+        <TextView
+            android:id="@+id/wallpaperAlertTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/porkys"
+            android:gravity="center"
+            android:text="@string/set_wallpaper"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/wallpaperSetBothButton"
-        style="@style/Widget.Material3.Button.TonalButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="24dp"
-        android:text="@string/set_wallpaper_to_home_and_lock_screen"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/wallpaperSetHomeButton"
-        app:layout_constraintStart_toStartOf="@id/wallpaperSetHomeButton"
-        app:layout_constraintTop_toBottomOf="@id/wallpaperSetLockButton" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/wallpaperAlertMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/setting_wallpaper_to"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wallpaperAlertTitle" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/wallpaperSetHomeButton"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/set_wallpaper_to_home_screen"
+            android:textColor="?attr/colorOnSecondaryContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wallpaperAlertMessage" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/wallpaperSetLockButton"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/set_wallpaper_to_lock_screen"
+            android:textColor="?attr/colorOnSecondaryContainer"
+            app:layout_constraintEnd_toEndOf="@id/wallpaperSetHomeButton"
+            app:layout_constraintStart_toStartOf="@id/wallpaperSetHomeButton"
+            app:layout_constraintTop_toBottomOf="@id/wallpaperSetHomeButton" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/wallpaperSetBothButton"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/set_wallpaper_to_home_and_lock_screen"
+            android:textColor="?attr/colorOnSecondaryContainer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/wallpaperSetHomeButton"
+            app:layout_constraintStart_toStartOf="@id/wallpaperSetHomeButton"
+            app:layout_constraintTop_toBottomOf="@id/wallpaperSetLockButton" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
