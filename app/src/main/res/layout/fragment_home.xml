@@ -7,47 +7,48 @@
     android:background="?attr/colorSecondaryContainer"
     tools:context=".ui.fragment.home_fragment.HomeFragment">
 
-    <TextView
-        android:id="@+id/appNameHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/porkys"
-        android:text="@string/app_name"
-        android:textColor="?attr/colorPrimary"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.cardview.widget.CardView
-        style="@style/Widget.Material3.CardView.Outlined"
-        android:layout_width="40dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="36dp"
-        app:cardCornerRadius="40dp"
-        app:layout_constraintBottom_toBottomOf="@id/appNameHeader"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/appNameHeader">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/appNameHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="36dp"
+            android:fontFamily="@font/porkys"
+            android:text="@string/app_name"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/searchButton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:scaleType="fitCenter"
+            android:layout_width="wrap_content"
+            android:id="@+id/searchImageButton"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:layout_gravity="end|center"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="@android:color/transparent"
             android:src="@drawable/ic_search" />
-    </androidx.cardview.widget.CardView>
+
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/headerDivider"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginTop="12dp"
-        app:dividerColor="?attr/colorPrimaryContainer"
+        app:dividerColor="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appNameHeader" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/imagesRecyclerView"
@@ -69,9 +70,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="?attr/colorTertiary"
+        android:backgroundTint="?attr/colorSecondaryContainer"
         android:text="@string/prev"
-        android:textColor="?attr/colorOnTertiary"
+        android:textColor="?attr/colorPrimary"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/nextButton"
@@ -84,9 +85,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="?attr/colorTertiary"
+        android:backgroundTint="?attr/colorSecondaryContainer"
         android:text="@string/next"
-        android:textColor="?attr/colorOnTertiary"
+        android:textColor="?attr/colorPrimary"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

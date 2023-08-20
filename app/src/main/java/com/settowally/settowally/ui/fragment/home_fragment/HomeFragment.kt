@@ -15,6 +15,7 @@ import com.settowally.settowally.data.model.Photo
 import com.settowally.settowally.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var mBinding: FragmentHomeBinding? = null
@@ -31,9 +32,14 @@ class HomeFragment : Fragment() {
         homeViewModel.getPhotos(page = page, perPage = PER_PAGE_PHOTO_COUNTER)
         savedPhotosList = homeViewModel.localDbResponse.value
 
+        binding.searchImageButton.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment()
+            findNavController().navigate(action)
+        }
 
         return binding.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
