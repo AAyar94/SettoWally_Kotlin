@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Bitmap
+import android.graphics.ColorFilter
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.settowally.settowally.R
 import com.settowally.settowally.data.model.PhotoQuality
 import com.settowally.settowally.databinding.FragmentWallpaperDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -76,7 +78,7 @@ class WallpaperDetailsFragment : Fragment() {
         }
     }
 
-    fun urlParser(quality: PhotoQuality): String {
+    private fun urlParser(quality: PhotoQuality): String {
         val url = photoArgs.photo.src
         return when (quality) {
             PhotoQuality.ORIGINAL -> url.original

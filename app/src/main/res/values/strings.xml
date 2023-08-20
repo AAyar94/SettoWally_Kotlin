@@ -98,4 +98,6 @@
     <string name="average_color">Average Color</string>
     <string name="description">Description</string>
     <string name="you_are_at_first_page">You are at first page</string>
+    <string name="developer_adem_ayar">Developer : Adem Ayar</string>
+    <string name="search">Search</string>
 </resources>

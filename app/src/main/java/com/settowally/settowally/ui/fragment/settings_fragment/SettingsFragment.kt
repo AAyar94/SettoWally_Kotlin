@@ -1,5 +1,7 @@
 package com.settowally.settowally.ui.fragment.settings_fragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.settowally.settowally.R
+import com.settowally.settowally.common.Constant.Companion.DEVELOPER_PAGE
 import com.settowally.settowally.data.model.PhotoQuality
 import com.settowally.settowally.data.model.Theme
 import com.settowally.settowally.databinding.FragmentSettingsBinding
@@ -77,6 +81,17 @@ class SettingsFragment : Fragment() {
             }
             smallQualityChip.setOnClickListener {
                 viewModel.setPhotosQuality(PhotoQuality.SMALL)
+            }
+
+            developerText.text = getString(R.string.developer_adem_ayar)
+            developerText.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(DEVELOPER_PAGE))
+                startActivity(intent)
+            }
+
+            googlePlayButtonImage.setOnClickListener {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(DEVELOPER_PAGE))
+                startActivity(intent)
             }
         }
     }

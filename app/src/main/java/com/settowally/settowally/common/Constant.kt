@@ -18,5 +18,7 @@ class Constant {
         const val DATABASE_NAME = "Saved_photos"
         const val BACK_ONLINE= "back_online"
 
+        const val DEVELOPER_PAGE="https://play.google.com/store/apps/dev?id=5913710677076012534"
+
     }
 }
