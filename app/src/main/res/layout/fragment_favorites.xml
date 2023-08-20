@@ -15,7 +15,7 @@
         android:layout_marginTop="100dp"
         android:fontFamily="@font/porkys"
         android:text="@string/favorites"
-        android:textColor="?attr/colorOnPrimaryContainer"
+        android:textColor="?attr/colorPrimary"
         android:textSize="64sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
