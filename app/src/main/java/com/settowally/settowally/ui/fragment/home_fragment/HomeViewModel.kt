@@ -27,8 +27,7 @@ class HomeViewModel @Inject constructor(
 
     val photoDataObject = MutableLiveData<NetworkResponseHandler<PhotosDataModel>>()
     val localDbResponse = MutableLiveData<List<Photo>>()
-    var networkStatus = false
-    var backOnline = false
+
 
 
     fun getAllSavedPhotos() {
@@ -51,22 +50,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun saveBackOnline(backOnline: Boolean) =
-        viewModelScope.launch(Dispatchers.IO) {
-            dataStoreRepository.saveOnlineStatus(backOnline)
-        }
 
-    fun showNetworkStatus() {
-        if (!networkStatus) {
-            Toast.makeText(getApplication(), "No Internet Connection.", Toast.LENGTH_SHORT).show()
-            saveBackOnline(true)
-        } else if (networkStatus) {
-            if (backOnline) {
-                Toast.makeText(getApplication(), "We're back online.", Toast.LENGTH_SHORT).show()
-                saveBackOnline(false)
-            }
-        }
-    }
 
 
 }
