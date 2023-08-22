@@ -95,7 +95,7 @@ class WallpaperDetailsFragment : Fragment() {
     private fun setBlurLayer() {
         binding.blurViewOverlay.setupWith(binding.root, RenderScriptBlur(requireContext()))
             .setFrameClearDrawable(binding.bigImageView.background)
-            .setBlurRadius(5f)
+            .setBlurRadius(15f)
         binding.blurViewOverlay.outlineProvider = ViewOutlineProvider.BACKGROUND
         binding.blurViewOverlay.clipToOutline = true
     }
