@@ -43,4 +43,8 @@ class Repository @Inject constructor(
         return localDataSource.getAllSavedPhotos()
     }
 
+    suspend fun deletePhotoFromDb(photo: Photo){
+        return localDataSource.deletePhotoFromDb(photo)
+    }
+
 }

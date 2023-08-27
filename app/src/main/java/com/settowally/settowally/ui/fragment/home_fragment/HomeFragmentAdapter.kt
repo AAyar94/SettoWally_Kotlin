@@ -11,9 +11,7 @@ import com.settowally.settowally.data.model.Photo
 import com.settowally.settowally.databinding.PhotoItemLayoutBinding
 
 class HomeFragmentAdapter(
-    val savedPhotosList: List<Photo>?,
     val onItemClick: (photo: Photo) -> Unit,
-    val favoriteButtonClick: (photo: Photo) -> Unit,
 ) : ListAdapter<Photo, HomeFragmentAdapter.HomeViewHolder>(
     PhotosDiffCallback()
 ) {

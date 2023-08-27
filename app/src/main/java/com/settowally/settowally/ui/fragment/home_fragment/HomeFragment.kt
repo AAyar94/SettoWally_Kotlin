@@ -45,15 +45,12 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val homeAdapter: HomeFragmentAdapter by lazy {
             HomeFragmentAdapter(
-                savedPhotosList,
                 onItemClick = { photo ->
                     val action =
                         HomeFragmentDirections.actionHomeFragmentToWallpaperDetailsFragment(photo)
                     findNavController().navigate(action)
                 }
-            ) { photo ->
-                homeViewModel.savePhotoToDb(photo)
-            }
+            )
         }
         binding.imagesRecyclerView.adapter = homeAdapter
         binding.nextButton.setOnClickListener {

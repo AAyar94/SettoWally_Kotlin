@@ -15,4 +15,8 @@ class LocalDataSource @Inject constructor(
         return dao.insertNewPhoto(photo)
     }
 
+    suspend fun deletePhotoFromDb(photo: Photo){
+        return dao.deletePhoto(photo)
+    }
+
 }

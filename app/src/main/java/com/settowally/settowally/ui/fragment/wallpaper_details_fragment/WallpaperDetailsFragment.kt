@@ -23,6 +23,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.settowally.settowally.BuildConfig
+import com.settowally.settowally.R
 import com.settowally.settowally.data.model.PhotoQuality
 import com.settowally.settowally.databinding.FragmentWallpaperDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,12 +54,16 @@ class WallpaperDetailsFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         mBinding = FragmentWallpaperDetailsBinding.inflate(layoutInflater, container, false)
-
+        getFavoriteImageList()
 
         setBlurLayer()
         setupButtons()
         getQualityOption()
         return binding.root
+    }
+
+    private fun getFavoriteImageList() {
+        viewModel.getFavoritePhotos()
     }
 
     private fun getQualityOption() {
@@ -141,6 +146,22 @@ class WallpaperDetailsFragment : Fragment() {
                 )
             findNavController().navigate(action)
         }
+
+        if (viewModel.isPhotoLiked(photoArgs.photo, viewModel.localDbResponse.value)) {
+            binding.manageFavoritesButton.text = getString(R.string.delete_from_favorites)
+            binding.manageFavoritesButton.setIconResource(R.drawable.ic_delete)
+        } else {
+            binding.manageFavoritesButton.text = getString(R.string.add_to_favorites)
+            binding.manageFavoritesButton.setIconResource(R.drawable.ic_favorite_filled)
+        }
+
+        binding.manageFavoritesButton.setOnClickListener {
+            if (viewModel.isPhotoLiked(photoArgs.photo, viewModel.localDbResponse.value)) {
+                viewModel.deletePhotoFromDb(photoArgs.photo)
+            } else {
+                viewModel.savePhotoToDb(photoArgs.photo)
+            }
+        }
     }
 
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
@@ -149,7 +170,6 @@ class WallpaperDetailsFragment : Fragment() {
         val filter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
         requireContext().registerReceiver(onCompleteReceiver, filter)
     }
-
 
 
     private fun getBitmapFromImageView(imageView: ImageView): BitmapDrawable {
