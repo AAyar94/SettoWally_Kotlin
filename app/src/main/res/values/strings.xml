@@ -100,4 +100,5 @@
     <string name="you_are_at_first_page">You are at first page</string>
     <string name="developer_adem_ayar">Developer : Adem Ayar</string>
     <string name="search">Search</string>
+    <string name="HeyCheckMyApp">"Hey check my app at: "</string>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/material_dynamic_secondary80"
+    android:background="?attr/colorSurface"
     app:layoutDescription="@xml/fragment_favorites_scene"
     tools:context=".ui.fragment.favorites_fragment.FavoritesFragment">
 
@@ -15,7 +15,7 @@
         android:layout_marginTop="100dp"
         android:fontFamily="@font/porkys"
         android:text="@string/favorites"
-        android:textColor="@color/material_dynamic_primary60"
+        android:textColor="?attr/colorPrimary"
         android:textSize="64sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:layout_marginTop="12dp"
-        app:dividerColor="@color/material_dynamic_primary80"
+        app:dividerColor="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/favoritesHeader" />

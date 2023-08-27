@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/material_dynamic_secondary80"
+    android:background="?attr/colorSurface"
     tools:context=".ui.fragment.home_fragment.HomeFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -23,7 +23,7 @@
             android:layout_marginStart="36dp"
             android:fontFamily="@font/porkys"
             android:text="@string/app_name"
-            android:textColor="@color/material_dynamic_primary80"
+            android:textColor="?attr/colorPrimary"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +36,8 @@
             android:layout_gravity="end|center"
             android:layout_marginEnd="24dp"
             android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/ic_search" />
+            android:src="@drawable/ic_search"
+            app:tint="?attr/colorPrimary" />
 
     </com.google.android.material.appbar.MaterialToolbar>
 
@@ -70,9 +71,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/material_dynamic_primary80"
+        android:backgroundTint="?attr/colorSecondaryContainer"
         android:text="@string/prev"
-        android:textColor="?attr/colorOnPrimaryFixed"
+        android:textColor="?attr/colorPrimary"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/nextButton"
@@ -85,9 +86,9 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/material_dynamic_primary80"
+        android:backgroundTint="?attr/colorSecondaryContainer"
         android:text="@string/next"
-        android:textColor="?attr/colorOnPrimaryFixed"
+        android:textColor="?attr/colorPrimary"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

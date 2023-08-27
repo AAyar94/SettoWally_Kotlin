@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/material_dynamic_secondary80"
+    android:background="?attr/colorSurface"
     tools:context=".ui.fragment.settings_fragment.SettingsFragment">
 
     <TextView
@@ -14,8 +14,8 @@
         android:layout_margin="24dp"
         android:fontFamily="@font/porkys"
         android:text="@string/settings"
-        android:textColor="@color/material_dynamic_primary60"
         android:textSize="36sp"
+        android:textColor="?attr/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:layout_marginTop="12dp"
-        app:dividerColor="@color/material_dynamic_primary60"
+        app:dividerColor="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settingsHeader" />
@@ -36,7 +36,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/porkys"
         android:text="@string/dark_mode"
-        android:textColor="@color/material_dynamic_primary60"
+        android:textColor="?attr/colorPrimary"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,6 @@
             android:paddingVertical="10dp"
             app:chipSpacing="24dp"
             app:selectionRequired="true"
-            tools:checkedChip="@+id/systemModeChip"
             app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
@@ -93,7 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:layout_marginTop="12dp"
-        app:dividerColor="@color/material_dynamic_primary60"
+        app:dividerColor="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/darkModeChipGroupContainer" />
@@ -105,7 +104,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/porkys"
         android:text="@string/quality"
-        android:textColor="@color/material_dynamic_primary60"
+        android:textColor="?attr/colorPrimary"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -124,15 +123,13 @@
         app:layout_constraintTop_toBottomOf="@id/qualityHeader">
 
         <com.google.android.material.chip.ChipGroup
-            style="@style/ThemeOverlay.Material3.DynamicColors.DayNight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="36dp"
             android:paddingVertical="10dp"
             app:chipSpacing="24dp"
             app:selectionRequired="true"
-            app:singleSelection="true"
-            tools:checkedChip="@id/originalQualityChip">
+            app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/originalQualityChip"
@@ -197,7 +194,7 @@
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:layout_marginTop="12dp"
-        app:dividerColor="@color/material_dynamic_primary60"
+        app:dividerColor="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/qualityChipGroupContainer" />
@@ -209,8 +206,8 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/porkys"
         android:text="@string/about"
-        android:textColor="@color/material_dynamic_primary60"
         android:textSize="24sp"
+        android:textColor="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/qualityHeaderDivider" />
@@ -220,7 +217,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:textColor="@color/material_dynamic_primary60"
+        android:textColor="?attr/colorPrimary"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

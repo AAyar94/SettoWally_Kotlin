@@ -22,17 +22,6 @@ class SearchAdapter(
             val item = currentList[position]
             Glide.with(binding.root).load(item.src.medium)
                 .into(binding.imageViewPerPhoto)
-            binding.isLikedButton.setOnClickListener {
-                favoriteButtonClick(item)
-            }
-            /** binding.isLikedButton.setOnClickListener {
-            favoriteButtonClick(item)
-            if (savedPhotosList?.contains(item) == true) {
-            binding.isLikedButton.setColorFilter(Color.RED)
-            } else {
-            binding.isLikedButton.setColorFilter(Color.WHITE)
-            }
-            }*/
             binding.imageViewPerPhoto.setOnClickListener {
                 onItemClick(item)
             }

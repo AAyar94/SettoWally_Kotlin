@@ -20,13 +20,6 @@ class FavoritesAdapter(val onItemClick: (photo: Photo) -> Unit) :
             Log.d("FavoritesFragment", favoritePhotosList.size.toString())
             Glide.with(binding.root).load(favoritePhotosList[position].src.medium)
                 .into(binding.imageViewPerPhoto)
-            binding.isLikedButton.setOnClickListener {
-                /**     LIKE FUNCTION       */
-            }
-            if (favoritePhotosList[position].liked) {
-                Glide.with(binding.root).load(R.drawable.ic_favorite_filled)
-                    .into(binding.isLikedButton)
-            }
             binding.root.setOnClickListener {
                 onItemClick(favoritePhotosList[position])
             }

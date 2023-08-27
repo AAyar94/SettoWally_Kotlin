@@ -7,7 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Bitmap
-import android.graphics.ColorFilter
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,7 +22,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
-import com.settowally.settowally.R
+import com.settowally.settowally.BuildConfig
 import com.settowally.settowally.data.model.PhotoQuality
 import com.settowally.settowally.databinding.FragmentWallpaperDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +31,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+
 
 @AndroidEntryPoint
 class WallpaperDetailsFragment : Fragment() {
@@ -148,28 +148,9 @@ class WallpaperDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val filter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
         requireContext().registerReceiver(onCompleteReceiver, filter)
-
-        /*Glide.with(binding.root.context)
-            .load(qualityPicker(viewModel.selectedQuality))
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(binding.bigImageView)*/
     }
 
-    /* private fun qualityPicker(selectedQuality: Flow<PhotoQuality>): String {
-         return when (selectedQuality.toString()) {
-             "Landscape" -> photoArgs.photo.src.landscape
-             "Large" -> photoArgs.photo.src.large
-             "Large2x" -> photoArgs.photo.src.large2x
-             "Medium" -> photoArgs.photo.src.medium
-             "Original" -> photoArgs.photo.src.original
-             "Portrait" -> photoArgs.photo.src.portrait
-             "Small" -> photoArgs.photo.src.small
-             "Tiny" -> photoArgs.photo.src.tiny
-             else -> {
-                 photoArgs.photo.src.medium
-             }
-         }
-     }*/
+
 
     private fun getBitmapFromImageView(imageView: ImageView): BitmapDrawable {
         return imageView.drawable as BitmapDrawable
@@ -201,11 +182,17 @@ class WallpaperDetailsFragment : Fragment() {
             file
         )
 
-        val shareIntent = Intent(Intent.ACTION_SEND)
-        shareIntent.type = "image/*"
-        shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri)
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.putExtra(Intent.EXTRA_STREAM, fileUri)
+        intent.putExtra(
+            Intent.EXTRA_TEXT,
+            getString(com.settowally.settowally.R.string.HeyCheckMyApp) + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID
+        )
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        intent.type = "image/png"
 
-        startActivity(Intent.createChooser(shareIntent, "Share Image"))
+        val shareIntent = Intent.createChooser(intent, null)
+        startActivity(shareIntent)
     }
 
 
