@@ -1,6 +1,9 @@
 
 <resources>
-    <style name="Base.Theme.SettoWally" parent="Theme.Material3.DynamicColors.Dark">
+    <style name="Base.Theme.SettoWally" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="android:windowLayoutInDisplayCutoutMode">
+            default
+        </item>
         <item name="colorPrimary">@color/md_theme_dark_primary</item>
         <item name="colorOnPrimary">@color/md_theme_dark_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_dark_primaryContainer</item>

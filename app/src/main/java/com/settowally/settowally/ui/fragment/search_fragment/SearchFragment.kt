@@ -52,6 +52,11 @@ class SearchFragment : Fragment() {
     }
 
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding = null
+    }
+
     private fun attachObserver() {
         viewModel.searchPhotoResponse.observe(viewLifecycleOwner) { response ->
             when (response) {

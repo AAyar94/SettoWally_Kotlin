@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.net.URL
 import javax.inject.Inject
 
@@ -20,7 +21,7 @@ class SetWallpaperBottomSheetViewModel @Inject constructor(
     dataStoreRepository: DataStoreRepository
 ) : ViewModel() {
 
-    val selectedQuality : Flow<PhotoQuality> = dataStoreRepository.savedQualitySetting
+    val selectedQuality: Flow<PhotoQuality> = dataStoreRepository.savedQualitySetting
 
     fun setWallpaper(uri: String, wallpaperType: WallpaperType, context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -49,12 +50,18 @@ class SetWallpaperBottomSheetViewModel @Inject constructor(
                             wallpaperManager.setStream(stream)
                         }
                     }
-                    Toast.makeText(context,"Wallpaper set to : $wallpaperType.name.toString()",
-                        Toast.LENGTH_LONG).show()
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(
+                            context, "Wallpaper set to : $wallpaperType.name.toString()",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    Toast.makeText(context, "Failed to set wallpaper", Toast.LENGTH_SHORT)
-                        .show()
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(context, "Failed to set wallpaper", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 } finally {
                     try {
                         stream.close()
@@ -65,5 +72,4 @@ class SetWallpaperBottomSheetViewModel @Inject constructor(
             }
         }
     }
-
 }

@@ -11,6 +11,8 @@ import android.graphics.Bitmap
 import android.graphics.BlendMode
 import android.graphics.Color
 import android.graphics.ColorFilter
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -28,12 +30,17 @@ import androidx.navigation.fragment.navArgs
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable.LARGE
 import com.bumptech.glide.Glide
+import com.google.android.material.color.MaterialColors
+import com.google.android.material.theme.overlay.MaterialThemeOverlay
 import com.settowally.settowally.BuildConfig
 import com.settowally.settowally.R
 import com.settowally.settowally.data.model.PhotoQuality
+import com.settowally.settowally.data.model.Theme
 import com.settowally.settowally.databinding.FragmentWallpaperDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
+import jp.wasabeef.glide.transformations.ColorFilterTransformation
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
@@ -72,11 +79,18 @@ class WallpaperDetailsFragment : Fragment() {
         viewModel.getFavoritePhotos()
     }
 
-    @SuppressLint("ResourceAsColor")
+
     private fun getQualityOption() {
         val circularProgressDrawable = CircularProgressDrawable(requireContext())
-        circularProgressDrawable.setTint(androidx.appcompat.R.attr.colorPrimary)
+        //circularProgressDrawable.setTintList(ColorStateList.valueOf(Color.CYAN))
         circularProgressDrawable.strokeWidth = 6f
+        circularProgressDrawable.setColorSchemeColors(
+            MaterialColors.getColor(
+                requireContext(),
+                com.google.android.material.R.attr.colorPrimary,
+                Color.BLUE
+            )
+        )
         circularProgressDrawable.centerRadius = 100f
         circularProgressDrawable.setStyle(LARGE)
         circularProgressDrawable.start()
@@ -156,20 +170,26 @@ class WallpaperDetailsFragment : Fragment() {
             findNavController().navigate(action)
         }
 
-        if (viewModel.isPhotoLiked(photoArgs.photo, viewModel.localDbResponse.value)) {
+        isPhotoLikedChecker()
+
+        binding.manageFavoritesButton.setOnClickListener {
+            if (viewModel.isPhotoLiked(photoArgs.photo)) {
+                viewModel.deletePhotoFromDb(photoArgs.photo)
+                isPhotoLikedChecker()
+            } else {
+                viewModel.savePhotoToDb(photoArgs.photo)
+                isPhotoLikedChecker()
+            }
+        }
+    }
+
+    private fun isPhotoLikedChecker(){
+        if (viewModel.isPhotoLiked(photoArgs.photo)) {
             binding.manageFavoritesButton.text = getString(R.string.delete_from_favorites)
             binding.manageFavoritesButton.setIconResource(R.drawable.ic_delete)
         } else {
             binding.manageFavoritesButton.text = getString(R.string.add_to_favorites)
             binding.manageFavoritesButton.setIconResource(R.drawable.ic_favorite_filled)
-        }
-
-        binding.manageFavoritesButton.setOnClickListener {
-            if (viewModel.isPhotoLiked(photoArgs.photo, viewModel.localDbResponse.value)) {
-                viewModel.deletePhotoFromDb(photoArgs.photo)
-            } else {
-                viewModel.savePhotoToDb(photoArgs.photo)
-            }
         }
     }
 

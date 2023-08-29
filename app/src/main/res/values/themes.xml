@@ -1,6 +1,9 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Base.Theme.SettoWally" parent="Theme.Material3.DynamicColors.Light">
+    <style name="Base.Theme.SettoWally" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowLayoutInDisplayCutoutMode">
+            default
+        </item>
         <item name="colorPrimary">@color/md_theme_light_primary</item>
         <item name="colorOnPrimary">@color/md_theme_light_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_light_primaryContainer</item>
