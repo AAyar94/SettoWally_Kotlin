@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.wallpaperDetailsFragment -> {
                     binding.bottomNavBar.visibility = View.GONE
-                    window.statusBarColor = Color.TRANSPARENT
+                    window.statusBarColor = Color.BLACK
                     window.navigationBarColor = Color.TRANSPARENT
                 }
 
@@ -72,14 +72,8 @@ class MainActivity : AppCompatActivity() {
 
                 else -> {
                     binding.bottomNavBar.visibility = View.VISIBLE
-                    window.statusBarColor = MaterialColors.getColor(
-                        binding.root,
-                        com.google.android.material.R.attr.colorSecondaryContainer
-                    )
-                    window.navigationBarColor = MaterialColors.getColor(
-                        binding.root,
-                        com.google.android.material.R.attr.colorSecondaryContainer
-                    )
+                    window.statusBarColor = Color.BLACK
+                    window.navigationBarColor =Color.BLACK
                 }
             }
         }

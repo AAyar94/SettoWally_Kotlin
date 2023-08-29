@@ -22,8 +22,6 @@ class SearchFragment : Fragment() {
         SearchAdapter(onItemClick = {
             val action = SearchFragmentDirections.actionSearchFragmentToWallpaperDetailsFragment(it)
             findNavController().navigate(action)
-        }, favoriteButtonClick = {
-            viewModel.savePhotoToDb(it)
         })
     }
     private var page: Int = 1
@@ -36,8 +34,8 @@ class SearchFragment : Fragment() {
 
         binding.searchRecyclerView.adapter = adapter
         attachObserver()
-        binding.searchView.queryHint=getString(R.string.search)
-        binding.searchView.setOnQueryTextListener(object : OnQueryTextListener{
+        binding.searchView.queryHint = getString(R.string.search)
+        binding.searchView.setOnQueryTextListener(object : OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
                     viewModel.searchPhotosWithQuery(query = query, page = page)

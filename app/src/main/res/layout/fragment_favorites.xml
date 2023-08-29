@@ -8,6 +8,7 @@
     app:layoutDescription="@xml/fragment_favorites_scene"
     tools:context=".ui.fragment.favorites_fragment.FavoritesFragment">
 
+
     <TextView
         android:id="@+id/favoritesHeader"
         android:layout_width="wrap_content"
@@ -30,6 +31,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/favoritesHeader" />
+
+    <ImageView
+        android:id="@+id/noFavoriteInDbImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_box"
+        android:visibility="gone"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/favoritedHeaderDivider" />
+
+    <TextView
+        android:id="@+id/noFavoriteInDbText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/there_are_no_image_in_favorites"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/noFavoriteInDbImage"
+        app:layout_constraintStart_toStartOf="@id/noFavoriteInDbImage"
+        app:layout_constraintTop_toBottomOf="@id/noFavoriteInDbImage" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/favoritesRecyclerView"

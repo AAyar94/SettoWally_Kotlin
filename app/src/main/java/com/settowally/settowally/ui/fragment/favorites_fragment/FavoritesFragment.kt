@@ -29,14 +29,32 @@ class FavoritesFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         mBinding = FragmentFavoritesBinding.inflate(inflater, container, false)
-        binding.favoritesRecyclerView.adapter=adapter
-        viewModel.localDbResponse.observe(viewLifecycleOwner) {
-            adapter.setData(it)
+        binding.favoritesRecyclerView.adapter = adapter
+        viewModel.localDbResponse.observe(viewLifecycleOwner) { dbResponse ->
+            binding.favoritesRecyclerView.visibility=View.VISIBLE
+            adapter.submitList(dbResponse)
+
+            /**if (dbResponse.isNullOrEmpty()) {
+                with(binding) {
+                    noFavoriteInDbImage.visibility = View.VISIBLE
+                    noFavoriteInDbText.visibility = View.VISIBLE
+                    favoritesRecyclerView.visibility = View.GONE
+                }
+            } else {
+                with(binding) {
+                    noFavoriteInDbImage.visibility = View.GONE
+                    noFavoriteInDbText.visibility = View.GONE
+                    favoritesRecyclerView.visibility = View.VISIBLE
+                }
+                adapter.submitList(dbResponse)
+            }*/
         }
-        viewModel.getAllSavedPhotos()
-
         return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.getAllSavedPhotos()
     }
 
     override fun onDestroy() {

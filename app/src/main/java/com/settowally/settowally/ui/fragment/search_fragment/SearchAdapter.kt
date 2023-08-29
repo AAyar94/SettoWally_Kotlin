@@ -11,7 +11,6 @@ import com.settowally.settowally.databinding.PhotoItemLayoutBinding
 
 class SearchAdapter(
     val onItemClick: (photo: Photo) -> Unit,
-    val favoriteButtonClick: (photo: Photo) -> Unit,
 ) : ListAdapter<Photo, SearchAdapter.SearchViewHolder>(
     SearchAdapterDiffCallback()
 ) {

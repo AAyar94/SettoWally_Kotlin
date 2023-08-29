@@ -14,7 +14,8 @@
         android:layout_margin="24dp"
         android:fontFamily="@font/porkys"
         android:text="@string/settings"
-        android:textSize="36sp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/settingsHeaderDivider"
         android:textColor="?attr/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,12 +23,12 @@
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/settingsHeaderDivider"
         android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="60dp"
         app:dividerColor="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/settingsHeader" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/darkModeHeader"
@@ -90,7 +91,7 @@
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/darkModeHeaderDivider"
         android:layout_width="match_parent"
-        android:layout_height="4dp"
+        android:layout_height="2dp"
         android:layout_marginTop="12dp"
         app:dividerColor="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
@@ -192,7 +193,7 @@
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/qualityHeaderDivider"
         android:layout_width="match_parent"
-        android:layout_height="4dp"
+        android:layout_height="2dp"
         android:layout_marginTop="12dp"
         app:dividerColor="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"

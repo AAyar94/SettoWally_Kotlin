@@ -6,7 +6,11 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
+import android.graphics.BlendMode
+import android.graphics.Color
+import android.graphics.ColorFilter
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +18,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,6 +26,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable.LARGE
 import com.bumptech.glide.Glide
 import com.settowally.settowally.BuildConfig
 import com.settowally.settowally.R
@@ -66,10 +72,13 @@ class WallpaperDetailsFragment : Fragment() {
         viewModel.getFavoritePhotos()
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun getQualityOption() {
         val circularProgressDrawable = CircularProgressDrawable(requireContext())
+        circularProgressDrawable.setTint(androidx.appcompat.R.attr.colorPrimary)
         circularProgressDrawable.strokeWidth = 6f
-        circularProgressDrawable.centerRadius = 50f
+        circularProgressDrawable.centerRadius = 100f
+        circularProgressDrawable.setStyle(LARGE)
         circularProgressDrawable.start()
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.selectedQuality.collect { quality ->
