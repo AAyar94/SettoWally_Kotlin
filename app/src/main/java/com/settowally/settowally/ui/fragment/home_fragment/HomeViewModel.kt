@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.settowally.settowally.common.Constant
 import com.settowally.settowally.common.NetworkResponseHandler
 import com.settowally.settowally.data.local.data_store.DataStoreRepository
 import com.settowally.settowally.data.model.Photo
@@ -27,8 +28,7 @@ class HomeViewModel @Inject constructor(
 
     val photoDataObject = MutableLiveData<NetworkResponseHandler<PhotosDataModel>>()
     val localDbResponse = MutableLiveData<List<Photo>>()
-
-
+    val searchPhotoResponse = MutableLiveData<NetworkResponseHandler<PhotosDataModel>>()
 
     fun getAllSavedPhotos() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -50,7 +50,11 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-
-
-
+    fun searchPhotosWithQuery(query: String, page: Int) {
+        viewModelScope.launch {
+            val response =
+                repository.getSearchedPhotosFromRemote(query, page, Constant.PER_PAGE_PHOTO_COUNTER)
+            searchPhotoResponse.postValue(response)
+        }
+    }
 }

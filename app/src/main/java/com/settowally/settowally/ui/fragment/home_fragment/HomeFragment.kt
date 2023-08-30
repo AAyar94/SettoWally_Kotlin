@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -23,6 +24,12 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModels()
     private var savedPhotosList: List<Photo>? = null
     private var page: Int = 1
+    private val searchAdapter: SearchAdapter by lazy {
+        SearchAdapter(onItemClick = {
+            val action = HomeFragmentDirections.actionHomeFragmentToWallpaperDetailsFragment(it)
+            findNavController().navigate(action)
+        })
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,11 +39,14 @@ class HomeFragment : Fragment() {
         homeViewModel.getPhotos(page = page, perPage = PER_PAGE_PHOTO_COUNTER)
         savedPhotosList = homeViewModel.localDbResponse.value
 
-        binding.searchImageButton.setOnClickListener {
-            val action = HomeFragmentDirections.actionHomeFragmentToSearchFragment()
-            findNavController().navigate(action)
-        }
+        attachSearchObserver()
 
+
+        binding.searchView.editText.addTextChangedListener(
+            afterTextChanged = {
+                homeViewModel.searchPhotosWithQuery(it.toString(), page)
+            }
+        )
         return binding.root
     }
 
@@ -52,6 +62,7 @@ class HomeFragment : Fragment() {
                 }
             )
         }
+        binding.searchRecyclerView.adapter=searchAdapter
         binding.imagesRecyclerView.adapter = homeAdapter
         binding.nextButton.setOnClickListener {
             page += 1
@@ -82,6 +93,19 @@ class HomeFragment : Fragment() {
                 is NetworkResponseHandler.Loading -> {
 
                 }
+            }
+        }
+    }
+
+    private fun attachSearchObserver() {
+        homeViewModel.searchPhotoResponse.observe(viewLifecycleOwner) { response ->
+            when (response) {
+                is NetworkResponseHandler.Success -> {
+                    searchAdapter.submitList(response.data?.photos)
+                }
+
+                is NetworkResponseHandler.Loading -> {}
+                is NetworkResponseHandler.Error -> {}
             }
         }
     }

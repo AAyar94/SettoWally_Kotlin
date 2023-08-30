@@ -1,4 +1,4 @@
-package com.settowally.settowally.ui.fragment.search_fragment
+package com.settowally.settowally.ui.fragment.home_fragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -30,7 +30,7 @@ class SearchAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): SearchAdapter.SearchViewHolder {
+    ): SearchViewHolder {
         val binding =
             PhotoItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return SearchViewHolder(binding)
@@ -40,7 +40,7 @@ class SearchAdapter(
         return currentList.size
     }
 
-    override fun onBindViewHolder(holder: SearchAdapter.SearchViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         holder.bind(position)
     }
 }
