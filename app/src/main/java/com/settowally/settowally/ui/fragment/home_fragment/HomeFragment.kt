@@ -24,6 +24,8 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModels()
     private var savedPhotosList: List<Photo>? = null
     private var page: Int = 1
+    private var searchedPage = 1
+    private var searchQuery = ""
     private val searchAdapter: SearchAdapter by lazy {
         SearchAdapter(onItemClick = {
             val action = HomeFragmentDirections.actionHomeFragmentToWallpaperDetailsFragment(it)
@@ -42,12 +44,44 @@ class HomeFragment : Fragment() {
         attachSearchObserver()
 
 
-        binding.searchView.editText.addTextChangedListener(
-            afterTextChanged = {
-                homeViewModel.searchPhotosWithQuery(it.toString(), page)
+        binding.searchView.editText.addTextChangedListener { str ->
+            if (str.isNullOrBlank()) {
+                binding.nextSearchButton.visibility = View.INVISIBLE
+                binding.prevSearchButton.visibility = View.INVISIBLE
+            } else {
+                homeViewModel.searchPhotosWithQuery(str.toString(), searchedPage)
+                binding.nextSearchButton.visibility = View.VISIBLE.apply {
+                    binding.nextSearchButton.setOnClickListener {
+                        searchButtonClicked(it.toString(), binding.nextSearchButton.id)
+                    }
+                }
+                binding.prevSearchButton.visibility = View.VISIBLE.apply {
+                    binding.prevSearchButton.setOnClickListener {
+                        searchButtonClicked(it.toString(), binding.prevSearchButton.id)
+                    }
+                }
             }
-        )
+        }
         return binding.root
+    }
+
+
+    private fun searchButtonClicked(query: String, id: Int) {
+        if (id == binding.nextSearchButton.id) {
+            searchedPage += 1
+            homeViewModel.searchPhotosWithQuery(query, page)
+        } else if (id == binding.prevSearchButton.id) {
+            if (page == 1) {
+                page = 1
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.you_are_at_first_page), Toast.LENGTH_LONG
+                ).show()
+            } else {
+                page -= 1
+                homeViewModel.searchPhotosWithQuery(query, page)
+            }
+        }
     }
 
 
@@ -62,7 +96,7 @@ class HomeFragment : Fragment() {
                 }
             )
         }
-        binding.searchRecyclerView.adapter=searchAdapter
+        binding.searchRecyclerView.adapter = searchAdapter
         binding.imagesRecyclerView.adapter = homeAdapter
         binding.nextButton.setOnClickListener {
             page += 1
