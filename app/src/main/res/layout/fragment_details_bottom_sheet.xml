@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/colorSurface"
-    app:cardCornerRadius="20dp">
+    app:cardBackgroundColor="?attr/colorSurface"
+    app:cardCornerRadius="40dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@android:color/transparent"
         android:layout_height="wrap_content">
 
         <TextView

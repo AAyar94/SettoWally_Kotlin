@@ -23,6 +23,10 @@ class FavoritesFragment : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getAllSavedPhotos()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,24 +34,14 @@ class FavoritesFragment : Fragment() {
     ): View {
         mBinding = FragmentFavoritesBinding.inflate(inflater, container, false)
         binding.favoritesRecyclerView.adapter = adapter
-        viewModel.localDbResponse.observe(viewLifecycleOwner) { dbResponse ->
-            binding.favoritesRecyclerView.visibility=View.VISIBLE
-            adapter.submitList(dbResponse)
-
-            /**if (dbResponse.isNullOrEmpty()) {
-                with(binding) {
-                    noFavoriteInDbImage.visibility = View.VISIBLE
-                    noFavoriteInDbText.visibility = View.VISIBLE
-                    favoritesRecyclerView.visibility = View.GONE
-                }
+        viewModel.isEmpty.observe(viewLifecycleOwner) { isEmpty ->
+            if (isEmpty) {
+                noItemInDBVisibilitySetter()
+                adapter.submitList(viewModel.localDbResponse.value)
             } else {
-                with(binding) {
-                    noFavoriteInDbImage.visibility = View.GONE
-                    noFavoriteInDbText.visibility = View.GONE
-                    favoritesRecyclerView.visibility = View.VISIBLE
-                }
-                adapter.submitList(dbResponse)
-            }*/
+                itemInDBVisibilitySetter()
+                adapter.submitList(viewModel.localDbResponse.value)
+            }
         }
         return binding.root
     }
@@ -55,6 +49,22 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getAllSavedPhotos()
+    }
+
+    private fun noItemInDBVisibilitySetter() {
+        with(binding) {
+            noFavoriteInDbText.visibility = View.VISIBLE
+            noFavoriteInDbImage.visibility = View.VISIBLE
+            favoritesRecyclerView.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun itemInDBVisibilitySetter(){
+        with(binding) {
+            noFavoriteInDbImage.visibility = View.INVISIBLE
+            noFavoriteInDbText.visibility = View.INVISIBLE
+            favoritesRecyclerView.visibility = View.VISIBLE
+        }
     }
 
     override fun onDestroy() {

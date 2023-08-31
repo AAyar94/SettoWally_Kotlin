@@ -227,10 +227,10 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/googleDevProfileButton"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:background="?attr/colorSecondaryContainer"
+        android:backgroundTint="?attr/colorSecondaryContainer"
         android:elevation="8dp"
         app:cardCornerRadius="40dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -238,10 +238,11 @@
         app:layout_constraintTop_toBottomOf="@id/developerText">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="12dp">
+            android:paddingBottom="20dp"
+            android:layout_gravity="bottom">
 
             <ImageButton
                 android:id="@+id/googlePlayButtonImage"
@@ -254,6 +255,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/see_more_apps_on_play_store"
                 android:textColor="?attr/colorPrimary"

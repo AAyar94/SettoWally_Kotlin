@@ -1,7 +1,9 @@
 package com.settowally.settowally.ui.fragment.favorites_fragment
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.settowally.settowally.data.model.Photo
 import com.settowally.settowally.data.repository.Repository
@@ -17,6 +19,8 @@ class FavoritesViewModel @Inject constructor(
 ) : ViewModel() {
 
     val localDbResponse = MutableLiveData<List<Photo>>()
+    val isEmpty: LiveData<Boolean>
+        get() = localDbResponse.map { it.isEmpty() }
 
     fun getAllSavedPhotos() {
         viewModelScope.launch(Dispatchers.IO) {
