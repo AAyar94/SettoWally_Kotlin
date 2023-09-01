@@ -11,25 +11,65 @@
         android:layout_height="match_parent"
         app:layout_dodgeInsetEdges="top">
 
+        <ProgressBar
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:id="@+id/homeProgressBar"
+            android:progressTint="?attr/colorPrimary"
+            android:progressTintMode="multiply"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/errorImageView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_error"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorError" />
+
         <TextView
+            android:id="@+id/errorTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/there_is_an_error_occurred"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/errorImageView"
+            app:layout_constraintStart_toStartOf="@id/errorImageView"
+            app:layout_constraintTop_toBottomOf="@id/errorImageView" />
+
+        <TextView
+            android:id="@+id/brandImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:elevation="-1dp"
             android:fontFamily="@font/porkys"
             android:text="@string/app_name"
-            app:layout_dodgeInsetEdges="bottom"
             android:textColor="?attr/colorPrimarySurface"
             android:textSize="36sp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_dodgeInsetEdges="bottom" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/imagesRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +86,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            app:layout_dodgeInsetEdges="bottom"
             android:layout_marginBottom="16dp"
             android:backgroundTint="?attr/colorSecondaryContainer"
             android:text="@string/prev"
@@ -54,7 +93,8 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/nextButton"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_dodgeInsetEdges="bottom" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/nextButton"
@@ -62,7 +102,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            app:layout_dodgeInsetEdges="bottom"
             android:layout_marginBottom="16dp"
             android:backgroundTint="?attr/colorSecondaryContainer"
             android:text="@string/next"
@@ -70,7 +109,8 @@
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/prevButton" />
+            app:layout_constraintStart_toEndOf="@id/prevButton"
+            app:layout_dodgeInsetEdges="bottom" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -99,16 +139,16 @@
             android:layout_height="match_parent">
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/searchRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="24dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="2"
-            tools:itemCount="20"
-            tools:listitem="@layout/photo_item_layout" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="24dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:itemCount="20"
+                tools:listitem="@layout/photo_item_layout" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/prevSearchButton"
@@ -116,7 +156,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
-                app:layout_dodgeInsetEdges="bottom"
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="?attr/colorSecondaryContainer"
                 android:text="@string/prev"
@@ -124,7 +163,8 @@
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/nextSearchButton"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_dodgeInsetEdges="bottom" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/nextSearchButton"
@@ -132,7 +172,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"
-                app:layout_dodgeInsetEdges="bottom"
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="?attr/colorSecondaryContainer"
                 android:text="@string/next"
@@ -140,7 +179,8 @@
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/prevSearchButton" />
+                app:layout_constraintStart_toEndOf="@id/prevSearchButton"
+                app:layout_dodgeInsetEdges="bottom" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.search.SearchView>

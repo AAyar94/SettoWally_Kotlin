@@ -14,7 +14,7 @@
         android:layout_margin="24dp"
         android:fontFamily="@font/porkys"
         android:text="@string/settings"
-        android:textSize="24sp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@id/settingsHeaderDivider"
         android:textColor="?attr/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,11 +24,11 @@
         android:id="@+id/settingsHeaderDivider"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="12dp"
         app:dividerColor="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/settingsHeader" />
 
     <TextView
         android:id="@+id/darkModeHeader"
@@ -38,7 +38,7 @@
         android:fontFamily="@font/porkys"
         android:text="@string/dark_mode"
         android:textColor="?attr/colorPrimary"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/settingsHeaderDivider" />
@@ -116,8 +116,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="4dp"
-        android:layout_marginTop="24dp"
-        android:gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,14 +128,15 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="36dp"
             android:paddingVertical="10dp"
-            app:chipSpacing="24dp"
+            app:chipSpacingVertical="10dp"
+            app:chipSpacingHorizontal="15dp"
             app:selectionRequired="true"
             app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/originalQualityChip"
                 style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/original" />
 
@@ -149,42 +150,42 @@
             <com.google.android.material.chip.Chip
                 android:id="@+id/largeQualityChip"
                 style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/large" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/landspaceQualityChip"
                 style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/landscape" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/portraitQualityChip"
                 style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/portrait" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/mediumQualityChip"
                 style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/medium" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/tinyQualityChip"
                 style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/tiny" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/smallQualityChip"
                 style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/small" />
         </com.google.android.material.chip.ChipGroup>
@@ -250,12 +251,14 @@
                 android:layout_height="100dp"
                 android:background="?attr/colorSecondaryContainer"
                 android:scaleType="fitCenter"
+                android:elevation="1dp"
                 android:src="@drawable/ic_google_play" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:elevation="1dp"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/see_more_apps_on_play_store"
                 android:textColor="?attr/colorPrimary"

@@ -84,11 +84,10 @@ class SettingsFragment : Fragment() {
             }
 
             developerText.text = getString(R.string.developer_adem_ayar)
-            developerText.setOnClickListener {
+            googleDevProfileButton.setOnClickListener {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(DEVELOPER_PAGE))
                 startActivity(intent)
             }
-
             googlePlayButtonImage.setOnClickListener {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(DEVELOPER_PAGE))
                 startActivity(intent)

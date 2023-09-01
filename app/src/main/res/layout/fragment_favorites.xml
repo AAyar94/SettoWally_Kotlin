@@ -17,7 +17,7 @@
         android:fontFamily="@font/porkys"
         android:text="@string/favorites"
         android:textColor="?attr/colorPrimary"
-        android:textSize="24sp"
+        android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@id/favoritesHeaderDivider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,11 +26,11 @@
         android:id="@+id/favoritesHeaderDivider"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="12dp"
         app:dividerColor="?attr/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/favoritesHeader" />
 
     <ImageView
         android:id="@+id/noFavoriteInDbImage"

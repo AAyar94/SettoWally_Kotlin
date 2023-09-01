@@ -118,14 +118,27 @@ class HomeFragment : Fragment() {
             when (response) {
                 is NetworkResponseHandler.Success -> {
                     response.data?.let { homeAdapter.submitList(it.photos) }
+                    binding.homeProgressBar.visibility = View.INVISIBLE
+                    binding.brandImage.visibility = View.VISIBLE
+                    binding.imagesRecyclerView.visibility = View.VISIBLE
+                    binding.errorImageView.visibility = View.INVISIBLE
+                    binding.errorTextView.visibility = View.INVISIBLE
                 }
 
                 is NetworkResponseHandler.Error -> {
-
+                    binding.brandImage.visibility = View.INVISIBLE
+                    binding.homeProgressBar.visibility = View.INVISIBLE
+                    binding.imagesRecyclerView.visibility = View.INVISIBLE
+                    binding.errorImageView.visibility = View.VISIBLE
+                    binding.errorTextView.visibility = View.VISIBLE
                 }
 
                 is NetworkResponseHandler.Loading -> {
-
+                    binding.brandImage.visibility = View.INVISIBLE
+                    binding.homeProgressBar.visibility = View.VISIBLE
+                    binding.imagesRecyclerView.visibility = View.INVISIBLE
+                    binding.errorImageView.visibility = View.INVISIBLE
+                    binding.errorTextView.visibility = View.INVISIBLE
                 }
             }
         }
