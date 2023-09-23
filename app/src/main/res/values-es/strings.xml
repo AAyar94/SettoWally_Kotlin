@@ -55,11 +55,15 @@
     <string name="description">Descripción</string>
     <string name="you_are_at_first_page">Estás en la primera página</string>
     <string name="developer_adem_ayar">Desarrollador : Adem Ayar</string>
-    <string name="search">Buscar...</string>
+    <string name="search">Buscar…</string>
     <string name="HeyCheckMyApp">"Hey, revisa mi aplicación en: "</string>
     <string name="delete_from_favorites">Eliminar de favoritos</string>
     <string name="add_to_favorites">Agregar a favoritos</string>
     <string name="there_are_no_image_in_favorites">No hay imágenes en favoritos</string>
     <string name="there_is_an_error_occurred">Ocurrió un error!</string>
+    <string name="wallpaper_image">Imagen de fondo de pantalla</string>
+    <string name="downloading">Descargando</string>
+    <string name="image_download">Descargar imagen</string>
+    <string name="downloading_image">Descargando imagen…</string>
 
 </resources>

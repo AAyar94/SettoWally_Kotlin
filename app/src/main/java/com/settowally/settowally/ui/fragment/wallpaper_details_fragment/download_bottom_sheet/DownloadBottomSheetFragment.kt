@@ -86,8 +86,8 @@ class DownloadBottomSheetFragment : BottomSheetDialogFragment() {
         val imageUri: Uri = selectedQuality.toUri()
 
         val request = DownloadManager.Request(imageUri)
-            .setTitle("Wallpaper Image")
-            .setDescription("Downloading")
+            .setTitle(getString(R.string.wallpaper_image))
+            .setDescription(getString(R.string.downloading))
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             .setDestinationInExternalPublicDir(
                 Environment.DIRECTORY_PICTURES,
@@ -100,8 +100,8 @@ class DownloadBottomSheetFragment : BottomSheetDialogFragment() {
 
         // Create and show a notification
         val notificationBuilder = NotificationCompat.Builder(requireContext(), "download_channel")
-            .setContentTitle("Image Download")
-            .setContentText("Downloading image...")
+            .setContentTitle(getString(R.string.image_download))
+            .setContentText(getString(R.string.downloading_image))
             .setSmallIcon(R.drawable.ic_launcher_foreground) // Replace with your own icon
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setOngoing(true)

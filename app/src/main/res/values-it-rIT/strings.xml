@@ -55,11 +55,16 @@
     <string name="description">Descrizione</string>
     <string name="you_are_at_first_page">Ti trovi nella prima pagina</string>
     <string name="developer_adem_ayar">Sviluppatore : Adem Ayar</string>
-    <string name="search">Cerca...</string>
+    <string name="search">Cerca…</string>
     <string name="HeyCheckMyApp">"Ehi, controlla la mia app su: "</string>
     <string name="delete_from_favorites">Rimuovi dai preferiti</string>
     <string name="add_to_favorites">Aggiungi ai preferiti</string>
     <string name="there_are_no_image_in_favorites">Non ci sono immagini nei preferiti</string>
     <string name="there_is_an_error_occurred">Si è verificato un errore!</string>
+    <string name="wallpaper_image">Immagine di sfondo</string>
+    <string name="downloading">Scaricamento</string>
+    <string name="image_download">Scarica immagine</string>
+    <string name="downloading_image">Scaricamento dell\'immagine…</string>
+
 
 </resources>

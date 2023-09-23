@@ -69,4 +69,8 @@
     <string name="add_to_favorites">Add to favorites</string>
     <string name="there_are_no_image_in_favorites">There are no image in favorites</string>
     <string name="there_is_an_error_occurred">There is an error occurred!</string>
+    <string name="wallpaper_image">Wallpaper Image</string>
+    <string name="downloading">Downloading</string>
+    <string name="image_download">Image Download</string>
+    <string name="downloading_image">Downloading image...</string>
 </resources>
