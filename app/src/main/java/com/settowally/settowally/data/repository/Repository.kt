@@ -47,4 +47,8 @@ class Repository @Inject constructor(
         return localDataSource.deletePhotoFromDb(photo)
     }
 
+    suspend fun deleteAllFavoritePhotos(){
+        return localDataSource.deleteAllFavoritePhotos()
+    }
+
 }

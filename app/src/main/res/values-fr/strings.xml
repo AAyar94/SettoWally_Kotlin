@@ -65,5 +65,7 @@
     <string name="downloading">Téléchargement</string>
     <string name="image_download">Téléchargement de l\'image</string>
     <string name="downloading_image">Téléchargement de l\'image en cours…</string>
+    <string name="cache">Cache</string>
+    <string name="clear_cache">Effacer le cache</string>
 
 </resources>

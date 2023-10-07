@@ -65,5 +65,7 @@
     <string name="downloading">Descargando</string>
     <string name="image_download">Descargar imagen</string>
     <string name="downloading_image">Descargando imagen…</string>
+    <string name="cache">Caché</string>
+    <string name="clear_cache">Borrar caché</string>
 
 </resources>

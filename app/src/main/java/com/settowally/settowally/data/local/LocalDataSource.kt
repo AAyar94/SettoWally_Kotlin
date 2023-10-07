@@ -11,12 +11,15 @@ class LocalDataSource @Inject constructor(
         return dao.getFavoritePhotos()
     }
 
-    suspend fun savePhotoToDb(photo: Photo){
+    suspend fun savePhotoToDb(photo: Photo) {
         return dao.insertNewPhoto(photo)
     }
 
-    suspend fun deletePhotoFromDb(photo: Photo){
+    suspend fun deletePhotoFromDb(photo: Photo) {
         return dao.deletePhoto(photo)
     }
 
+    suspend fun deleteAllFavoritePhotos() {
+        return dao.deleteAllFavoritePhotos()
+    }
 }

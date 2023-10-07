@@ -19,4 +19,7 @@ interface PhotosDao {
 
     @Delete
     suspend fun deletePhoto(photo: Photo)
+
+    @Query("DELETE FROM $FAVORITE_PHOTOS_TABLE_NAME")
+    suspend fun deleteAllFavoritePhotos()
 }

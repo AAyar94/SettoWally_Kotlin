@@ -65,5 +65,7 @@
     <string name="downloading">İndiriliyor</string>
     <string name="image_download">Resmi İndir</string>
     <string name="downloading_image">Duvar Kağıdı İndiriliyor…</string>
+    <string name="cache">Önbellek</string>
+    <string name="clear_cache">Önbelleği Temizle</string>
 
 </resources>

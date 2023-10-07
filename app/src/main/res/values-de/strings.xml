@@ -65,5 +65,7 @@
     <string name="downloading">Herunterladen</string>
     <string name="image_download">Bild herunterladen</string>
     <string name="downloading_image">Bild wird heruntergeladen…</string>
+    <string name="cache">Zwischenspeicher</string>
+    <string name="clear_cache">Zwischenspeicher löschen</string>
 
 </resources>

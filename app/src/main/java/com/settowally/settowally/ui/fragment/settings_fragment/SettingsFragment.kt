@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import com.settowally.settowally.R
 import com.settowally.settowally.common.Constant.Companion.DEVELOPER_PAGE
 import com.settowally.settowally.data.model.PhotoQuality
@@ -92,9 +93,19 @@ class SettingsFragment : Fragment() {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(DEVELOPER_PAGE))
                 startActivity(intent)
             }
+
+
+            /**     CACHE CLEAR     */
+            cacheClearButton.setOnClickListener {
+                viewModel.deleteAllFavoritePhotos()
+                val snackbar =
+                    Snackbar.make(root, "Deleted all favorite photos", Snackbar.LENGTH_LONG)
+                snackbar.setAction("Undo", SnackbarUndoListener(viewModel))
+                snackbar.show()
+
+            }
         }
     }
-
 
     private fun observeLiveData() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -131,4 +142,13 @@ class SettingsFragment : Fragment() {
             }
         }
     }
+}
+
+class SnackbarUndoListener(
+    private val viewModel: SettingsViewModel
+) : View.OnClickListener {
+    override fun onClick(p0: View?) {
+        viewModel.restoreRecentlyDeletedPhotos()
+    }
+
 }
