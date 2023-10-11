@@ -50,15 +50,14 @@ class HomeFragment : Fragment() {
                 binding.prevSearchButton.visibility = View.INVISIBLE
             } else {
                 homeViewModel.searchPhotosWithQuery(str.toString(), searchedPage)
-                binding.nextSearchButton.visibility = View.VISIBLE.apply {
-                    binding.nextSearchButton.setOnClickListener {
-                        searchButtonClicked(it.toString(), binding.nextSearchButton.id)
-                    }
+                binding.nextSearchButton.visibility = View.VISIBLE
+                binding.nextSearchButton.setOnClickListener {
+                    searchButtonClicked(str.toString(), binding.nextSearchButton.id)
+
                 }
-                binding.prevSearchButton.visibility = View.VISIBLE.apply {
-                    binding.prevSearchButton.setOnClickListener {
-                        searchButtonClicked(it.toString(), binding.prevSearchButton.id)
-                    }
+                binding.prevSearchButton.visibility = View.VISIBLE
+                binding.prevSearchButton.setOnClickListener {
+                    searchButtonClicked(str.toString(), binding.prevSearchButton.id)
                 }
             }
         }
