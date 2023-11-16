@@ -1,19 +1,19 @@
 package com.settowally.settowally.ui
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.activity.viewModels
+import android.view.animation.OvershootInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.color.MaterialColors
 import com.settowally.settowally.R
 import com.settowally.settowally.data.local.data_store.DataStoreRepository
 import com.settowally.settowally.data.model.Theme
@@ -33,7 +33,33 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen()
+
+        installSplashScreen().apply {
+            setOnExitAnimationListener { splashScreen ->
+                val zoomX = ObjectAnimator.ofFloat(
+                    splashScreen.iconView,
+                    View.SCALE_X,
+                    0.4f, 0.0f
+                )
+                zoomX.interpolator = OvershootInterpolator()
+                zoomX.duration = 500L
+                zoomX.doOnEnd { splashScreen.remove() }
+
+                val zoomY = ObjectAnimator.ofFloat(
+                    splashScreen.iconView,
+                    View.SCALE_Y,
+                    0.4f, 0.0f
+                )
+                zoomY.interpolator = OvershootInterpolator()
+                zoomY.duration = 500L
+                zoomY.doOnEnd { splashScreen.remove() }
+
+                zoomX.start()
+                zoomY.start()
+            }
+        }
+
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -73,7 +99,7 @@ class MainActivity : AppCompatActivity() {
                 else -> {
                     binding.bottomNavBar.visibility = View.VISIBLE
                     window.statusBarColor = Color.BLACK
-                    window.navigationBarColor =Color.BLACK
+                    window.navigationBarColor = Color.BLACK
                 }
             }
         }
