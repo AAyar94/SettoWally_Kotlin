@@ -18,8 +18,8 @@ android {
         applicationId "com.settowally.settowally"
         minSdk 28
         targetSdk 34
-        versionCode 20
-        versionName "2.0.4"
+        versionCode 22
+        versionName "2.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
