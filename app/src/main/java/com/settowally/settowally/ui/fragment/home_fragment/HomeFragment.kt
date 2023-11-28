@@ -43,7 +43,6 @@ class HomeFragment : Fragment() {
 
         attachSearchObserver()
 
-
         binding.searchView.editText.addTextChangedListener { str ->
             if (str.isNullOrBlank()) {
                 binding.nextSearchButton.visibility = View.INVISIBLE
@@ -53,7 +52,6 @@ class HomeFragment : Fragment() {
                 binding.nextSearchButton.visibility = View.VISIBLE
                 binding.nextSearchButton.setOnClickListener {
                     searchButtonClicked(str.toString(), binding.nextSearchButton.id)
-
                 }
                 binding.prevSearchButton.visibility = View.VISIBLE
                 binding.prevSearchButton.setOnClickListener {
