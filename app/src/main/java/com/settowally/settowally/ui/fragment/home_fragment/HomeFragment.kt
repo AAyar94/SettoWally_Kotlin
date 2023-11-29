@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -27,6 +28,7 @@ class HomeFragment : Fragment() {
     var currentPage = page
     var isLastPage = false
     var searchCurrentPage = 1
+    var query = ""
     private val homeAdapter: HomeFragmentAdapter by lazy {
         HomeFragmentAdapter { photo ->
             val action = HomeFragmentDirections.actionHomeFragmentToWallpaperDetailsFragment(photo)
@@ -52,12 +54,50 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initHomeObservers()
+
         setupRecyclerView()
+        setupSearchRecyclerView()
         callFirstPage()
+        searchFirstPage()
+    }
+
+    private fun setupSearchRecyclerView() {
+        val searchLayoutManager = GridLayoutManager(requireContext(), 2)
+        binding.searchRecyclerView.layoutManager = searchLayoutManager
+        binding.searchRecyclerView.adapter = searchAdapter
+        binding.searchRecyclerView.addOnScrollListener(object :
+            PaginationScrollListener(searchLayoutManager) {
+            override fun loadMoreItems() {
+                isloading = true
+                searchCurrentPage++
+
+                homeViewModel.searchPhotosWithQuery(query, searchCurrentPage)
+            }
+
+            override fun getTotalPageCount(): Int {
+                return getTotalPageCount()
+            }
+
+            override fun isLastPage(): Boolean {
+                return isLastPage
+            }
+
+            override fun isLoading(): Boolean {
+                return isloading
+            }
+
+        })
+    }
+
+    private fun searchFirstPage() {
+        binding.searchView.editText.addTextChangedListener { queryText ->
+            homeViewModel.searchPhotosWithQuery(queryText.toString(), searchCurrentPage)
+            query = queryText.toString()
+        }
     }
 
     private fun setupRecyclerView() {
-        val homeLayoutManager = GridLayoutManager(requireContext(), 3)
+        val homeLayoutManager = GridLayoutManager(requireContext(), 2)
         binding.imagesRecyclerView.layoutManager = homeLayoutManager
         binding.imagesRecyclerView.adapter = homeAdapter
         binding.imagesRecyclerView.addOnScrollListener(object :
@@ -91,6 +131,7 @@ class HomeFragment : Fragment() {
                     binding.errorImageView.setVisible()
                     binding.errorTextView.setVisible()
                     binding.homeProgressBar.setInvisible()
+                    isloading = false
                 }
 
                 is NetworkResponseHandler.Loading -> {
@@ -119,6 +160,7 @@ class HomeFragment : Fragment() {
                     binding.errorImageView.setVisible()
                     binding.errorTextView.setVisible()
                     binding.homeProgressBar.setInvisible()
+                    isloading = false
                 }
 
                 is NetworkResponseHandler.Loading -> {
@@ -126,6 +168,7 @@ class HomeFragment : Fragment() {
                     binding.errorImageView.setInvisible()
                     binding.errorTextView.setInvisible()
                     binding.homeProgressBar.setVisible()
+                    isloading = true
                 }
 
                 is NetworkResponseHandler.Success -> {
@@ -133,7 +176,9 @@ class HomeFragment : Fragment() {
                     binding.errorImageView.setInvisible()
                     binding.errorTextView.setInvisible()
                     binding.homeProgressBar.setInvisible()
-                    result.data?.photos?.let { searchAdapter.currentList.addAll(it) }
+                    val newSearchList = searchAdapter.currentList + result.data?.photos!!
+                    searchAdapter.submitList(newSearchList)
+                    isloading = false
                 }
             }
         }
