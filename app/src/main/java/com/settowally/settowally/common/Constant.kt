@@ -1,13 +1,12 @@
 package com.settowally.settowally.common
 
-import com.settowally.settowally.BuildConfig.SETTOWALLY_API_KEY
-import com.settowally.settowally.data.model.PhotoQuality
+import com.settowally.settowally.BuildConfig
 
 class Constant {
 
     companion object {
         /**     REMOTE      */
-        const val API_KEY = SETTOWALLY_API_KEY
+        const val API_KEY = BuildConfig.SETTOWALLY_API_KEY
         const val BASE_URL = "https://api.pexels.com/v1/"
         const val PER_PAGE_PHOTO_COUNTER = 20
         const val PREFERENCES_NAME = "settowally_preferences"
@@ -20,5 +19,6 @@ class Constant {
 
         const val DEVELOPER_PAGE="https://play.google.com/store/apps/dev?id=5913710677076012534"
 
+        const val PAGE_SIZE=20
     }
 }

@@ -4,158 +4,147 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.settowally.settowally.R
+import androidx.recyclerview.widget.GridLayoutManager
 import com.settowally.settowally.common.Constant.Companion.PER_PAGE_PHOTO_COUNTER
 import com.settowally.settowally.common.NetworkResponseHandler
-import com.settowally.settowally.data.model.Photo
+import com.settowally.settowally.common.PaginationScrollListener
+import com.settowally.settowally.common.setInvisible
+import com.settowally.settowally.common.setVisible
 import com.settowally.settowally.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
-    private var mBinding: FragmentHomeBinding? = null
-    private val binding get() = mBinding!!
+    private var _binding: FragmentHomeBinding? = null
+    val binding get() = _binding!!
     private val homeViewModel: HomeViewModel by viewModels()
-    private var savedPhotosList: List<Photo>? = null
-    private var page: Int = 1
-    private var searchedPage = 1
-    private var searchQuery = ""
-    private val searchAdapter: SearchAdapter by lazy {
-        SearchAdapter(onItemClick = {
-            val action = HomeFragmentDirections.actionHomeFragmentToWallpaperDetailsFragment(it)
+    var isloading = false
+    val page = 1
+    val searchPage = 1
+    var currentPage = page
+    var isLastPage = false
+    var searchCurrentPage = 1
+    private val homeAdapter: HomeFragmentAdapter by lazy {
+        HomeFragmentAdapter { photo ->
+            val action = HomeFragmentDirections.actionHomeFragmentToWallpaperDetailsFragment(photo)
             findNavController().navigate(action)
-        })
+        }
+    }
+    private val searchAdapter: SearchAdapter by lazy {
+        SearchAdapter { photo ->
+            val action = HomeFragmentDirections.actionHomeFragmentToWallpaperDetailsFragment(photo)
+            findNavController().navigate(action)
+        }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        mBinding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-        homeViewModel.getPhotos(page = page, perPage = PER_PAGE_PHOTO_COUNTER)
-        savedPhotosList = homeViewModel.localDbResponse.value
-
-        attachSearchObserver()
-
-        binding.searchView.editText.addTextChangedListener { str ->
-            if (str.isNullOrBlank()) {
-                binding.nextSearchButton.visibility = View.INVISIBLE
-                binding.prevSearchButton.visibility = View.INVISIBLE
-            } else {
-                homeViewModel.searchPhotosWithQuery(str.toString(), searchedPage)
-                binding.nextSearchButton.visibility = View.VISIBLE
-                binding.nextSearchButton.setOnClickListener {
-                    searchButtonClicked(str.toString(), binding.nextSearchButton.id)
-                }
-                binding.prevSearchButton.visibility = View.VISIBLE
-                binding.prevSearchButton.setOnClickListener {
-                    searchButtonClicked(str.toString(), binding.prevSearchButton.id)
-                }
-            }
-        }
+        _binding = FragmentHomeBinding.inflate(layoutInflater)
         return binding.root
     }
 
-
-    private fun searchButtonClicked(query: String, id: Int) {
-        if (id == binding.nextSearchButton.id) {
-            searchedPage += 1
-            homeViewModel.searchPhotosWithQuery(query, page)
-        } else if (id == binding.prevSearchButton.id) {
-            if (page == 1) {
-                page = 1
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.you_are_at_first_page), Toast.LENGTH_LONG
-                ).show()
-            } else {
-                page -= 1
-                homeViewModel.searchPhotosWithQuery(query, page)
-            }
-        }
-    }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val homeAdapter: HomeFragmentAdapter by lazy {
-            HomeFragmentAdapter(
-                onItemClick = { photo ->
-                    val action =
-                        HomeFragmentDirections.actionHomeFragmentToWallpaperDetailsFragment(photo)
-                    findNavController().navigate(action)
-                }
-            )
-        }
-        binding.searchRecyclerView.adapter = searchAdapter
-        binding.imagesRecyclerView.adapter = homeAdapter
-        binding.nextButton.setOnClickListener {
-            page += 1
-            homeViewModel.getPhotos(page, PER_PAGE_PHOTO_COUNTER)
-        }
-        binding.prevButton.setOnClickListener {
-            if (page == 1) {
-                page = 1
-                Toast.makeText(
-                    requireContext(),
-                    getString(R.string.you_are_at_first_page), Toast.LENGTH_LONG
-                ).show()
-            } else {
-                page -= 1
-                homeViewModel.getPhotos(page, PER_PAGE_PHOTO_COUNTER)
-            }
-        }
-        homeViewModel.photoDataObject.observe(viewLifecycleOwner) { response ->
-            when (response) {
-                is NetworkResponseHandler.Success -> {
-                    response.data?.let { homeAdapter.submitList(it.photos) }
-                    binding.homeProgressBar.visibility = View.INVISIBLE
-                    binding.brandImage.visibility = View.VISIBLE
-                    binding.imagesRecyclerView.visibility = View.VISIBLE
-                    binding.errorImageView.visibility = View.INVISIBLE
-                    binding.errorTextView.visibility = View.INVISIBLE
-                }
+        initHomeObservers()
+        setupRecyclerView()
+        callFirstPage()
+    }
 
+    private fun setupRecyclerView() {
+        val homeLayoutManager = GridLayoutManager(requireContext(), 3)
+        binding.imagesRecyclerView.layoutManager = homeLayoutManager
+        binding.imagesRecyclerView.adapter = homeAdapter
+        binding.imagesRecyclerView.addOnScrollListener(object :
+            PaginationScrollListener(homeLayoutManager) {
+            override fun loadMoreItems() {
+                isloading = true
+                currentPage++
+
+                homeViewModel.getPhotos(currentPage)
+            }
+
+            override fun getTotalPageCount(): Int {
+                return getTotalPageCount()
+            }
+
+            override fun isLastPage(): Boolean {
+                return isLastPage
+            }
+
+            override fun isLoading(): Boolean {
+                return isloading
+            }
+        })
+    }
+
+    private fun initHomeObservers() {
+        homeViewModel.photoDataObject.observe(viewLifecycleOwner) { result ->
+            when (result) {
                 is NetworkResponseHandler.Error -> {
-                    binding.brandImage.visibility = View.INVISIBLE
-                    binding.homeProgressBar.visibility = View.INVISIBLE
-                    binding.imagesRecyclerView.visibility = View.INVISIBLE
-                    binding.errorImageView.visibility = View.VISIBLE
-                    binding.errorTextView.visibility = View.VISIBLE
+                    binding.imagesRecyclerView.setInvisible()
+                    binding.errorImageView.setVisible()
+                    binding.errorTextView.setVisible()
+                    binding.homeProgressBar.setInvisible()
                 }
 
                 is NetworkResponseHandler.Loading -> {
-                    binding.brandImage.visibility = View.INVISIBLE
-                    binding.homeProgressBar.visibility = View.VISIBLE
-                    binding.imagesRecyclerView.visibility = View.INVISIBLE
-                    binding.errorImageView.visibility = View.INVISIBLE
-                    binding.errorTextView.visibility = View.INVISIBLE
+                    binding.imagesRecyclerView.setInvisible()
+                    binding.errorImageView.setInvisible()
+                    binding.errorTextView.setInvisible()
+                    isloading = true
+                    binding.homeProgressBar.setVisible()
+                }
+
+                is NetworkResponseHandler.Success -> {
+                    binding.imagesRecyclerView.setVisible()
+                    binding.errorImageView.setInvisible()
+                    binding.errorTextView.setInvisible()
+                    binding.homeProgressBar.setInvisible()
+                    val newList = homeAdapter.currentList + result.data?.photos!!
+                    homeAdapter.submitList(newList)
+                    isloading = false
+                }
+            }
+        }
+        homeViewModel.searchPhotoResponse.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is NetworkResponseHandler.Error -> {
+                    binding.searchRecyclerView.setInvisible()
+                    binding.errorImageView.setVisible()
+                    binding.errorTextView.setVisible()
+                    binding.homeProgressBar.setInvisible()
+                }
+
+                is NetworkResponseHandler.Loading -> {
+                    binding.searchRecyclerView.setInvisible()
+                    binding.errorImageView.setInvisible()
+                    binding.errorTextView.setInvisible()
+                    binding.homeProgressBar.setVisible()
+                }
+
+                is NetworkResponseHandler.Success -> {
+                    binding.searchRecyclerView.setVisible()
+                    binding.errorImageView.setInvisible()
+                    binding.errorTextView.setInvisible()
+                    binding.homeProgressBar.setInvisible()
+                    result.data?.photos?.let { searchAdapter.currentList.addAll(it) }
                 }
             }
         }
     }
 
-    private fun attachSearchObserver() {
-        homeViewModel.searchPhotoResponse.observe(viewLifecycleOwner) { response ->
-            when (response) {
-                is NetworkResponseHandler.Success -> {
-                    searchAdapter.submitList(response.data?.photos)
-                }
-
-                is NetworkResponseHandler.Loading -> {}
-                is NetworkResponseHandler.Error -> {}
-            }
-        }
+    private fun callFirstPage() {
+        homeViewModel.getPhotos(page)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mBinding = null
+        _binding = null
     }
 }
