@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.color.MaterialColors
 import com.settowally.settowally.R
+import com.settowally.settowally.common.setInvisible
 import com.settowally.settowally.data.local.data_store.DataStoreRepository
 import com.settowally.settowally.data.model.Theme
 import com.settowally.settowally.databinding.ActivityMainBinding
@@ -36,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setTheme()
 
         supportActionBar?.hide()
@@ -45,37 +46,78 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        binding.bottomNavBar.setupWithNavController(navController)
+        val isTablet = applicationContext.resources.getBoolean(R.bool.tablet)
+        if (isTablet) {
+            binding.bottomNavRail!!.setupWithNavController(navController)
 
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.wallpaperDetailsFragment -> {
-                    binding.bottomNavBar.visibility = View.GONE
-                    window.statusBarColor = Color.BLACK
-                    window.navigationBarColor = Color.TRANSPARENT
-                }
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                when (destination.id) {
+                    R.id.wallpaperDetailsFragment -> {
+                        binding.bottomNavRail!!.visibility = View.GONE
+                        window.statusBarColor = Color.BLACK
+                        window.navigationBarColor = Color.TRANSPARENT
+                    }
 
-                R.id.setWallpaperBottomSheetFragment -> {
-                    binding.bottomNavBar.visibility = View.GONE
-                    window.navigationBarColor = Color.TRANSPARENT
-                }
+                    R.id.setWallpaperBottomSheetFragment -> {
+                        binding.bottomNavRail!!.visibility = View.GONE
+                        window.navigationBarColor = Color.TRANSPARENT
+                    }
 
-                R.id.downloadBottomSheetFragment -> {
-                    binding.bottomNavBar.visibility = View.GONE
-                    window.navigationBarColor = Color.TRANSPARENT
-                }
+                    R.id.downloadBottomSheetFragment -> {
+                        binding.bottomNavRail!!.visibility = View.GONE
+                        window.navigationBarColor = Color.TRANSPARENT
+                    }
 
-                R.id.detailsBottomSheetFragment -> {
-                    binding.bottomNavBar.visibility = View.GONE
-                    window.navigationBarColor = Color.TRANSPARENT
-                }
+                    R.id.detailsBottomSheetFragment -> {
+                        binding.bottomNavRail!!.visibility = View.GONE
+                        window.navigationBarColor = Color.TRANSPARENT
+                    }
 
-                else -> {
-                    binding.bottomNavBar.visibility = View.VISIBLE
-                    window.statusBarColor = Color.BLACK
-                    window.navigationBarColor =Color.BLACK
+                    else -> {
+                        binding.bottomNavRail!!.visibility = View.VISIBLE
+                        window.statusBarColor = Color.BLACK
+                        window.navigationBarColor = Color.BLACK
+                    }
                 }
             }
+        } else {
+            binding.bottomNavBar!!.setupWithNavController(navController)
+
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                when (destination.id) {
+                    R.id.wallpaperDetailsFragment -> {
+                        binding.bottomNavBar!!.visibility = View.GONE
+                        window.statusBarColor = Color.BLACK
+                        window.navigationBarColor = Color.TRANSPARENT
+                    }
+
+                    R.id.setWallpaperBottomSheetFragment -> {
+
+                        binding.bottomNavBar!!.visibility = View.GONE
+                        window.navigationBarColor = Color.TRANSPARENT
+                    }
+
+                    R.id.downloadBottomSheetFragment -> {
+
+                        binding.bottomNavBar!!.visibility = View.GONE
+                        window.navigationBarColor = Color.TRANSPARENT
+                    }
+
+                    R.id.detailsBottomSheetFragment -> {
+
+                        binding.bottomNavBar!!.visibility = View.GONE
+                        window.navigationBarColor = Color.TRANSPARENT
+                    }
+
+                    else -> {
+
+                        binding.bottomNavBar!!.visibility = View.VISIBLE
+                        window.statusBarColor = Color.BLACK
+                        window.navigationBarColor = Color.BLACK
+                    }
+                }
+            }
+
         }
     }
 

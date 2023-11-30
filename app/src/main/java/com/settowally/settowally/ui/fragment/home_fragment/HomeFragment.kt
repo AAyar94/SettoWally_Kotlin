@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.settowally.settowally.R
 import com.settowally.settowally.common.Constant.Companion.PER_PAGE_PHOTO_COUNTER
 import com.settowally.settowally.common.NetworkResponseHandler
 import com.settowally.settowally.common.PaginationScrollListener
@@ -22,13 +23,15 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     val binding get() = _binding!!
     private val homeViewModel: HomeViewModel by viewModels()
-    var isloading = false
+    var isLoading = false
     val page = 1
     val searchPage = 1
     var currentPage = page
     var isLastPage = false
     var searchCurrentPage = 1
     var query = ""
+    var homeLayoutManager: GridLayoutManager? = null
+    var searchLayoutManager: GridLayoutManager? = null
     private val homeAdapter: HomeFragmentAdapter by lazy {
         HomeFragmentAdapter { photo ->
             val action = HomeFragmentDirections.actionHomeFragmentToWallpaperDetailsFragment(photo)
@@ -62,13 +65,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupSearchRecyclerView() {
-        val searchLayoutManager = GridLayoutManager(requireContext(), 2)
+        val isTablet = requireContext().resources.getBoolean(R.bool.tablet)
+        if (isTablet) {
+            searchLayoutManager = GridLayoutManager(requireContext(), 4)
+        } else {
+            searchLayoutManager = GridLayoutManager(requireContext(), 2)
+        }
         binding.searchRecyclerView.layoutManager = searchLayoutManager
         binding.searchRecyclerView.adapter = searchAdapter
         binding.searchRecyclerView.addOnScrollListener(object :
-            PaginationScrollListener(searchLayoutManager) {
+            PaginationScrollListener(searchLayoutManager!!) {
             override fun loadMoreItems() {
-                isloading = true
+                isLoading = true
                 searchCurrentPage++
 
                 homeViewModel.searchPhotosWithQuery(query, searchCurrentPage)
@@ -83,7 +91,7 @@ class HomeFragment : Fragment() {
             }
 
             override fun isLoading(): Boolean {
-                return isloading
+                return isLoading
             }
 
         })
@@ -97,13 +105,18 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val homeLayoutManager = GridLayoutManager(requireContext(), 2)
+        val isTablet = requireContext().resources.getBoolean(R.bool.tablet)
+        homeLayoutManager = if (isTablet) {
+            GridLayoutManager(requireContext(), 4)
+        } else {
+            GridLayoutManager(requireContext(), 2)
+        }
         binding.imagesRecyclerView.layoutManager = homeLayoutManager
         binding.imagesRecyclerView.adapter = homeAdapter
         binding.imagesRecyclerView.addOnScrollListener(object :
-            PaginationScrollListener(homeLayoutManager) {
+            PaginationScrollListener(homeLayoutManager!!) {
             override fun loadMoreItems() {
-                isloading = true
+                isLoading = true
                 currentPage++
 
                 homeViewModel.getPhotos(currentPage)
@@ -118,7 +131,7 @@ class HomeFragment : Fragment() {
             }
 
             override fun isLoading(): Boolean {
-                return isloading
+                return isLoading
             }
         })
     }
@@ -131,14 +144,14 @@ class HomeFragment : Fragment() {
                     binding.errorImageView.setVisible()
                     binding.errorTextView.setVisible()
                     binding.homeProgressBar.setInvisible()
-                    isloading = false
+                    isLoading = false
                 }
 
                 is NetworkResponseHandler.Loading -> {
                     binding.imagesRecyclerView.setInvisible()
                     binding.errorImageView.setInvisible()
                     binding.errorTextView.setInvisible()
-                    isloading = true
+                    isLoading = true
                     binding.homeProgressBar.setVisible()
                 }
 
@@ -149,7 +162,7 @@ class HomeFragment : Fragment() {
                     binding.homeProgressBar.setInvisible()
                     val newList = homeAdapter.currentList + result.data?.photos!!
                     homeAdapter.submitList(newList)
-                    isloading = false
+                    isLoading = false
                 }
             }
         }
@@ -160,7 +173,7 @@ class HomeFragment : Fragment() {
                     binding.errorImageView.setVisible()
                     binding.errorTextView.setVisible()
                     binding.homeProgressBar.setInvisible()
-                    isloading = false
+                    isLoading = false
                 }
 
                 is NetworkResponseHandler.Loading -> {
@@ -168,7 +181,7 @@ class HomeFragment : Fragment() {
                     binding.errorImageView.setInvisible()
                     binding.errorTextView.setInvisible()
                     binding.homeProgressBar.setVisible()
-                    isloading = true
+                    isLoading = true
                 }
 
                 is NetworkResponseHandler.Success -> {
@@ -178,7 +191,7 @@ class HomeFragment : Fragment() {
                     binding.homeProgressBar.setInvisible()
                     val newSearchList = searchAdapter.currentList + result.data?.photos!!
                     searchAdapter.submitList(newSearchList)
-                    isloading = false
+                    isLoading = false
                 }
             }
         }
