@@ -14,12 +14,14 @@ import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.BitmapDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -53,14 +55,12 @@ class WallpaperDetailsFragment : Fragment() {
     private val binding get() = mBinding!!
     private val viewModel: WallpaperDetailsViewModel by viewModels()
     private val photoArgs: WallpaperDetailsFragmentArgs by navArgs()
-    private var photoQuality: PhotoQuality? = null
-    private var loadQuality: String? = null
-    private val PERMISSION_REQUEST_CODE = 100
     private val onCompleteReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            // Handle download completion, update notification, etc.
+
         }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -183,7 +183,7 @@ class WallpaperDetailsFragment : Fragment() {
         }
     }
 
-    private fun isPhotoLikedChecker(){
+    private fun isPhotoLikedChecker() {
         if (viewModel.isPhotoLiked(photoArgs.photo)) {
             binding.manageFavoritesButton.text = getString(R.string.delete_from_favorites)
             binding.manageFavoritesButton.setIconResource(R.drawable.ic_delete)
@@ -193,11 +193,12 @@ class WallpaperDetailsFragment : Fragment() {
         }
     }
 
-    @SuppressLint("UnspecifiedRegisterReceiverFlag")
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val filter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
-        requireContext().registerReceiver(onCompleteReceiver, filter)
+        filter.addCategory(Intent.CATEGORY_DEFAULT)
+        requireContext().registerReceiver(onCompleteReceiver, filter, Context.RECEIVER_NOT_EXPORTED)
     }
 
 
