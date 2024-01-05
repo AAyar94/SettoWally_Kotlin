@@ -1,6 +1,10 @@
 package com.settowally.settowally.ui.fragment.home_fragment
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +21,11 @@ import com.settowally.settowally.common.setInvisible
 import com.settowally.settowally.common.setVisible
 import com.settowally.settowally.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -97,11 +106,31 @@ class HomeFragment : Fragment() {
         })
     }
 
+    private val debouncePeriod = 500L // Adjust this delay as needed
+
+    private val handler = Handler(Looper.getMainLooper())
+    private var searchJob: Job? = null
+
     private fun searchFirstPage() {
-        binding.searchView.editText.addTextChangedListener { queryText ->
-            homeViewModel.searchPhotosWithQuery(queryText.toString(), searchCurrentPage)
-            query = queryText.toString()
-        }
+        binding.searchView.editText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(editable: Editable?) {
+                // Cancel the previous search job if it exists
+                searchJob?.cancel()
+
+                // Start a new coroutine to debounce the search
+                searchJob = CoroutineScope(Dispatchers.Main).launch {
+                    delay(debouncePeriod)
+                    // Get the query text after the debounce delay
+                    val queryText = editable?.toString() ?: ""
+                    homeViewModel.searchPhotosWithQuery(queryText, searchCurrentPage)
+                    query = queryText
+                }
+            }
+        })
     }
 
     private fun setupRecyclerView() {
@@ -189,7 +218,7 @@ class HomeFragment : Fragment() {
                     binding.errorImageView.setInvisible()
                     binding.errorTextView.setInvisible()
                     binding.homeProgressBar.setInvisible()
-                    val newSearchList = searchAdapter.currentList + result.data?.photos!!
+                    val newSearchList = result.data?.photos!!
                     searchAdapter.submitList(newSearchList)
                     isLoading = false
                 }
