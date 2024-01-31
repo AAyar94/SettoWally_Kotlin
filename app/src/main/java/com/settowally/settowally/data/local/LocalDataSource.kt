@@ -1,22 +1,22 @@
 package com.settowally.settowally.data.local
 
-import com.settowally.settowally.data.model.Photo
+import com.settowally.settowally.data.model.SinglePhotoDto
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
     private val dao: PhotosDao,
 ) {
 
-    suspend fun getAllSavedPhotos(): List<Photo> {
+    suspend fun getAllSavedPhotos(): List<SinglePhotoDto> {
         return dao.getFavoritePhotos()
     }
 
-    suspend fun savePhotoToDb(photo: Photo) {
-        return dao.insertNewPhoto(photo)
+    suspend fun savePhotoToDb(singlePhotoDto: SinglePhotoDto) {
+        return dao.insertNewPhoto(singlePhotoDto)
     }
 
-    suspend fun deletePhotoFromDb(photo: Photo) {
-        return dao.deletePhoto(photo)
+    suspend fun deletePhotoFromDb(singlePhotoDto: SinglePhotoDto) {
+        return dao.deletePhoto(singlePhotoDto)
     }
 
     suspend fun deleteAllFavoritePhotos() {

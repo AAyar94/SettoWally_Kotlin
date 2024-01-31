@@ -8,10 +8,10 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.settowally.settowally.common.Constant.Companion.BACK_ONLINE
-import com.settowally.settowally.common.Constant.Companion.PREFERENCES_NAME
-import com.settowally.settowally.common.Constant.Companion.PREFERENCE_DARK_MODE_SETTING
-import com.settowally.settowally.common.Constant.Companion.PREFERENCE_QUALITY_SETTING
+import com.settowally.settowally.core.util.Constant.BACK_ONLINE
+import com.settowally.settowally.core.util.Constant.PREFERENCES_NAME
+import com.settowally.settowally.core.util.Constant.PREFERENCE_DARK_MODE_SETTING
+import com.settowally.settowally.core.util.Constant.PREFERENCE_QUALITY_SETTING
 import com.settowally.settowally.data.model.PhotoQuality
 import com.settowally.settowally.data.model.Theme
 import dagger.hilt.android.qualifiers.ApplicationContext

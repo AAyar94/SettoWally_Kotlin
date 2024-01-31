@@ -5,12 +5,12 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.settowally.settowally.data.local.coverters.PhotoTypeConverter
 import com.settowally.settowally.data.local.coverters.SrcTypeConverter
-import com.settowally.settowally.data.model.Photo
+import com.settowally.settowally.data.model.SinglePhotoDto
 import com.settowally.settowally.data.model.Src
 
 
 @Database(
-    entities = [Photo::class, Src::class],
+    entities = [SinglePhotoDto::class, Src::class],
     version = 1,
     exportSchema = false
 )
