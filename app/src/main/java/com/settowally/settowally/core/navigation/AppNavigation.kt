@@ -7,9 +7,11 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.settowally.settowally.presentation.PhotoDetailScreen
 import com.settowally.settowally.presentation.favorites.FavoritesScreen
 import com.settowally.settowally.presentation.home.HomeScreen
@@ -20,7 +22,9 @@ fun AppNavigation() {
     val navController = rememberNavController()
     Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = {
         BottomNavigationBar(
-            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight(),
             navController = navController,
             onItemClick = { navController.navigate(it) })
     }) { paddingValues ->
@@ -30,7 +34,9 @@ fun AppNavigation() {
             startDestination = Route.HOME
         ) {
             composable(Route.HOME) {
-                HomeScreen(onPhotoClick = {})
+                HomeScreen(onPhotoClick = { photoId ->
+                    navController.navigate(Route.PHOTO_DETAIL + "/${photoId}")
+                })
             }
             composable(Route.FAVORITES) {
                 FavoritesScreen()
@@ -38,8 +44,14 @@ fun AppNavigation() {
             composable(Route.SETTINGS) {
                 SettingsScreen()
             }
-            composable(Route.PHOTO_DETAIL) {
-                PhotoDetailScreen()
+            composable(
+                Route.PHOTO_DETAIL + "/{photoId}",
+                arguments = listOf(navArgument("photoId") {
+                    type = NavType.IntType
+                })
+            ) {
+                val photoId = it.arguments?.getInt("photoId")
+                PhotoDetailScreen(photoId)
             }
         }
     }

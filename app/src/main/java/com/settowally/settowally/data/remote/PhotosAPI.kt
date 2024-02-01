@@ -36,7 +36,7 @@ interface PhotosAPI {
     )
     @GET("photos/")
     suspend fun getPhoto(
-        @Query("id") photoId: Int,
+        @Query("id") photoId: Int
     ): SinglePhotoDto
 
 

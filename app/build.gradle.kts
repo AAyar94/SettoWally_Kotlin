@@ -122,4 +122,7 @@ dependencies {
 
     implementation("io.coil-kt:coil-compose:2.5.0")
 
+    implementation("dev.chrisbanes.haze:haze:0.5.0")
+
+
 }
