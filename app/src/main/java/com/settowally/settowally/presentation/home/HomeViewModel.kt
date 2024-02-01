@@ -82,6 +82,6 @@ class HomeViewModel @Inject constructor(
                 else -> Unit
             }
         }
-
     }
+
 }

@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,7 +23,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -40,13 +38,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.settowally.settowally.R
 import com.settowally.settowally.core.theme.LocalSpacing
 import com.settowally.settowally.core.theme.SettoWallyTheme
-import com.settowally.settowally.core.util.UiEvent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    onPhotoClick: () -> Unit
+    onPhotoClick: (Int) -> Unit
 ) {
     val spacing = LocalSpacing.current
     val uiState = viewModel.uiState.collectAsState()
@@ -54,14 +51,7 @@ fun HomeScreen(
         1
     }
     val lazyGridState = rememberLazyGridState()
-    LaunchedEffect(key1 = true) {
-        viewModel.uiEvent.collect { event ->
-            when (event) {
-                is UiEvent.Success -> onPhotoClick()
-                else -> Unit
-            }
-        }
-    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -113,7 +103,8 @@ fun HomeScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(spacing.spaceMedium),
-                    homePhotoDataModel = it
+                    homePhotoDataModel = it,
+                    onPhotoClick = onPhotoClick
                 )
             }
         }
