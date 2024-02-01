@@ -9,7 +9,7 @@ data class PhotosDataModelDto(
     val page: Int,
     @SerializedName("per_page")
     val perPage: Int,
-    val singlePhotoDtos: List<SinglePhotoDto>,
+    val photos: List<SinglePhotoDto>,
     @SerializedName("prev_page")
     val prevPage: String?,
     @SerializedName("total_results")
