@@ -1,10 +1,10 @@
 package com.settowally.settowally.presentation.photo_detail
 
-import com.settowally.settowally.data.model.SinglePhotoDto
+import com.settowally.settowally.domain.model.SinglePhotoModel
 
 data class PhotoDetailUiState(
     val isLoading: Boolean = true,
     val error: String? = null,
-    val photo: SinglePhotoDto? = null,
+    val photo: SinglePhotoModel? = null,
     val selectedQualityLink:String?=null
 )

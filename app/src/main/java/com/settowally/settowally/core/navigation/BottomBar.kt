@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -36,14 +37,15 @@ fun BottomNavigationBar(
     modifier: Modifier = Modifier,
     navController: NavController,
     items: List<BottomBarItems> = bottomBarItems,
-    onItemClick: (String) -> Unit
+    onItemClick: (String) -> Unit,
+    color: Color
 ) {
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = currentBackStackEntry?.destination?.route
 
     NavigationBar(
         modifier = modifier,
-        containerColor = MaterialTheme.colorScheme.primaryContainer
+        containerColor = color,
     ) {
         items.forEach { item ->
             NavigationBarItem(
@@ -51,19 +53,19 @@ fun BottomNavigationBar(
                     Icon(
                         imageVector = item.icon,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimaryContainer
+                        tint = MaterialTheme.colorScheme.onBackground
                     )
                 },
                 label = {
                     Text(
                         text = item.label,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                 },
                 selected = item.route == currentRoute,
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = MaterialTheme.colorScheme.primary,
-                    unselectedIconColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    unselectedIconColor = MaterialTheme.colorScheme.primaryContainer
                 ),
                 onClick = { onItemClick(item.route) },
             )
