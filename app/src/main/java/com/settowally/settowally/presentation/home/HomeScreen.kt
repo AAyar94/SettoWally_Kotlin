@@ -103,7 +103,7 @@ fun HomeScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(spacing.spaceMedium),
-                    homePhotoDataModel = it,
+                    gridPhotoDataModel = it,
                     onPhotoClick = onPhotoClick
                 )
             }
