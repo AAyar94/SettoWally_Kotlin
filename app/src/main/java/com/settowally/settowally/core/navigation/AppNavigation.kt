@@ -63,7 +63,10 @@ fun AppNavigation() {
                     })
             }
             composable(Route.FAVORITES) {
-                FavoritesScreen()
+                FavoritesScreen(onPhotoClick = { photoId ->
+                    navController.navigate(Route.PHOTO_DETAIL + "/${photoId}")
+
+                })
             }
             composable(Route.SETTINGS) {
                 SettingsScreen()
