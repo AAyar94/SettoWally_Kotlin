@@ -19,6 +19,7 @@ fun FavoritesScreen(
     viewModel: FavoritesViewModel = hiltViewModel(), onPhotoClick: (Int) -> Unit
 ) {
     val uiState = viewModel.uiState.collectAsState()
+    viewModel.getFavoritePhotos()
     Box(
         modifier = Modifier
             .fillMaxSize()

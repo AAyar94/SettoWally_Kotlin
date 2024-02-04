@@ -13,16 +13,16 @@ sealed class QualitySelector(val name: String) {
     companion object {
         fun fromString(name: String): QualitySelector {
             return when (name) {
-                "landscape" -> QualitySelector.Landscape
-                "large" -> QualitySelector.Large
-                "large2x" -> QualitySelector.Large2x
-                "medium" -> QualitySelector.Medium
-                "original" -> QualitySelector.Original
-                "portrait" -> QualitySelector.Portrait
-                "small" -> QualitySelector.Small
-                "tiny" -> QualitySelector.Tiny
+                "landscape" -> Landscape
+                "large" -> Large
+                "large2x" -> Large2x
+                "medium" -> Medium
+                "original" -> Original
+                "portrait" -> Portrait
+                "small" -> Small
+                "tiny" -> Tiny
                 else -> {
-                    QualitySelector.Medium
+                    Medium
                 }
             }
         }

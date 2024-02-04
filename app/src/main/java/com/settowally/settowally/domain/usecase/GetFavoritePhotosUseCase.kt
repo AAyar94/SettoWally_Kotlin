@@ -1,6 +1,5 @@
 package com.settowally.settowally.domain.usecase
 
-import com.settowally.settowally.data.model.SinglePhotoDto
 import com.settowally.settowally.data.repository.LocalDataRepositoryImpl
 import com.settowally.settowally.domain.model.GridPhotoDataModel
 import javax.inject.Inject
