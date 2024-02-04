@@ -39,6 +39,11 @@ android {
             )
             buildConfigField("String", "SETTOWALLY_API_KEY", "\"$key\"")
         }
+        create("compose") {
+            initWith(getByName("debug"))
+            applicationIdSuffix = ".compose"
+            resValue("drawable", "ic_launcher", "mipmap/ic_launcher")
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -91,9 +96,9 @@ dependencies {
 
     // Lifecycle
 
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-    implementation ("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 
     /*      ROOM        */
     implementation("androidx.room:room-runtime:2.6.1")
@@ -103,22 +108,22 @@ dependencies {
 
     /*      RETROFIT        */
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
 
     /*      SystemUI Controller     */
-    implementation ("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
 
     /*      Gson        */
-    implementation ("com.google.code.gson:gson:2.10")
+    implementation("com.google.code.gson:gson:2.10")
 
     /*      Navigation      */
     implementation("androidx.navigation:navigation-compose:2.7.6")
 
-    implementation( "androidx.compose.material:material-icons-extended:1.6.0")
+    implementation("androidx.compose.material:material-icons-extended:1.6.0")
 
-    implementation ("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     implementation("io.coil-kt:coil-compose:2.5.0")
 
