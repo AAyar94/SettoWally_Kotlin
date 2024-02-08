@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Download
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -30,6 +31,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
@@ -40,6 +42,7 @@ import com.settowally.settowally.R
 import com.settowally.settowally.core.theme.LocalSpacing
 import com.settowally.settowally.presentation.photo_detail.PhotoDetailViewModel
 import dev.chrisbanes.haze.HazeState
+import dev.chrisbanes.haze.HazeStyle
 import dev.chrisbanes.haze.haze
 import dev.chrisbanes.haze.hazeChild
 
@@ -59,7 +62,7 @@ fun PhotoDetailScreen(photoId: Int?, viewModel: PhotoDetailViewModel = hiltViewM
             AsyncImage(
                 modifier = Modifier
                     .fillMaxSize()
-                    .haze(state = hazeState),
+                    .haze(state = hazeState, style = HazeStyle(blurRadius = 50.dp)),
                 contentScale = ContentScale.Crop,
                 model = uiState.value.selectedQualityLink,
                 contentDescription = uiState.value.photo?.avgColor
@@ -68,6 +71,7 @@ fun PhotoDetailScreen(photoId: Int?, viewModel: PhotoDetailViewModel = hiltViewM
                 modifier = Modifier
                     .fillMaxWidth()
                     .align(Alignment.BottomCenter)
+                    .clip(RoundedCornerShape(24.dp))
                     .hazeChild(hazeState),
                 colors = CardDefaults.cardColors(containerColor = Color.Transparent)
             ) {
@@ -111,6 +115,7 @@ fun PhotoDetailScreen(photoId: Int?, viewModel: PhotoDetailViewModel = hiltViewM
                             Text(text = stringResource(id = R.string.share), color = Color.White)
                         }
                     }
+                    Spacer(modifier = Modifier.width(spacing.spaceSmall))
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
@@ -150,7 +155,7 @@ fun PhotoDetailScreen(photoId: Int?, viewModel: PhotoDetailViewModel = hiltViewM
                             )
                         }
                     }
-                    Spacer(modifier = Modifier.width(spacing.spaceMedium))
+                    Spacer(modifier = Modifier.width(spacing.spaceSmall))
                     OutlinedButton(
                         onClick = { /*TODO*/ },
                         shape = MaterialTheme.shapes.medium,
