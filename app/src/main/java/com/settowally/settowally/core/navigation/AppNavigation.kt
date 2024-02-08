@@ -1,5 +1,6 @@
 package com.settowally.settowally.core.navigation
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.settowally.settowally.presentation.photo_detail.PhotoDetailScreen
@@ -24,43 +26,43 @@ import dev.chrisbanes.haze.HazeDefaults
 import dev.chrisbanes.haze.HazeState
 import dev.chrisbanes.haze.haze
 import dev.chrisbanes.haze.hazeChild
+import kotlinx.coroutines.flow.asFlow
 
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
     val hazeState = remember { HazeState() }
-    Scaffold(modifier = Modifier
-        .fillMaxSize(),
-        bottomBar = {
-            BottomNavigationBar(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .background(Color.Transparent)
-                    .hazeChild(
-                        hazeState
-                    ),
-                navController = navController,
-                onItemClick = { navController.navigate(it) },
-                color = Color.Transparent
-            )
-        }) { paddingValues ->
+    Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = {
+        val currentRoute = navController.currentBackStackEntryAsState().value
+        bottomBarItems.forEach { bottomBarItem ->
+            if (currentRoute?.destination?.route?.contains(bottomBarItem.route) == true) {
+                BottomNavigationBar(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .background(Color.Transparent)
+                        .hazeChild(
+                            hazeState
+                        ),
+                    navController = navController,
+                    onItemClick = { navController.navigate(it) },
+                    color = Color.Transparent
+                )
+            }
+        }
+    }) { paddingValues ->
         NavHost(
             modifier = Modifier
                 .padding(paddingValues)
                 .haze(
                     state = hazeState,
                     style = HazeDefaults.style(backgroundColor = MaterialTheme.colorScheme.surface)
-                ),
-            navController = navController,
-            startDestination = Route.HOME
-        )
-        {
+                ), navController = navController, startDestination = Route.HOME
+        ) {
             composable(Route.HOME) {
-                HomeScreen(
-                    onPhotoClick = { photoId ->
-                        navController.navigate(Route.PHOTO_DETAIL + "/${photoId}")
-                    })
+                HomeScreen(onPhotoClick = { photoId ->
+                    navController.navigate(Route.PHOTO_DETAIL + "/${photoId}")
+                })
             }
             composable(Route.FAVORITES) {
                 FavoritesScreen(onPhotoClick = { photoId ->
@@ -72,8 +74,7 @@ fun AppNavigation() {
                 SettingsScreen()
             }
             composable(
-                Route.PHOTO_DETAIL + "/{photoId}",
-                arguments = listOf(navArgument("photoId") {
+                Route.PHOTO_DETAIL + "/{photoId}", arguments = listOf(navArgument("photoId") {
                     type = NavType.IntType
                 })
             ) {

@@ -15,9 +15,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SettoWallyTheme {
-                val systemUiController = rememberSystemUiController()
-                systemUiController.setStatusBarColor(MaterialTheme.colorScheme.primaryContainer)
-                systemUiController.setNavigationBarColor(MaterialTheme.colorScheme.primaryContainer)
                 AppNavigation()
             }
         }

@@ -51,7 +51,7 @@ fun HomeScreen(
         1
     }
     val lazyGridState = rememberLazyGridState()
-    viewModel.getPhotos(1)
+    viewModel.getPhotos(page)
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -98,7 +98,7 @@ fun HomeScreen(
             verticalArrangement = Arrangement.SpaceAround,
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            items(uiState.value.photosList?.toList() ?: emptyList()) {
+            items(uiState.value.photosList?.toList() ?: emptyList()){
                 PhotoItem(
                     modifier = Modifier
                         .fillMaxSize()

@@ -24,7 +24,7 @@ data class BottomBarItems(
     val label: String
 )
 
-private val bottomBarItems = listOf(
+val bottomBarItems = listOf(
     BottomBarItems(Route.FAVORITES, Icons.Default.Favorite, "favorites"),
     BottomBarItems(Route.HOME, Icons.Default.Home, "Home"),
     BottomBarItems(
