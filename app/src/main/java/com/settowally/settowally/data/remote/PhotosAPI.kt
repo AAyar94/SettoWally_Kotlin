@@ -5,6 +5,7 @@ import com.settowally.settowally.data.model.PhotosDataModelDto
 import com.settowally.settowally.data.model.SinglePhotoDto
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface PhotosAPI {
@@ -34,9 +35,9 @@ interface PhotosAPI {
         "Accept: application/json",
         "Authorization: $API_KEY"
     )
-    @GET("photos/")
+    @GET("photos/{id}")
     suspend fun getPhoto(
-        @Query("id") photoId: Int
+        @Path("id") photoId: Int
     ): SinglePhotoDto
 
 
