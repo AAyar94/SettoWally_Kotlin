@@ -2,9 +2,15 @@ package com.settowally.settowally.core.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.settowally.settowally.R
+
+private val PorkysFamily = FontFamily(
+    fonts = listOf(Font(resId = R.font.porkys), Font(resId = R.font.prokyh))
+)
 
 // Set of Material typography styles to start with
 val Typography = Typography(
@@ -14,6 +20,10 @@ val Typography = Typography(
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
+    ),
+    titleMedium = TextStyle(
+        fontFamily = PorkysFamily,
+        fontSize = 18.sp,
     )
     /* Other default text styles to override
     titleLarge = TextStyle(
@@ -31,4 +41,7 @@ val Typography = Typography(
         letterSpacing = 0.5.sp
     )
     */
+
 )
+
+
