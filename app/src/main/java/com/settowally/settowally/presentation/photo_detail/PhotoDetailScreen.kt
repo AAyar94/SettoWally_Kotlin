@@ -38,6 +38,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.settowally.settowally.R
 import com.settowally.settowally.core.theme.LocalSpacing
 import com.settowally.settowally.presentation.photo_detail.PhotoDetailViewModel
@@ -54,7 +55,8 @@ fun PhotoDetailScreen(photoId: Int?, viewModel: PhotoDetailViewModel = hiltViewM
     }
     val hazeState = remember { HazeState() }
     val spacing = LocalSpacing.current
-
+val systemUiController = rememberSystemUiController()
+    systemUiController.setSystemBarsColor(Color.Black)
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         if (uiState.value.isLoading) {
             CircularProgressIndicator()
@@ -98,6 +100,7 @@ fun PhotoDetailScreen(photoId: Int?, viewModel: PhotoDetailViewModel = hiltViewM
                                 contentDescription = null,
                                 tint = Color.White
                             )
+                            Spacer(modifier = Modifier.width(spacing.spaceSmall))
                             Text(text = stringResource(id = R.string.download), color = Color.White)
                         }
                         Spacer(modifier = Modifier.width(spacing.spaceMedium))
@@ -112,6 +115,7 @@ fun PhotoDetailScreen(photoId: Int?, viewModel: PhotoDetailViewModel = hiltViewM
                                 contentDescription = null,
                                 tint = Color.White
                             )
+                            Spacer(modifier = Modifier.width(spacing.spaceSmall))
                             Text(text = stringResource(id = R.string.share), color = Color.White)
                         }
                     }
@@ -132,6 +136,7 @@ fun PhotoDetailScreen(photoId: Int?, viewModel: PhotoDetailViewModel = hiltViewM
                                 contentDescription = null,
                                 tint = Color.White
                             )
+                            Spacer(modifier = Modifier.width(spacing.spaceSmall))
                             Text(
                                 text = stringResource(id = R.string.photo_details),
                                 color = Color.White
@@ -149,6 +154,7 @@ fun PhotoDetailScreen(photoId: Int?, viewModel: PhotoDetailViewModel = hiltViewM
                                 contentDescription = null,
                                 tint = Color.White
                             )
+                            Spacer(modifier = Modifier.width(spacing.spaceSmall))
                             Text(
                                 text = stringResource(id = R.string.set_wallpaper),
                                 color = Color.White
@@ -167,6 +173,7 @@ fun PhotoDetailScreen(photoId: Int?, viewModel: PhotoDetailViewModel = hiltViewM
                             contentDescription = null,
                             tint = Color.White
                         )
+                        Spacer(modifier = Modifier.width(spacing.spaceSmall))
                         Text(
                             text = stringResource(id = R.string.add_to_favorites),
                             color = Color.White
