@@ -17,5 +17,5 @@ object Constant {
 
     const val DEVELOPER_PAGE = "https://play.google.com/store/apps/dev?id=5913710677076012534"
 
-    const val PAGE_SIZE = 20
+    const val PAGE_SIZE = 24
 }
