@@ -7,7 +7,7 @@ plugins {
     id("dagger.hilt.android.plugin")
 }
 
-val key: String = gradleLocalProperties(rootDir).getProperty("SETTOWALLY_API_KEY")
+val API_KEY: String = gradleLocalProperties(rootDir).getProperty("SETTOWALLY_API_KEY")
 
 
 android {
@@ -29,7 +29,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "SETTOWALLY_API_KEY", "\"$key\"")
+            buildConfigField("String", "SETTOWALLY_API_KEY", API_KEY)
         }
         release {
             isMinifyEnabled = false
@@ -37,7 +37,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "SETTOWALLY_API_KEY", "\"$key\"")
+            buildConfigField("String", "SETTOWALLY_API_KEY", API_KEY)
         }
         create("compose") {
             initWith(getByName("debug"))
