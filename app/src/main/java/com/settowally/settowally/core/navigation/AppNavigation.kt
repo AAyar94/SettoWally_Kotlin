@@ -16,7 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.settowally.settowally.presentation.PhotoDetailScreen
+import com.settowally.settowally.presentation.photo_detail.PhotoDetailScreen
 import com.settowally.settowally.presentation.favorites.FavoritesScreen
 import com.settowally.settowally.presentation.home.HomeScreen
 import com.settowally.settowally.presentation.settings.SettingsScreen

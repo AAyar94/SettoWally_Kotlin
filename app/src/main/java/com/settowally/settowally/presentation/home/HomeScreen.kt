@@ -51,7 +51,7 @@ fun HomeScreen(
         1
     }
     val lazyGridState = rememberLazyGridState()
-
+    viewModel.getPhotos(1)
     Column(
         modifier = Modifier
             .fillMaxSize()

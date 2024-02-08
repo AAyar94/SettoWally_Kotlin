@@ -1,4 +1,4 @@
-package com.settowally.settowally.presentation
+package com.settowally.settowally.presentation.photo_detail
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -19,6 +19,7 @@ import androidx.compose.material.icons.filled.Wallpaper
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -52,111 +53,120 @@ fun PhotoDetailScreen(photoId: Int?, viewModel: PhotoDetailViewModel = hiltViewM
     val spacing = LocalSpacing.current
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        AsyncImage(
-            modifier = Modifier
-                .fillMaxSize()
-                .haze(state = hazeState),
-            contentScale = ContentScale.Crop,
-            model = uiState.value.selectedQualityLink,
-            contentDescription = uiState.value.photo?.avgColor
-        )
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomCenter)
-                .hazeChild(hazeState),
-            colors = CardDefaults.cardColors(containerColor = Color.Transparent)
-        ) {
-            Column(
+        if (uiState.value.isLoading) {
+            CircularProgressIndicator()
+        } else {
+            AsyncImage(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .haze(state = hazeState),
+                contentScale = ContentScale.Crop,
+                model = uiState.value.selectedQualityLink,
+                contentDescription = uiState.value.photo?.avgColor
+            )
+            Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = spacing.spaceMedium),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .align(Alignment.BottomCenter)
+                    .hazeChild(hazeState),
+                colors = CardDefaults.cardColors(containerColor = Color.Transparent)
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = spacing.spaceMedium),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    OutlinedButton(
-                        onClick = { /*TODO*/ },
-                        shape = MaterialTheme.shapes.medium,
-                        modifier = Modifier.weight(1f),
-                        border = BorderStroke(2.dp, MaterialTheme.colorScheme.onBackground)
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
                     ) {
-                        Icon(
-                            imageVector = Icons.Default.Download,
-                            contentDescription = null,
-                            tint = Color.White
-                        )
-                        Text(text = stringResource(id = R.string.download), color = Color.White)
+                        OutlinedButton(
+                            onClick = { /*TODO*/ },
+                            shape = MaterialTheme.shapes.medium,
+                            modifier = Modifier.weight(1f),
+                            border = BorderStroke(2.dp, MaterialTheme.colorScheme.onBackground)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Download,
+                                contentDescription = null,
+                                tint = Color.White
+                            )
+                            Text(text = stringResource(id = R.string.download), color = Color.White)
+                        }
+                        Spacer(modifier = Modifier.width(spacing.spaceMedium))
+                        OutlinedButton(
+                            onClick = { /*TODO*/ },
+                            shape = MaterialTheme.shapes.medium,
+                            modifier = Modifier.weight(1f),
+                            border = BorderStroke(2.dp, Color.White)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Share,
+                                contentDescription = null,
+                                tint = Color.White
+                            )
+                            Text(text = stringResource(id = R.string.share), color = Color.White)
+                        }
+                    }
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        OutlinedButton(
+                            onClick = { /*TODO*/ },
+                            shape = MaterialTheme.shapes.medium,
+                            modifier = Modifier.weight(1f),
+                            border = BorderStroke(2.dp, Color.White)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Info,
+                                contentDescription = null,
+                                tint = Color.White
+                            )
+                            Text(
+                                text = stringResource(id = R.string.photo_details),
+                                color = Color.White
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(spacing.spaceMedium))
+                        OutlinedButton(
+                            onClick = { /*TODO*/ },
+                            shape = MaterialTheme.shapes.medium,
+                            modifier = Modifier.weight(1f),
+                            border = BorderStroke(2.dp, Color.White)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Wallpaper,
+                                contentDescription = null,
+                                tint = Color.White
+                            )
+                            Text(
+                                text = stringResource(id = R.string.set_wallpaper),
+                                color = Color.White
+                            )
+                        }
                     }
                     Spacer(modifier = Modifier.width(spacing.spaceMedium))
                     OutlinedButton(
                         onClick = { /*TODO*/ },
                         shape = MaterialTheme.shapes.medium,
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.fillMaxWidth(),
                         border = BorderStroke(2.dp, Color.White)
                     ) {
                         Icon(
-                            imageVector = Icons.Default.Share,
-                            contentDescription = null,
-                            tint = Color.White
-                        )
-                        Text(text = stringResource(id = R.string.share), color = Color.White)
-                    }
-                }
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    OutlinedButton(
-                        onClick = { /*TODO*/ },
-                        shape = MaterialTheme.shapes.medium,
-                        modifier = Modifier.weight(1f),
-                        border = BorderStroke(2.dp, Color.White)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Info,
+                            imageVector = Icons.Default.FavoriteBorder,
                             contentDescription = null,
                             tint = Color.White
                         )
                         Text(
-                            text = stringResource(id = R.string.photo_details), color = Color.White
+                            text = stringResource(id = R.string.add_to_favorites),
+                            color = Color.White
                         )
                     }
-                    Spacer(modifier = Modifier.width(spacing.spaceMedium))
-                    OutlinedButton(
-                        onClick = { /*TODO*/ },
-                        shape = MaterialTheme.shapes.medium,
-                        modifier = Modifier.weight(1f),
-                        border = BorderStroke(2.dp, Color.White)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Wallpaper,
-                            contentDescription = null,
-                            tint = Color.White
-                        )
-                        Text(
-                            text = stringResource(id = R.string.set_wallpaper), color = Color.White
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.width(spacing.spaceMedium))
-                OutlinedButton(
-                    onClick = { /*TODO*/ },
-                    shape = MaterialTheme.shapes.medium,
-                    modifier = Modifier.fillMaxWidth(),
-                    border = BorderStroke(2.dp, Color.White)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.FavoriteBorder,
-                        contentDescription = null,
-                        tint = Color.White
-                    )
-                    Text(text = stringResource(id = R.string.add_to_favorites), color = Color.White)
                 }
             }
         }
