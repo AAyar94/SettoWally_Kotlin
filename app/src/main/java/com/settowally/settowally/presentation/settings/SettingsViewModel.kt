@@ -3,6 +3,7 @@ package com.settowally.settowally.presentation.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.settowally.settowally.domain.preferences.Preferences
+import com.settowally.settowally.domain.usecase.DeleteAllFavoritePhotosUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val preferences: Preferences
+    private val preferences: Preferences,
+    private val deleteAllFavoritePhotosUseCase: DeleteAllFavoritePhotosUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SettingsUiState())
@@ -41,6 +43,12 @@ class SettingsViewModel @Inject constructor(
                 )
             }
             preferences.saveQualitySettings(string)
+        }
+    }
+
+    fun onClearCache() {
+        viewModelScope.launch {
+            deleteAllFavoritePhotosUseCase.invoke()
         }
     }
 

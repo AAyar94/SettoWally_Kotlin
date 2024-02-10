@@ -75,4 +75,7 @@
     <string name="downloading_image">Downloading image…</string>
     <string name="cache">Cache</string>
     <string name="clear_cache">Clear Cache</string>
+    <string name="are_u_sure_title">Are u sure?</string>
+    <string name="are_u_sure_message">This will clear all your favorites and there is no way to take this back</string>
+    <string name="im_sure_delete_all">I\'m sure delete all</string>
 </resources>
