@@ -19,6 +19,6 @@ fun PhotoItem(
         modifier = modifier.clickable { onPhotoClick(gridPhotoDataModel.id) },
         model = gridPhotoDataModel.imgLink,
         contentDescription = stringResource(R.string.description),
-        contentScale = ContentScale.FillBounds
+        contentScale = ContentScale.Crop
     )
 }

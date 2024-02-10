@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.ime
@@ -98,11 +99,13 @@ fun HomeScreen(
             verticalArrangement = Arrangement.SpaceAround,
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            items(uiState.value.photosList?.toList() ?: emptyList()){
+            items(uiState.value.photosList?.toList() ?: emptyList()) {
                 PhotoItem(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(spacing.spaceMedium),
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                        .padding(spacing.spaceMedium)
+                        .size(200.dp),
                     gridPhotoDataModel = it,
                     onPhotoClick = onPhotoClick
                 )
