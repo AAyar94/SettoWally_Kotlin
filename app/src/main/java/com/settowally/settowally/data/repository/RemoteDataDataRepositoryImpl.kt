@@ -12,17 +12,15 @@ class RemoteDataDataRepositoryImpl @Inject constructor(
 ) : RemoteDataRepository {
     override suspend fun getPhotosFromRemote(
         page: Int,
-        pageSize: Int
     ): NetworkResponseHandler<PhotosDataModelDto> {
-        return remoteDataSource.getPhotos(page, pageSize)
+        return remoteDataSource.getPhotos(page)
     }
 
     override suspend fun getSearchedPhotosFromRemote(
         query: String,
         page: Int,
-        pageSize: Int
     ): NetworkResponseHandler<PhotosDataModelDto> {
-        return remoteDataSource.getSearchedPhotos(query, page = page, pageSize = pageSize)
+        return remoteDataSource.getSearchedPhotos(query, page = page)
     }
 
     override suspend fun getSinglePhotoFromRemote(photoId: Int): NetworkResponseHandler<SinglePhotoDto> {

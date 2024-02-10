@@ -1,6 +1,7 @@
 package com.settowally.settowally.data.remote
 
 import com.settowally.settowally.common.NetworkResponseHandler
+import com.settowally.settowally.core.util.Constant.REQUEST_PAGE_SIZE
 import com.settowally.settowally.data.model.PhotosDataModelDto
 import com.settowally.settowally.data.model.SinglePhotoDto
 import javax.inject.Inject
@@ -9,7 +10,10 @@ class RemoteDataSource @Inject constructor(
     private val photosAPI: PhotosAPI,
 ) {
 
-    suspend fun getPhotos(page: Int, pageSize: Int): NetworkResponseHandler<PhotosDataModelDto> {
+    suspend fun getPhotos(
+        page: Int,
+        pageSize: Int = REQUEST_PAGE_SIZE
+    ): NetworkResponseHandler<PhotosDataModelDto> {
         val response = try {
             photosAPI.getPhotosPage(page, pageSize)
         } catch (e: Exception) {
@@ -21,7 +25,7 @@ class RemoteDataSource @Inject constructor(
     suspend fun getSearchedPhotos(
         query: String,
         page: Int,
-        pageSize: Int,
+        pageSize: Int = REQUEST_PAGE_SIZE,
     ): NetworkResponseHandler<PhotosDataModelDto> {
         val response = try {
             photosAPI.getSearchedPhotos(query = query, page = page, perPage = pageSize)

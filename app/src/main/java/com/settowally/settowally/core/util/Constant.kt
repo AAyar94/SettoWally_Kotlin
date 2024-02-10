@@ -6,7 +6,7 @@ object Constant {
     /**     REMOTE      */
     const val API_KEY = BuildConfig.SETTOWALLY_API_KEY
     const val BASE_URL = "https://api.pexels.com/v1/"
-    const val PER_PAGE_PHOTO_COUNTER = 20
+    const val REQUEST_PAGE_SIZE = 24
     const val PREFERENCES_NAME = "settowally_preferences"
     const val PREFERENCE_DARK_MODE_SETTING = "OS"
     const val PREFERENCE_QUALITY_SETTING = "medium"
@@ -17,5 +17,5 @@ object Constant {
 
     const val DEVELOPER_PAGE = "https://play.google.com/store/apps/dev?id=5913710677076012534"
 
-    const val PAGE_SIZE = 24
+
 }
