@@ -91,7 +91,7 @@ fun HomeScreen(
             }
         }
         LazyVerticalGrid(
-            columns = GridCells.Fixed(3),
+            columns = GridCells.Fixed(2),
             modifier = Modifier
                 .weight(1f)
                 .fillMaxSize(),
@@ -105,7 +105,8 @@ fun HomeScreen(
                         .fillMaxWidth()
                         .fillMaxHeight()
                         .padding(spacing.spaceMedium)
-                        .size(200.dp),
+                        .size(200.dp)
+                        .clip(RoundedCornerShape(20.dp)),
                     gridPhotoDataModel = it,
                     onPhotoClick = onPhotoClick
                 )
