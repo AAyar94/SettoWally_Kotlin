@@ -1,4 +1,4 @@
-package com.settowally.settowally.ui.fragment.wallpaper_details_fragment.details_bottom_sheet
+package com.settowally.settowally.ui.fragment.wallpaper_details.details_bottom_sheet
 
 import android.graphics.Color
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.settowally.settowally.ui.fragment.home_fragment
+package com.settowally.settowally.ui.fragment.home
 
 import android.os.Bundle
 import android.os.Handler
@@ -8,13 +8,11 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.settowally.settowally.R
-import com.settowally.settowally.common.Constant.Companion.PER_PAGE_PHOTO_COUNTER
 import com.settowally.settowally.common.NetworkResponseHandler
 import com.settowally.settowally.common.PaginationScrollListener
 import com.settowally.settowally.common.setInvisible

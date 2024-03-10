@@ -1,4 +1,4 @@
-package com.settowally.settowally.ui.fragment.wallpaper_details_fragment
+package com.settowally.settowally.ui.fragment.wallpaper_details
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

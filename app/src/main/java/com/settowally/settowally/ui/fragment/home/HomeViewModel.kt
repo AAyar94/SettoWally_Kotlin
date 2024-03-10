@@ -1,4 +1,4 @@
-package com.settowally.settowally.ui.fragment.home_fragment
+package com.settowally.settowally.ui.fragment.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

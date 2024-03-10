@@ -1,4 +1,4 @@
-package com.settowally.settowally.ui.fragment.wallpaper_details_fragment.set_wallpaper_bottom_sheet
+package com.settowally.settowally.ui.fragment.wallpaper_details.set_wallpaper_bottom_sheet
 
 import android.os.Bundle
 import android.view.LayoutInflater

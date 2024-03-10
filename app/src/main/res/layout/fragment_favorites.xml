@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
     app:layoutDescription="@xml/fragment_favorites_scene"
-    tools:context=".ui.fragment.favorites_fragment.FavoritesFragment">
+    tools:context=".ui.fragment.favorites.FavoritesFragment">
 
 
     <TextView

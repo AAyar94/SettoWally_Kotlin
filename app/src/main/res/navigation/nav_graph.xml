@@ -6,7 +6,7 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.settowally.settowally.ui.fragment.home_fragment.HomeFragment"
+        android:name="com.settowally.settowally.ui.fragment.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/wallpaperDetailsFragment"
-        android:name="com.settowally.settowally.ui.fragment.wallpaper_details_fragment.WallpaperDetailsFragment"
+        android:name="com.settowally.settowally.ui.fragment.wallpaper_details.WallpaperDetailsFragment"
         android:label="fragment_wallpaper_details"
         tools:layout="@layout/fragment_wallpaper_details" >
         <argument
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="com.settowally.settowally.ui.fragment.favorites_fragment.FavoritesFragment"
+        android:name="com.settowally.settowally.ui.fragment.favorites.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action
@@ -42,12 +42,12 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.settowally.settowally.ui.fragment.settings_fragment.SettingsFragment"
+        android:name="com.settowally.settowally.ui.fragment.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
     <dialog
         android:id="@+id/downloadBottomSheetFragment"
-        android:name="com.settowally.settowally.ui.fragment.wallpaper_details_fragment.download_bottom_sheet.DownloadBottomSheetFragment"
+        android:name="com.settowally.settowally.ui.fragment.wallpaper_details.download_bottom_sheet.DownloadBottomSheetFragment"
         android:label="fragment_download_bottom_sheet"
         tools:layout="@layout/fragment_download_bottom_sheet" >
         <argument
@@ -56,7 +56,7 @@
     </dialog>
     <dialog
         android:id="@+id/setWallpaperBottomSheetFragment"
-        android:name="com.settowally.settowally.ui.fragment.wallpaper_details_fragment.set_wallpaper_bottom_sheet.SetWallpaperBottomSheetFragment"
+        android:name="com.settowally.settowally.ui.fragment.wallpaper_details.set_wallpaper_bottom_sheet.SetWallpaperBottomSheetFragment"
         android:label="fragment_set_wallpaper_bottom_sheet"
         tools:layout="@layout/fragment_set_wallpaper_bottom_sheet" >
         <argument
@@ -65,7 +65,7 @@
     </dialog>
     <dialog
         android:id="@+id/detailsBottomSheetFragment"
-        android:name="com.settowally.settowally.ui.fragment.wallpaper_details_fragment.details_bottom_sheet.DetailsBottomSheetFragment"
+        android:name="com.settowally.settowally.ui.fragment.wallpaper_details.details_bottom_sheet.DetailsBottomSheetFragment"
         android:label="DetailsBottomSheetFragment" >
         <argument
             android:name="photo"

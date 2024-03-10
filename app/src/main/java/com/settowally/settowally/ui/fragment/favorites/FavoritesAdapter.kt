@@ -1,6 +1,6 @@
-package com.settowally.settowally.ui.fragment.home_fragment
+package com.settowally.settowally.ui.fragment.favorites
 
-import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,40 +10,40 @@ import com.bumptech.glide.Glide
 import com.settowally.settowally.data.model.Photo
 import com.settowally.settowally.databinding.PhotoItemLayoutBinding
 
-class HomeFragmentAdapter(
-    val onItemClick: (photo: Photo) -> Unit,
-) : ListAdapter<Photo, HomeFragmentAdapter.HomeViewHolder>(
-    PhotosDiffCallback()
-) {
-    inner class HomeViewHolder(private val binding: PhotoItemLayoutBinding) :
+class FavoritesAdapter(val onItemClick: (photo: Photo) -> Unit) :
+    ListAdapter<Photo, FavoritesAdapter.FavoritesViewHolder>(
+        FavoritePhotosDiffCallback()
+    ) {
+
+    inner class FavoritesViewHolder(private val binding: PhotoItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
-            val item = currentList[position]
-            Glide.with(binding.root).load(item.src.medium)
+            val currentItem = currentList[position]
+            Log.d("FavoritesFragment", currentList.size.toString())
+            Glide.with(binding.root).load(currentItem.src.medium)
                 .into(binding.imageViewPerPhoto)
-            binding.imageViewPerPhoto.setOnClickListener {
-                onItemClick(item)
+            binding.root.setOnClickListener {
+                onItemClick(currentItem)
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
-        val binding =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesViewHolder {
+        val favoriteBinding =
             PhotoItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return HomeViewHolder(binding)
+        return FavoritesViewHolder(favoriteBinding)
     }
 
     override fun getItemCount(): Int {
         return currentList.size
     }
 
-    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavoritesViewHolder, position: Int) {
         holder.bind(position)
     }
-
 }
 
-class PhotosDiffCallback : DiffUtil.ItemCallback<Photo>() {
+class FavoritePhotosDiffCallback : DiffUtil.ItemCallback<Photo>() {
     override fun areItemsTheSame(oldItem: Photo, newItem: Photo): Boolean {
         return oldItem == newItem
     }

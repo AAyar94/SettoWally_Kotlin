@@ -1,4 +1,4 @@
-package com.settowally.settowally.ui.fragment.favorites_fragment
+package com.settowally.settowally.ui.fragment.favorites
 
 import android.os.Bundle
 import android.view.LayoutInflater

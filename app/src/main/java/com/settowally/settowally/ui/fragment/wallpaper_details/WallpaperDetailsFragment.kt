@@ -1,4 +1,4 @@
-package com.settowally.settowally.ui.fragment.wallpaper_details_fragment
+package com.settowally.settowally.ui.fragment.wallpaper_details
 
 import android.annotation.SuppressLint
 import android.app.DownloadManager
@@ -6,13 +6,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.content.res.ColorStateList
 import android.graphics.Bitmap
-import android.graphics.BlendMode
 import android.graphics.Color
-import android.graphics.ColorFilter
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
@@ -22,7 +17,6 @@ import android.view.ViewGroup
 import android.view.ViewOutlineProvider
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -33,16 +27,12 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable.LARGE
 import com.bumptech.glide.Glide
 import com.google.android.material.color.MaterialColors
-import com.google.android.material.theme.overlay.MaterialThemeOverlay
 import com.settowally.settowally.BuildConfig
 import com.settowally.settowally.R
 import com.settowally.settowally.data.model.PhotoQuality
-import com.settowally.settowally.data.model.Theme
 import com.settowally.settowally.databinding.FragmentWallpaperDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.RenderScriptBlur
-import jp.wasabeef.glide.transformations.ColorFilterTransformation
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream

@@ -1,4 +1,4 @@
-package com.settowally.settowally.ui.fragment.settings_fragment
+package com.settowally.settowally.ui.fragment.settings
 
 import android.content.Intent
 import android.net.Uri

@@ -1,4 +1,4 @@
-package com.settowally.settowally.ui.fragment.settings_fragment
+package com.settowally.settowally.ui.fragment.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
