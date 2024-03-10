@@ -27,6 +27,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -112,25 +113,33 @@ class HomeFragment : Fragment() {
     private var searchJob: Job? = null
 
     private fun searchFirstPage() {
-        binding.searchView.editText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        binding.searchView.editText.addTextChangedListener(
+            object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
-            override fun afterTextChanged(editable: Editable?) {
-                // Cancel the previous search job if it exists
-                searchJob?.cancel()
+                override fun afterTextChanged(editable: Editable?) {
+                    // Cancel the previous search job if it exists
+                    searchJob?.cancel()
 
-                // Start a new coroutine to debounce the search
-                searchJob = CoroutineScope(Dispatchers.Main).launch {
-                    delay(debouncePeriod)
-                    // Get the query text after the debounce delay
-                    val queryText = editable?.toString() ?: ""
-                    homeViewModel.searchPhotosWithQuery(queryText, searchCurrentPage)
-                    query = queryText
+                    // Start a new coroutine to debounce the search
+                    searchJob = CoroutineScope(Dispatchers.Main).launch {
+                        delay(debouncePeriod)
+                        // Get the query text after the debounce delay
+                        val queryText = editable?.toString() ?: ""
+                        homeViewModel.searchPhotosWithQuery(queryText, searchCurrentPage)
+                        query = queryText
+                    }
                 }
             }
-        })
+        )
     }
 
     private fun setupRecyclerView() {
